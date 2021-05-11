@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_075939) do
+ActiveRecord::Schema.define(version: 2021_05_12_075941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_075939) do
     t.bigint "address_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "price_period"
     t.index ["address_id"], name: "index_courses_on_address_id"
   end
 
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_075939) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "imparato_blog_link"
     t.index ["user_id"], name: "index_schools_on_user_id"
   end
 
