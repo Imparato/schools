@@ -1,6 +1,6 @@
 class Course < ApplicationRecord
   belongs_to :address
-  has_many :attributes
-  has_many :teachings
+  has_many :properties, :dependent => :destroy
+  has_many :teachings, :dependent => :destroy
 
 end
