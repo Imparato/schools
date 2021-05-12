@@ -17,7 +17,6 @@ user1 = User.create!(
   email: "beryl@test.com",
   password: "password"
 )
-user1 ? "Created #{user1.email}" : "Not created !"
 
 school1 = School.create!(
   name: "Cours Myriade",
@@ -27,19 +26,17 @@ school1 = School.create!(
   website: "https://www.ecolemyriade.com",
   blog_default: "",
   user: User.last,
+  city: "Lyon",
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon"
 )
-school1 ? "Created #{school1.name}" : "Not created !"
 
 # provider1 = Provider.create!(name: "facebook")
-# provider1 ? "Created #{provider1.name}" : "Not created !"
 
 network1 = Network.create!(
   school: School.last,
   provider: Provider.last,
   url: "https://www.facebook.com/CoursMyriade/"
 )
-network1 ? "Created network" : "Not created !"
 
 address1 = Address.create!(
   published: false,
@@ -51,7 +48,6 @@ address1 = Address.create!(
   details: "En haut de l'escalier à droite",
   phone: "0456734544", 
 )
-address1 ? "Created #{address1.address}" : "Not created !"
 
 address2 = Address.create!(
   published: false,
@@ -63,7 +59,6 @@ address2 = Address.create!(
   details: "Sonner au théâtre",
   phone: "+33456732222"
 )
-address2 ? "Created #{address2.address}" : "Not created !"
 
 course1 = Course.create!(
   published: false,
@@ -72,7 +67,6 @@ course1 = Course.create!(
   price_period:"trimestre",
   description: "Cours d'improvisation pour débutants"
 )
-course1 ? "Created #{course1.description}" : "Not created !"
 
 course2 = Course.create!(
   published: false,
@@ -81,7 +75,6 @@ course2 = Course.create!(
   price_period:"trimestre",
   description: "Cours pour enfants de 7 à 11 ans"
 )
-course2 ? "Created #{course2.description}" : "Not created !"
 
 teacher1 = Teacher.create!(
   first_name: "Emeline",
@@ -89,13 +82,11 @@ teacher1 = Teacher.create!(
   bio: "De 2010 à 2012, Emeline Cascio a abordé le théâtre en premier lieu par l’écriture, assistée par un coach privé à Genève (Suisse). En 2013, elle vend ses premières pièces, Demi-nuit et Interlude, puis fait ses premiers pas sur scène dans la pièce Lunatic, au théâtre de La Tarentule à Neuchâtel (Suisse).",
   phone: "+33456732222"
 )
-teacher1 ? "Created #{teacher1.first_name}" : "Not created !"
 
 teaching1 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching1 ? "Created teaching" : "Not created !"
 
 teacher2 = Teacher.create!(
   first_name: "Léonard",
@@ -103,37 +94,31 @@ teacher2 = Teacher.create!(
   bio: "On le retrouve également sur la scène musicale avec Tisiphone. Il improvise régulièrement pour la danse notamment avec Ennio Sammarco (Ramdam Théâtre) et compose également de la musique pour le théâtre et le cinéma.",
   phone: "+33456732222"
 )
-teacher2 ? "Created #{teacher2.first_name}" : "Not created !"
 
 teaching2 = Teaching.create!(
   course: course1,
   teacher: Teacher.last
 )
-teaching2 ? "Created teaching" : "Not created !"
 
 # tag1 = Tag.create!(
 #   name: "improvisation",
 #   category: "type de cours"
 # )
-# tag1 ? "Created #{tag1.name}" : "Not created !"
 
 # tag2 = Tag.create!(
 #   name: "enfants",
 #   category: "type de cours"
 # )
-# tag2 ? "Created #{tag2.name}" : "Not created !"
 
 property1 = Property.create!(
   course: course1,
   tag: Tag.last
 )
-property1 ? "Created property" : "Not created !"
 
 property2 = Property.create!(
   course: course2,
   tag: Tag.first
 )
-property2 ? "Created property" : "Not created !"
 
 puts "End of round 1"
 
@@ -145,7 +130,6 @@ user2 = User.create!(
   email: "basile@test.com",
   password: "password"
 )
-user2 ? "Created #{user2.email}" : "Not created !"
 
 school2 = School.create!(
   name: "Acting Studio",
@@ -155,19 +139,17 @@ school2 = School.create!(
   website: "https://www.actingstudio.com",
   blog_default: "",
   user: User.last,
+  city: "Lyon",
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon"
 )
-school2 ? "Created #{school2.name}" : "Not created !"
 
 # provider2 = Provider.create!(name: "instagram")
-# provider2 ? "Created #{provider2.name}" : "Not created !"
 
 network2 = Network.create!(
   school: School.last,
   provider: Provider.last,
   url: "https://www.instagram.com/ActingStudio/"
 )
-network2 ? "Created network" : "Not created !"
 
 address3 = Address.create!(
   published: false,
@@ -179,7 +161,6 @@ address3 = Address.create!(
   details: "",
   phone: "0412345678", 
 )
-address3 ? "Created #{address3.address}" : "Not created !"
 
 course3 = Course.create!(
   published: false,
@@ -188,7 +169,6 @@ course3 = Course.create!(
   price_period:"année",
   description: "Formation professionnelle 810 heures"
 )
-course3 ? "Created #{course3.description}" : "Not created !"
 
 teacher3 = Teacher.create!(
   first_name: "Mathieu",
@@ -196,13 +176,11 @@ teacher3 = Teacher.create!(
   bio: "Mathieu joue de nombreuses pièces à Lyon et dans toute la France. Il tourne également pour la télévision et le cinéma.",
   phone: "+33456734444"
 )
-teacher3 ? "Created #{teacher3.first_name}" : "Not created !"
     
 teaching3 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching3 ? "Created teaching" : "Not created !"
         
 course4 = Course.create!(
   published: false,
@@ -211,7 +189,6 @@ course4 = Course.create!(
   price_period:"année",
   description: "Atelier amateur le lundi soir"
 )
-course4 ? "Created #{course4.description}" : "Not created !"
 
 teacher4 = Teacher.create!(
   first_name: "Margaux",
@@ -219,37 +196,31 @@ teacher4 = Teacher.create!(
   bio: "Elle travaille pour diverses troupes sur la région, notamment pour La compagnie des 4 murs dans laquelle elle intervient sur plusieurs spectacles en tant que comédienne ou metteuse en scène. En 2017, elle rejoint l'équipe d'enseignant de l'Acting Studio tout en continuant son activité de comédienne.",
   phone: "056732832"
 )
-teacher4 ? "Created #{teacher4.first_name}" : "Not created !"
 
 teaching4 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching4 ? "Created teaching" : "Not created !"
 
 # tag3 = Tag.create!(
 #   name: "lundi",
 #   category: "jour"
 # )
-# tag3 ? "Created #{tag3.name}" : "Not created !"
 
 # tag4 = Tag.create!(
 #   name: "professionnel",
 #   category: "type de cours"
 # )
-# tag4 ? "Created #{tag4.name}" : "Not created !"
 
 property3 = Property.create!(
   course: course4,
   tag: Tag.last
 )
-property3 ? "Created property" : "Not created !"
 
 property4 = Property.create!(
   course: course3,
   tag: Tag.first
 )
-property4 ? "Created property" : "Not created !"
 
 puts "End of round 2"
 
@@ -261,7 +232,6 @@ user3 = User.create!(
   email: "seryl@test.com",
   password: "password"
 )
-user3 ? "Created #{user3.email}" : "Not created !"
 
 school3 = School.create!(
   name: "Le Parvis des arts",
@@ -270,19 +240,17 @@ school3 = School.create!(
   email: "contact@parvisdesarts.com",
   website: "https://www.orchestra-studio.com",
   user: User.last,
+  city: "Marseille",
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-paris",
 )
-school3 ? "Created #{school3.name}" : "Not created !"
 
 # provider3 = Provider.create!(name: "facebook")
-# provider3 ? "Created #{provider3.name}" : "Not created !"
 
 network3 = Network.create!(
   school: School.last,
   provider: Provider.last,
   url: "https://www.facebook.com/ParvisDesArts/"
 )
-network3 ? "Created network" : "Not created !"
 
 address4 = Address.create!(
   published: true,
@@ -293,7 +261,6 @@ address4 = Address.create!(
   zipcode: "13008",
   phone: "0484255024", 
 )
-address4 ? "Created #{address4.address}" : "Not created !"
 
 course5 = Course.create!(
   published: true,
@@ -302,7 +269,6 @@ course5 = Course.create!(
   price_period: "Tarif annuel",
   description: "Adulte"
 )
-course5 ? "Created #{course5.description}" : "Not created !"
 
 teacher5 = Teacher.create!(
   first_name: "Bernard",
@@ -310,13 +276,11 @@ teacher5 = Teacher.create!(
   bio: "Comédien, Metteur en scène et, Dramaturge, Bernard Fructus connaît un grand succès dans le rôle du contrôleur fiscal Cheval dans « le Diner de Cons » en tournée et au théâtre des Variétés, dans « Un Monde Merveilleux » de Caron et Laborie, pendant plus d'un an à l'affiche à la Comédie de Paris et au Théâtre du Splendid. Il avait auparavant tenu le premier rôle dans « Les P'tits Vélos » de Danièle et Patrick Haudecoeur durant 350 représentations à la Comédie de Paris, et dans « Frou-Frou les Bains » (rôle principal) , Molière meilleur spectacle musical.",
   phone: "0612121212"
 )
-teacher5 ? "Created #{teacher5.first_name}" : "Not created !"
 
 teaching5 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching5 ? "Created teaching" : "Not created !"
 
 # Tag.create!(
 #   name: "Théâtre comique ",
@@ -327,7 +291,6 @@ property5 = Property.create!(
   course: Course.last,
   tag: Tag.last
 )
-property5 ? "Created property" : "Not created !"
 
 course6 = Course.create!(
   published: true,
@@ -336,7 +299,6 @@ course6 = Course.create!(
   price_period: "Tarif annuel",
   description: "Enfant"
 )
-course6 ? "Created #{course6.description}" : "Not created !"
 
 teacher6 = Teacher.create!(
   first_name: "Marion",
@@ -344,13 +306,11 @@ teacher6 = Teacher.create!(
   bio: "Comédienne et chanteuse",
   phone: "0612121212"
 )
-teacher6 ? "Created #{teacher6.first_name}" : "Not created !"
 
 teaching6 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching6 ? "Created teaching" : "Not created !"
 
 # Tag.create!(
 #   name: "Mime",
@@ -361,7 +321,6 @@ property6 = Property.create!(
   course: Course.last,
   tag: Tag.last
 )
-property6 ? "Created property" : "Not created !"
 
 puts "End of round 3"
 
@@ -374,7 +333,6 @@ user4 = User.create!(
   email: "fake@test.com",
   password: "password"
 )
-user4 ? "Created #{user4.email}" : "Not created !"
 
 school4 = School.create!(
   name: "Théâtre du Carré Rond",
@@ -383,9 +341,9 @@ school4 = School.create!(
   email: "contact@lecarrerond.com",
   website: "http://lecarrerond.fr",
   user: User.last,
+  city: "Marseille",
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-paris",
 )
-school4 ? "Created #{school4.name}" : "Not created !"
 
 # Provider.create!(name: "facebook")
 
@@ -394,7 +352,6 @@ network4 = Network.create!(
   provider: Provider.last,
   url: "https://www.facebook.com/lecarrerondmarseille"
 )
-network4 ? "Created network" : "Not created !"
 
 # Provider.create!(name: "twitter")
 
@@ -403,7 +360,6 @@ network5 = Network.create!(
   provider: Provider.last,
   url: "https://twitter.com/lecarrerond"
 )
-network5 ? "Created network" : "Not created !"
 
 address5 = Address.create!(
   published: true,
@@ -413,7 +369,6 @@ address5 = Address.create!(
   zipcode: "13006",
   phone: "0674369753", 
 )
-address5 ? "Created #{address5.address}" : "Not created !"
 
 address6 = Address.create!(
   published: true,
@@ -424,7 +379,6 @@ address6 = Address.create!(
   zipcode: "13006",
   phone: "0674369753", 
 )
-address6 ? "Created #{address6.address}" : "Not created !"
 
 course7 = Course.create!(
   published: true,
@@ -433,7 +387,6 @@ course7 = Course.create!(
   price_period: "Tarif mensuel",
   description: "Cours pour adulte, lundi, mercredi et vendredi soir de 19h à 21h"
 )
-course7 ? "Created #{course7.description}" : "Not created !"
 
 teacher7 = Teacher.create!(
   first_name: "Isabelle",
@@ -441,13 +394,11 @@ teacher7 = Teacher.create!(
   bio: "comédienne, metteur en scène et directrice artistique de la compagnie. Formée au théâtre classique et moderne au Cours Florent, où elle eut notamment comme professeur Francis Huster.",
   phone: "0612121212"
 )
-teacher7 ? "Created #{teacher7.first_name}" : "Not created !"
 
 teaching7 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching7 ? "Created teaching" : "Not created !"
 
 # Tag.create!(
 #   name: "Improvisation",
@@ -458,7 +409,6 @@ property7 = Property.create!(
   course: Course.last,
   tag: Tag.last
 )
-property7 ? "Created property" : "Not created !"
 
 course8 = Course.create!(
   published: true,
@@ -467,7 +417,6 @@ course8 = Course.create!(
   price_period: "Tarif mensuel",
   description: "Cours pour les enfants à partir de 10 ans. Mardi, Mercredi et Vendredi de 18h30 à 20h"
 )
-course8 ? "Created #{course8.description}" : "Not created !"
 
 teacher8 = Teacher.create!(
   first_name: "Frederic",
@@ -475,13 +424,11 @@ teacher8 = Teacher.create!(
   bio: "Frédéric Bocquet est un acteur connu pour Priceless (2006), Le nouveau protocole (2008) et Zonama (2020).",
   phone: "0612121212"
 )
-teacher8 ? "Created #{teacher8.first_name}" : "Not created !"
 
 teaching8 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-teaching8 ? "Created teaching" : "Not created !"
 
 puts "End of round 4"
 

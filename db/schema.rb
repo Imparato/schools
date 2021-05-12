@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_075941) do
+ActiveRecord::Schema.define(version: 2021_05_12_135316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_075941) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "imparato_blog_link"
+    t.string "city"
     t.index ["user_id"], name: "index_schools_on_user_id"
   end
 
@@ -93,6 +94,8 @@ ActiveRecord::Schema.define(version: 2021_05_12_075941) do
     t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "school_id"
+    t.index ["school_id"], name: "index_teachers_on_school_id"
   end
 
   create_table "teachings", force: :cascade do |t|
@@ -123,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_075941) do
   add_foreign_key "properties", "courses"
   add_foreign_key "properties", "tags"
   add_foreign_key "schools", "users"
+  add_foreign_key "teachers", "schools"
   add_foreign_key "teachings", "courses"
   add_foreign_key "teachings", "teachers"
 end
