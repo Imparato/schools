@@ -29,15 +29,6 @@ ActiveRecord::Schema.define(version: 2021_05_12_075941) do
     t.index ["school_id"], name: "index_addresses_on_school_id"
   end
 
-  create_table "attributes", force: :cascade do |t|
-    t.bigint "course_id", null: false
-    t.bigint "tag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_attributes_on_course_id"
-    t.index ["tag_id"], name: "index_attributes_on_tag_id"
-  end
-
   create_table "courses", force: :cascade do |t|
     t.boolean "published"
     t.float "price"
@@ -57,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_05_12_075941) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["provider_id"], name: "index_networks_on_provider_id"
     t.index ["school_id"], name: "index_networks_on_school_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_properties_on_course_id"
+    t.index ["tag_id"], name: "index_properties_on_tag_id"
   end
 
   create_table "providers", force: :cascade do |t|
@@ -117,11 +117,11 @@ ActiveRecord::Schema.define(version: 2021_05_12_075941) do
   end
 
   add_foreign_key "addresses", "schools"
-  add_foreign_key "attributes", "courses"
-  add_foreign_key "attributes", "tags"
   add_foreign_key "courses", "addresses"
   add_foreign_key "networks", "providers"
   add_foreign_key "networks", "schools"
+  add_foreign_key "properties", "courses"
+  add_foreign_key "properties", "tags"
   add_foreign_key "schools", "users"
   add_foreign_key "teachings", "courses"
   add_foreign_key "teachings", "teachers"

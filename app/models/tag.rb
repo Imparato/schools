@@ -1,3 +1,3 @@
 class Tag < ApplicationRecord
-  has_many :attributes
+  has_many :properties
 end

@@ -1,6 +1,6 @@
-class CreateAttributes < ActiveRecord::Migration[6.1]
+class CreateProperties < ActiveRecord::Migration[6.1]
   def change
-    create_table :attributes do |t|
+    create_table :properties do |t|
       t.references :course, null: false, foreign_key: true
       t.references :tag, null: false, foreign_key: true
       t.timestamps

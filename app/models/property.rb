@@ -1,4 +1,4 @@
-class Attribute < ApplicationRecord
+class Property < ApplicationRecord
   belongs_to :course
   belongs_to :tag
 end
