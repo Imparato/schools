@@ -6,7 +6,6 @@ from pathlib import Path
 import xlrd
 import re
 
-loc = ("./cours.xlsx")
 data = {}
 
 
@@ -40,6 +39,8 @@ for sheet_index in range(book.nsheets):
         order = index
         index = index + 1
         name = sheet.cell_value(current_index, 0).replace("_", "")
+        if name == "## Autres cours à voir aussi …":
+            break
         # cleaned_title = title.replace("_","")
         body = sheet.cell_value(current_index, 1).replace('\n', "")
         school_city = sheet.cell_value(current_index, 4)
