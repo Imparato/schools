@@ -8,8 +8,8 @@
 /.bundle
 
 # ingore all data files in python
-/python/*.json
-/python/*.xlsx
+/python/cours.json
+/python/cours.xlsx
 
 
 # Ignore all logfiles and tempfiles.
