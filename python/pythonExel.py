@@ -41,7 +41,7 @@ for sheet_index in range(book.nsheets):
         order = index
         index = index + 1
         name = sheet.cell_value(current_index, 0).replace("_", "")
-        if name[0] == "#":
+        if name == "" or name[0] == "#":
             break
         # cleaned_title = title.replace("_","")
         body = sheet.cell_value(current_index, 1)
@@ -69,7 +69,7 @@ for sheet_index in range(book.nsheets):
                  "city": cityz[i]
                 })
         else:
-            address = addresses
+            address = [addresses.strip()]
 
         data[city]["cours"].append({
          "name": name,
