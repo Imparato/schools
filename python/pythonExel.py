@@ -69,7 +69,7 @@ for sheet_index in range(book.nsheets):
                  "city": cityz[i]
                 })
         else:
-            address = addresses
+            address = [addresses.strip()]
 
         data[city]["cours"].append({
          "name": name,
