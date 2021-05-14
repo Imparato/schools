@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_084420) do
+ActiveRecord::Schema.define(version: 2021_05_14_154647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_084420) do
     t.string "imparato_blog_link"
     t.string "city"
     t.string "blog_default_days"
+    t.integer "blog_order", default: 0
     t.index ["user_id"], name: "index_schools_on_user_id"
   end
 
