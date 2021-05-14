@@ -2,12 +2,50 @@ require 'json'
 
 class ApiController < ApplicationController
   skip_before_action :authenticate_user!
+  
   def show
     api_key = check_authentification(params[:key])
     if api_key.nil?
       render_unauthorized
     else
-      render json: {ok:"ok"}
+      city = params[:city]
+      name = params[:name]
+      id = params[:id]
+      if id
+        school = School.find(id)
+      end
+      if name
+        school = School.find_by('name = ?', name.capitalize)
+      end
+      if city
+        school = School.find_by('city = ?', city.capitalize)
+      end
+        # Addresses et cours  
+        address = {} 
+        school.addresses.each do |addrs|
+          courses = {}
+          addrs.courses.each do |cours| 
+            courses[cours.id] = {
+              course: cours,
+              teacher: cours.teachers
+            }
+          end
+          address[addrs.id] = {
+            address: addrs,
+            courses: courses
+          }
+        end
+
+        # school[:address] = school.addresses 
+        prof = school.teachers
+        response = {}
+        response = {
+          school: school,
+          addresses: address,
+          "teachers" => school.teachers
+        }
+        
+        render json: response      
     end
 
   end
