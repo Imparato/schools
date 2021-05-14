@@ -1,11 +1,8 @@
 # update network list
 namespace :init do
-  desc "udpate/create Providers"
+  desc "udpate/create Tags"
   task tables: :environment do
-    # providers
-    networks = %w(Youtube Linkedin Instagram Twitter Facebook Pinterest)
-    networks.each { |net| Provider.create(name: net) }
-
+    
     # tags
     tags = {
       jours: ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"],
