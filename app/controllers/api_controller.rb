@@ -20,6 +20,8 @@ class ApiController < ApplicationController
       if city
         school = School.find_by('city = ?', city.capitalize)
       end
+
+      if school 
         # Addresses et cours  
         address = []
         school.addresses.each do |addrs|
@@ -27,7 +29,7 @@ class ApiController < ApplicationController
           addrs.courses.each do |cours| 
             courses << {
               course: cours,
-              teacher: cours.teachers
+              teachers_ids: cours.teachers.ids
             }
           end
           address <<  {
@@ -44,8 +46,12 @@ class ApiController < ApplicationController
         }
         
         render json: response
+      else
+        render json: {
+          error: "Not found"
+        }, status: :not_found
+      end
     end
-
   end
 
   def index
@@ -55,35 +61,23 @@ class ApiController < ApplicationController
     else
       city = params[:city]
       schools = School.where(city: city.capitalize)
+      if schools[0]
       result = {}
-      schools.each do |school|
-        addresses = []
-        school.addresses.each do |address|
-          courses = {}
-          address.courses.each do |course|
-            courses[course.id] = { 
-              course: course, 
-              tags: course.tags, 
-              teachers: course.teachers 
-            }
-            addresses << {
-              address: address,
-              courses: courses
-            } 
-          end
+        schools.each do |school|
+          result[school.id] = {
+            id: school.id,
+            name: school.name,
+            city: school.city,
+            modified_at: school.updated_at.to_s
+          }
         end
-        result[school.id] = {
-          school: school,
-          addresses: addresses,
-          network: school.networks,
-          teachers: school.teachers,
-
-        }
+        render json: result
+      else
+        render json: {
+          error: "Not found"
+        }, status: :not_found
       end
-      render json: result
     end
-
-
   end
 
   private
