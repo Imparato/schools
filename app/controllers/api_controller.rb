@@ -15,37 +15,35 @@ class ApiController < ApplicationController
         school = School.find(id)
       end
       if name
-        school = School.find_by('name = ?', name.capitalize)
+        school = School.find_by('name ILIKE ?', "%#{name}%")
       end
       if city
         school = School.find_by('city = ?', city.capitalize)
       end
         # Addresses et cours  
-        address = {} 
+        address = []
         school.addresses.each do |addrs|
-          courses = {}
+          courses = []
           addrs.courses.each do |cours| 
-            courses[cours.id] = {
+            courses << {
               course: cours,
               teacher: cours.teachers
             }
           end
-          address[addrs.id] = {
+          address <<  {
             address: addrs,
             courses: courses
           }
         end
-
-        # school[:address] = school.addresses 
-        prof = school.teachers
-        response = {}
+        #
         response = {
           school: school,
+          network: school.networks,
           addresses: address,
-          "teachers" => school.teachers
+          teachers: school.teachers
         }
         
-        render json: response      
+        render json: response
     end
 
   end
@@ -59,7 +57,28 @@ class ApiController < ApplicationController
       schools = School.where(city: city.capitalize)
       result = {}
       schools.each do |school|
-        result[school.id] = school.name
+        addresses = []
+        school.addresses.each do |address|
+          courses = {}
+          address.courses.each do |course|
+            courses[course.id] = { 
+              course: course, 
+              tags: course.tags, 
+              teachers: course.teachers 
+            }
+            addresses << {
+              address: address,
+              courses: courses
+            } 
+          end
+        end
+        result[school.id] = {
+          school: school,
+          addresses: addresses,
+          network: school.networks,
+          teachers: school.teachers,
+
+        }
       end
       render json: result
     end
