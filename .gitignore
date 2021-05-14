@@ -7,6 +7,11 @@
 # Ignore bundler config.
 /.bundle
 
+# ingore all data files in python
+/python/cours.json
+/python/cours.xlsx
+
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

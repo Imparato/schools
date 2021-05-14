@@ -77,7 +77,8 @@ teacher1 = Teacher.create!(
   first_name: "Emeline",
   last_name: "Cascio",
   bio: "De 2010 à 2012, Emeline Cascio a abordé le théâtre en premier lieu par l’écriture, assistée par un coach privé à Genève (Suisse). En 2013, elle vend ses premières pièces, Demi-nuit et Interlude, puis fait ses premiers pas sur scène dans la pièce Lunatic, au théâtre de La Tarentule à Neuchâtel (Suisse).",
-  phone: "+33456732222"
+  phone: "+33456732222",
+  school: School.last
 )
 
 teaching1 = Teaching.create!(
@@ -89,7 +90,9 @@ teacher2 = Teacher.create!(
   first_name: "Léonard",
   last_name: "Stefanica",
   bio: "On le retrouve également sur la scène musicale avec Tisiphone. Il improvise régulièrement pour la danse notamment avec Ennio Sammarco (Ramdam Théâtre) et compose également de la musique pour le théâtre et le cinéma.",
-  phone: "+33456732222"
+  phone: "+33456732222",
+  school: School.last
+
 )
 
 teaching2 = Teaching.create!(
@@ -168,7 +171,8 @@ teacher3 = Teacher.create!(
   first_name: "Mathieu",
   last_name: "Duboclard",
   bio: "Mathieu joue de nombreuses pièces à Lyon et dans toute la France. Il tourne également pour la télévision et le cinéma.",
-  phone: "+33456734444"
+  phone: "+33456734444",
+  school: School.last
 )
     
 teaching3 = Teaching.create!(
@@ -188,7 +192,8 @@ teacher4 = Teacher.create!(
   first_name: "Margaux",
   last_name: "Peycelon",
   bio: "Elle travaille pour diverses troupes sur la région, notamment pour La compagnie des 4 murs dans laquelle elle intervient sur plusieurs spectacles en tant que comédienne ou metteuse en scène. En 2017, elle rejoint l'équipe d'enseignant de l'Acting Studio tout en continuant son activité de comédienne.",
-  phone: "056732832"
+  phone: "056732832",
+  school: School.last
 )
 
 teaching4 = Teaching.create!(
@@ -265,7 +270,8 @@ teacher5 = Teacher.create!(
   first_name: "Bernard",
   last_name: "Fructus",
   bio: "Comédien, Metteur en scène et, Dramaturge, Bernard Fructus connaît un grand succès dans le rôle du contrôleur fiscal Cheval dans « le Diner de Cons » en tournée et au théâtre des Variétés, dans « Un Monde Merveilleux » de Caron et Laborie, pendant plus d'un an à l'affiche à la Comédie de Paris et au Théâtre du Splendid. Il avait auparavant tenu le premier rôle dans « Les P'tits Vélos » de Danièle et Patrick Haudecoeur durant 350 représentations à la Comédie de Paris, et dans « Frou-Frou les Bains » (rôle principal) , Molière meilleur spectacle musical.",
-  phone: "0612121212"
+  phone: "0612121212",
+  school: School.last
 )
 
 teaching5 = Teaching.create!(
@@ -295,7 +301,8 @@ teacher6 = Teacher.create!(
   first_name: "Marion",
   last_name: "Nguyen Thé",
   bio: "Comédienne et chanteuse",
-  phone: "0612121212"
+  phone: "0612121212",
+  school: School.last
 )
 
 teaching6 = Teaching.create!(
@@ -377,7 +384,8 @@ teacher7 = Teacher.create!(
   first_name: "Isabelle",
   last_name: "Genot",
   bio: "comédienne, metteur en scène et directrice artistique de la compagnie. Formée au théâtre classique et moderne au Cours Florent, où elle eut notamment comme professeur Francis Huster.",
-  phone: "0612121212"
+  phone: "0612121212",
+  school: School.last
 )
 
 teaching7 = Teaching.create!(
@@ -407,7 +415,8 @@ teacher8 = Teacher.create!(
   first_name: "Frederic",
   last_name: "Bocquet",
   bio: "Frédéric Bocquet est un acteur connu pour Priceless (2006), Le nouveau protocole (2008) et Zonama (2020).",
-  phone: "0612121212"
+  phone: "0612121212",
+  school: School.last
 )
 
 teaching8 = Teaching.create!(
