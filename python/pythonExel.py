@@ -31,6 +31,8 @@ for sheet_index in range(book.nsheets):
     intro = sheet.cell_value(1, 1).replace("_", "")
     if city == " __NE PAS EFFACER" or city == " __Sons":
         break
+    if city[0] == " ":
+        continue
     # print(slug)
     current_index = 2
     data[city] = {"intro": intro, "cours": []}
@@ -40,8 +42,10 @@ for sheet_index in range(book.nsheets):
         order = index
         index = index + 1
         name = sheet.cell_value(current_index, 0).replace("_", "")
+        if name[0] == "#":
+            break
         # cleaned_title = title.replace("_","")
-        body = sheet.cell_value(current_index, 1).replace('\n', "")
+        body = sheet.cell_value(current_index, 1)
         school_city = sheet.cell_value(current_index, 4)
         website = sheet.cell_value(current_index, 5)
         days = get_days(sheet.cell_value(current_index, 7))
@@ -65,6 +69,8 @@ for sheet_index in range(book.nsheets):
                  "zipcode": cp[i],
                  "city": cityz[i]
                 })
+        else: 
+            address = addresses
 
         data[city]["cours"].append({
          "name": name,
