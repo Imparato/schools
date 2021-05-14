@@ -6,7 +6,6 @@ from pathlib import Path
 import xlrd
 import re
 
-loc = ("./cours.xlsx")
 data = {}
 
 
@@ -69,7 +68,7 @@ for sheet_index in range(book.nsheets):
                  "zipcode": cp[i],
                  "city": cityz[i]
                 })
-        else: 
+        else:
             address = addresses
 
         data[city]["cours"].append({
@@ -78,7 +77,7 @@ for sheet_index in range(book.nsheets):
          'blog_text': body,
          "addresses": address,
          'website': website,
-         'email': email,
+         'email': email.strip(),
          'blog_url': blog_url,
          'network': social_media.split("\n"),
          'days': days
@@ -88,4 +87,3 @@ for sheet_index in range(book.nsheets):
 # Write json file
 with open("cours.json", "w", encoding="utf-8") as outfile:
     json.dump(data, outfile, ensure_ascii=False)
-

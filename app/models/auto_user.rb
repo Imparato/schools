@@ -1,0 +1,2 @@
+class AutoUser < ApplicationRecord
+end

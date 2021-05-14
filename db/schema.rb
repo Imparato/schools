@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_13_115905) do
+ActiveRecord::Schema.define(version: 2021_05_14_084420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 2021_05_13_115905) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "auto_users", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "auto_str"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.boolean "published"
     t.float "price"
@@ -75,11 +82,9 @@ ActiveRecord::Schema.define(version: 2021_05_13_115905) do
 
   create_table "networks", force: :cascade do |t|
     t.bigint "school_id", null: false
-    t.bigint "provider_id", null: false
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["provider_id"], name: "index_networks_on_provider_id"
     t.index ["school_id"], name: "index_networks_on_school_id"
   end
 
@@ -90,12 +95,6 @@ ActiveRecord::Schema.define(version: 2021_05_13_115905) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_properties_on_course_id"
     t.index ["tag_id"], name: "index_properties_on_tag_id"
-  end
-
-  create_table "providers", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "schools", force: :cascade do |t|
@@ -154,7 +153,6 @@ ActiveRecord::Schema.define(version: 2021_05_13_115905) do
 
   add_foreign_key "addresses", "schools"
   add_foreign_key "courses", "addresses"
-  add_foreign_key "networks", "providers"
   add_foreign_key "networks", "schools"
   add_foreign_key "properties", "courses"
   add_foreign_key "properties", "tags"
