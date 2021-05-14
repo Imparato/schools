@@ -30,11 +30,8 @@ school1 = School.create!(
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon"
 )
 
-# provider1 = Provider.create!(name: "facebook")
-
 network1 = Network.create!(
   school: School.last,
-  provider: Provider.last,
   url: "https://www.facebook.com/CoursMyriade/"
 )
 
@@ -143,11 +140,8 @@ school2 = School.create!(
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon"
 )
 
-# provider2 = Provider.create!(name: "instagram")
-
 network2 = Network.create!(
   school: School.last,
-  provider: Provider.last,
   url: "https://www.instagram.com/ActingStudio/"
 )
 
@@ -244,11 +238,8 @@ school3 = School.create!(
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-paris",
 )
 
-# provider3 = Provider.create!(name: "facebook")
-
 network3 = Network.create!(
   school: School.last,
-  provider: Provider.last,
   url: "https://www.facebook.com/ParvisDesArts/"
 )
 
@@ -345,19 +336,13 @@ school4 = School.create!(
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-paris",
 )
 
-# Provider.create!(name: "facebook")
-
 network4 = Network.create!(
   school: School.last,
-  provider: Provider.last,
   url: "https://www.facebook.com/lecarrerondmarseille"
 )
 
-# Provider.create!(name: "twitter")
-
 network5 = Network.create!(
   school: School.last,
-  provider: Provider.last,
   url: "https://twitter.com/lecarrerond"
 )
 

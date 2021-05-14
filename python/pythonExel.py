@@ -73,7 +73,7 @@ for sheet_index in range(book.nsheets):
          'blog_text': body,
          "addresses": address,
          'website': website,
-         'email': email,
+         'email': email.strip(),
          'blog_url': blog_url,
          'network': social_media.split("\n"),
          'days': days

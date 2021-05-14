@@ -10,32 +10,42 @@ namespace :load do
 
         cours.each do |key, value|
             value["cours"].each do |school|
-                School.create!(
-                    name: school["name"],
-                    published: false,
-                    description: school["blog_text"],
-                    email: school["email"],
-                    website: school["website"],
-                    user: User.last, #pouvoir laisser vide
-                    city: key,
-                    imparato_blog_link: school["blog_url"]
-                )
-                school["addresses"].each do |address|
-                    Address.create!(
+                $password = SecureRandom.base64(5)
+                if school["email"] != ""
+                    User.create!(
+                        email: school["email"],
+                        password: $password
+                        )
+                    AutoUser.create!(
+                        email: school["email"],
+                        auto_str: $password,
+                    )
+                    School.create!(
+                        name: school["name"],
                         published: false,
-                        school: School.last,
-                        address: address["address"],
-                        city: address["city"],
-                        zipcode: address["zipcode"],
-                        phone: ""
+                        description: school["blog_text"],
+                        email: school["email"],
+                        website: school["website"],
+                        user: User.last,
+                        city: key,
+                        imparato_blog_link: school["blog_url"]
                     )
-                end
-                school["network"].each do |network|
-                    Network.create!(
-                        school: School.last,
-                        provider: Provider.last, #en fonction de ce que contient le lien, créer une méthode de classe sur provider
-                        url: network["network"]
-                    )
+                    school["addresses"].each do |address|
+                        Address.create!(
+                            published: false,
+                            school: School.last,
+                            address: address["address"],
+                            city: address["city"],
+                            zipcode: address["zipcode"],
+                            phone: ""
+                        )
+                    end
+                    school["network"].each do |network|
+                        Network.create!(
+                            school: School.last,
+                            url: network["network"]
+                        )
+                    end
                 end
             end
         end
