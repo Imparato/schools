@@ -68,6 +68,19 @@ class ApiController < ApplicationController
             modified_at: school.last_update.to_s
           }
         end
+        # check if main_city
+        main_city = MainCity.find_by(city: city.capitalize)
+        if main_city
+          result[:dedicated_host] = main_city.dedicated_host
+          blog_info = {}
+          blog_info[:blog_title] = main_city.blog_title
+          blog_info[:blog_slug] = main_city.blog_slug
+          blog_info[:blog_map_iframe] = main_city.blog_map_iframe
+          blog_info[:blog_important] = main_city.blog_important
+          blog_info[:blog_intro] = main_city.blog_intro
+          blog_info[:blog_voir_aussi] = main_city.blog_voir_aussi
+          result[:blog] = blog_info
+        end
         render json: result
       end
     end
@@ -79,9 +92,9 @@ class ApiController < ApplicationController
 
     # main cities
     MainCity.all.order("blog_important DESC, city ASC").each do |main_city|
-      city = { name: main_city.city,
+      city = { city: main_city.city,
                important: main_city.blog_important,
-               max: School.last_udpate_city(main_city.city).to_s,
+               updated_at: School.last_udpate_city(main_city.city).to_s,
                school_count: School.where(city: main_city.city).count }
       result.push city
     end
@@ -89,9 +102,9 @@ class ApiController < ApplicationController
     # other cities if any
     other_cities = School.secondary_cities
     other_cities.each do |other_city|
-      city = { name: other_city,
+      city = { city: other_city,
                important: false,
-               max: School.last_udpate_city(other_city).to_s,
+               updated_at: School.last_udpate_city(other_city).to_s,
                school_count: School.where(city: main_city.city).count }
       result.push city
     end
