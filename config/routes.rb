@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get '/api/schools', to:'api#index'
   get '/api/school', to:'api#show'
+  get '/api/cities', to:'api#cities'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
