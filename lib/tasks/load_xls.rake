@@ -94,7 +94,7 @@ namespace :load do
         school["network"].each do |network|
           Network.create!(
             school: School.last,
-            url: network["network"]
+            url: network
           )
         end
       end
