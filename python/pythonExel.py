@@ -49,7 +49,8 @@ for sheet_index in range(book.nsheets):
         index = index + 1
         name = sheet.cell_value(current_index, 0).replace("_", "")
         if name == "" or name[0] == "X":
-            break
+            current_index = current_index + 1
+            continue
         # cleaned_title = title.replace("_","")
         body = sheet.cell_value(current_index, 1)
         school_city = sheet.cell_value(current_index, 4)
