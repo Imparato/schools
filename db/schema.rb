@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_154647) do
+ActiveRecord::Schema.define(version: 2021_05_16_090335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,20 @@ ActiveRecord::Schema.define(version: 2021_05_14_154647) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "price_period"
     t.index ["address_id"], name: "index_courses_on_address_id"
+  end
+
+  create_table "main_cities", force: :cascade do |t|
+    t.string "city"
+    t.string "country_code"
+    t.text "blog_title"
+    t.string "blog_slug"
+    t.string "blog_map_iframe"
+    t.boolean "blog_important"
+    t.text "blog_intro"
+    t.text "blog_voir_aussi"
+    t.string "dedicated_host"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "networks", force: :cascade do |t|
