@@ -11,15 +11,9 @@ class ApiController < ApplicationController
       city = params[:city]
       name = params[:name]
       id = params[:id]
-      if id
-        school = School.find(id)
-      end
-      if name
-        school = School.find_by('name ILIKE ?', "%#{name}%")
-      end
-      if city
-        school = School.find_by('city = ?', city.capitalize)
-      end
+      school = School.find(id) if id
+      school = School.find_by('name ILIKE ?', "%#{name}%") if name
+      school = School.find_by('city = ?', city.capitalize) if city
 
       if school
         # Addresses et cours
@@ -32,12 +26,11 @@ class ApiController < ApplicationController
               teachers_ids: cours.teachers.ids
             }
           end
-          address <<  {
+          address << {
             address: addrs,
             courses: courses
           }
         end
-        #
         response = {
           school: school,
           network: school.networks,
@@ -61,8 +54,12 @@ class ApiController < ApplicationController
     else
       city = params[:city]
       schools = School.where(city: city.capitalize)
-      unless schools.empty?
-        result = {city: city.capitalize, school_count: School.where(city: city.capitalize).count, schools: []}
+      if schools.empty?
+        render json: {
+          error: "Not found"
+        }, status: :not_found
+      else
+        result = { city: city.capitalize, school_count: School.where(city: city.capitalize).count, schools: [] }
         schools.each do |school|
           result[:schools] << {
             id: school.id,
@@ -72,10 +69,6 @@ class ApiController < ApplicationController
           }
         end
         render json: result
-      else
-        render json: {
-          error: "Not found"
-        }, status: :not_found
       end
     end
   end
@@ -86,28 +79,24 @@ class ApiController < ApplicationController
 
     # main cities
     MainCity.all.order("blog_important DESC, city ASC").each do |main_city|
-      city = {name: main_city.city,
-              important: main_city.blog_important,
-              max: School.last_udpate_city(main_city.city).to_s,
-              school_count: School.where(city: main_city.city).count
-            }
+      city = { name: main_city.city,
+               important: main_city.blog_important,
+               max: School.last_udpate_city(main_city.city).to_s,
+               school_count: School.where(city: main_city.city).count }
       result.push city
     end
 
     # other cities if any
-    request_other_cities = "SELECT distinct s.city FROM schools s LEFT JOIN main_cities mc ON mc.city = s.city WHERE mc.id IS NULL ORDER BY city ASC"
-    other_cities = ActiveRecord::Base.connection.execute(request_other_cities)
+    other_cities = School.secondary_cities
     other_cities.each do |other_city|
-      city = {name: other_city,
-              important: false,
-              max: School.last_udpate_city(other_city).to_s,
-              school_count: School.where(city: main_city.city).count
-            }
+      city = { name: other_city,
+               important: false,
+               max: School.last_udpate_city(other_city).to_s,
+               school_count: School.where(city: main_city.city).count }
       result.push city
     end
     # render result
     render json: result
-
   end
 
   private

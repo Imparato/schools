@@ -5,7 +5,8 @@ ActiveAdmin.register MainCity do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :city, :country_code, :blog_title, :blog_slug, :blog_map_iframe, :blog_important, :blog_intro, :blog_voir_aussi, :dedicated_host
+  permit_params :city, :country_code, :blog_title, :blog_slug, :blog_map_iframe, :blog_important, :blog_intro,
+                :blog_voir_aussi, :dedicated_host
   #
   # or
   #
@@ -26,5 +27,4 @@ ActiveAdmin.register MainCity do
     column :dedicated_host
     actions
   end
-
 end

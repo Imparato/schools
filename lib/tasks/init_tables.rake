@@ -2,7 +2,6 @@
 namespace :init do
   desc "udpate/create Tags"
   task tables: :environment do
-    
     # tags
     tags = {
       jours: ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"],
@@ -12,8 +11,7 @@ namespace :init do
       langues: ["en anglais", "en allemand", "en espagnol"]
     }
     tags.each do |category, names|
-      names.each {|name| Tag.create(name: name, category: category.to_s)}
+      names.each { |name| Tag.create(name: name, category: category.to_s) }
     end
-
   end
 end
