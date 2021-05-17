@@ -1,4 +1,6 @@
 ActiveAdmin.register Address do
+
+  menu priority: 3
   # permit_params do
   #   permitted = [:published, :school_id, :address, :address_complement, :city, :zipcode, :details, :phone]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
