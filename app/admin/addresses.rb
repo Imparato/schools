@@ -27,8 +27,6 @@ ActiveAdmin.register Address do
     column :published
     column :address
     column :address_complement
-    column :phone
-    column :details
     column :school
   end
   
