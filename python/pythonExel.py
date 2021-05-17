@@ -77,7 +77,17 @@ for sheet_index in range(book.nsheets):
                  "city": cityz[i]
                 })
         else:
-            address = [addresses.strip()]
+            # [addresses.strip()]
+            cp = sheet.cell_value(current_index, 3)
+            if type(cp) is float or type(cp) is int:
+                cp = str(round(cp))
+            cityz = sheet.cell_value(current_index, 4)
+            address = []
+            address.append({
+                "address": addresses.strip(),
+                "zipcode":  cp,
+                "city": cityz
+            })
 
         data[city]["cours"].append({
          "name": name,
