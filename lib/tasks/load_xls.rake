@@ -1,5 +1,4 @@
 require 'json'
-require 'pry-byebug'
 
 namespace :load do
   desc "load xls to DB"
