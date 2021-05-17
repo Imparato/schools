@@ -5,7 +5,8 @@ ActiveAdmin.register School do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :published, :description, :email, :website, :blog_default, :user_id, :imparato_blog_link, :city, :blog_order, :blog_default_days
+  permit_params :name, :published, :description, :email, :website, :blog_default, :user_id, :imparato_blog_link, :city,
+                :blog_order, :blog_default_days
   #
   # or
   #
@@ -27,7 +28,6 @@ ActiveAdmin.register School do
   scope(:Nice) { |schools| schools.where(city: "Nice") }
   scope(:Strasbourg) { |schools| schools.where(city: "Strasbourg") }
 
-
   index do
     selectable_column
     id_column
@@ -39,5 +39,4 @@ ActiveAdmin.register School do
     column :updated_at
     actions
   end
-
 end

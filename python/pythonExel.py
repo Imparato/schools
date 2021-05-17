@@ -27,22 +27,30 @@ for sheet_index in range(book.nsheets):
     sheet = book.sheet_by_index(sheet_index)
     slug = sheet.cell_value(1, 2)
     city = sheet.name
-    intro = sheet.cell_value(1, 1).replace("_", "")
+
     if city == " __NE PAS EFFACER" or city == " __Sons":
         break
     if city[0] == " ":
         continue
+
+    # get all city blog composants
+    intro = sheet.cell_value(1, 1)
+    pitch = sheet.cell_value(1, 0)
+    important = sheet.cell_value(1, 3)
+    iframe = sheet.cell_value(1, 4)
+
     # print(slug)
     current_index = 2
-    data[city] = {"intro": intro, "cours": []}
+    data[city] = {"intro": intro, "pitch": pitch, "important": important, "iframe": iframe, "slug": slug, "cours": []}
     index = 1
 
     while current_index < sheet.nrows:
         order = index
         index = index + 1
         name = sheet.cell_value(current_index, 0).replace("_", "")
-        if name == "" or name[0] == "#":
-            break
+        if name == "" or name[0] == "X":
+            current_index = current_index + 1
+            continue
         # cleaned_title = title.replace("_","")
         body = sheet.cell_value(current_index, 1)
         school_city = sheet.cell_value(current_index, 4)
