@@ -15,6 +15,17 @@ ActiveAdmin.register Teacher do
   #   permitted
   # end
 
-  
+  index do
+    selectable_column
+    id_column
+    column :last_name
+    column :first_name
+    column :phone
+    column :school
+    column :updated_at
+    actions
+  end
+
+
   
 end
