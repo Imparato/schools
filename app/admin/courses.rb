@@ -16,6 +16,8 @@ ActiveAdmin.register Course do
     end 
     column :price
     column :tags
+    column :start_time
+    column :end_time
     column :school do |course|
         course.address.school
     end
@@ -31,6 +33,8 @@ ActiveAdmin.register Course do
         course.address.school
       end 
       row :tags
+      row :start_time
+      row :end_time
       row :teachers
       row :addresses do |course|
         course.address.address
@@ -63,7 +67,7 @@ ActiveAdmin.register Course do
                             end
     end
     f.inputs do
-      f.input :address
+      f.input :address.to_s
     end
       f.actions
   end
