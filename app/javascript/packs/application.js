@@ -18,6 +18,11 @@ ActiveStorage.start()
 // WRITE YOUR OWN JS STARTING FROM HERE 👇
 // ----------------------------------------------------
 
+// require("@rails/ujs").start();
+// require("turbolinks").start();
+
+require("stylesheets/application.scss");
+
 // External imports
 import "bootstrap";
 
