@@ -1,7 +1,7 @@
 ActiveAdmin.register Course do
 
  
-  permit_params :published, :price, :description, :address_id, :price_period, :address,
+  permit_params :published, :price, :start_time, :end_time, :description, :address_id, :price_period, :address,
     properties_attributes: [:id, :tag_id, :_destroy],
     teachings_attributes: [:id, :teacher_id, :_destroy]
     #
