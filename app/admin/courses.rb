@@ -6,7 +6,7 @@ ActiveAdmin.register Course do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :published, :price, :description, :address, :price_period, :address,
+  permit_params :published, :price, :description, :address_id, :price_period, :address,
     properties_attributes: [:id, :tag_id, :_destroy],
     teachings_attributes: [:id, :teacher_id, :_destroy]
     #
@@ -75,7 +75,7 @@ ActiveAdmin.register Course do
                             end
     end
     f.inputs do
-      f.input :address_id 
+      f.input :address
     end
       f.actions
   end
