@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html lang="fr">
   <head>
     <title>Schools</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,13 +8,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+    <%= javascript_pack_tag 'index' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <%# <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 
     <%= yield %>
