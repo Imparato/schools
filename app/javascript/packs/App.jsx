@@ -1,10 +1,19 @@
 import React from 'react';
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from './Components/Navbar';
+import School from './Components/School';
 const App = () => {
   return (
-    <div>
-      <h1>App</h1>
-    </div>
+    <>
+      <Router>
+        <div className="h-screen flex overflow-hidden bg-white">
+          <Navbar />
+          <Switch>
+            <Route exact path="/school" component={School} />
+          </Switch>
+        </div>
+      </Router>
+    </>
   );
 };
 

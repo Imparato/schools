@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   get '/api/school', to:'api#show'
   get '/api/cities', to:'api#cities'
 
+  get '/school', to: 'pages#home'
+  resources :schools, only: [:update, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
