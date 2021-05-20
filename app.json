@@ -1,0 +1,20 @@
+{
+  "name": "theatre-cours",
+  "scripts": {
+    "postdeploy": "scripts/heroku_postdeploy.sh"
+  },
+  "env": {
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "worker": {
+      "quantity": 1
+    }
+  },
+  "addons": ["heroku-postgresql"],
+}

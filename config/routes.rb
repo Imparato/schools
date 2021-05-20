@@ -8,8 +8,16 @@ Rails.application.routes.draw do
   get '/api/cities', to:'api#cities'
 
   get '/school', to: 'pages#home'
+<<<<<<< HEAD
   resources :schools, only: [:update, :index] do
     resources :networks, only: [:create, :update]
+=======
+
+  get '/adresses', to: 'pages#home'
+
+  resources :schools, only: [:update, :show] do
+    resources :addresses, only: [:index]
+>>>>>>> main
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
