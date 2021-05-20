@@ -8,7 +8,11 @@ const SchoolShow = ({ schools, setSchools }) => {
     <>
       <div className="bg-white shadow sm:rounded-lg w-100">
         {editMode ? (
-          <SchoolEdit schools={schools} setEditMode={setEditMode} setSchools={setSchools}  />
+          <SchoolEdit
+            schools={schools}
+            setEditMode={setEditMode}
+            setSchools={setSchools}
+          />
         ) : (
           <>
             <div className="border-t border-gray-200">
@@ -55,21 +59,21 @@ const SchoolShow = ({ schools, setSchools }) => {
                     {schools.school.city}
                   </dd>
                 </div>
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Réseaux :</dt>
+                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">
+                    Réseaux :
+                  </dt>
                   {/* {schools.networks.map} */}
-                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200 w-85">
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 w-2/3">
+                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
                       {schools.network.map((net) => {
                         return (
                           <li
                             key={net.id}
-                            className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
+                            className="pl-3 pr-4 w-40 py-2 flex items-center justify-between text-sm"
                           >
                             <div className=" flex-1 flex items-center">
-                              <span className="ml-2 flex-1  ">
-                                {net.url}
-                              </span>
+                              <span className="ml-2 ">{net.url}</span>
                             </div>
                           </li>
                         );
@@ -79,12 +83,14 @@ const SchoolShow = ({ schools, setSchools }) => {
                 </div>
               </dl>
             </div>
-            <button
-              onClick={() => setEditMode(!editMode)}
-              className="inline-flex ml-40 items-center px-4 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-            >
-              Modifier
-            </button>
+            <div className="flex w-100 justify-center mt-2">
+              <button
+                onClick={() => setEditMode(!editMode)}
+                className="inline-flex items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 hover:no-underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Modifier
+              </button>
+            </div>
           </>
         )}
       </div>

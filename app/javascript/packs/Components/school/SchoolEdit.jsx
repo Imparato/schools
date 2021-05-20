@@ -112,7 +112,7 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
                 onChange={(e) => setWebsite(e.target.value)}
               />
             </div>
-            <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className=" px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Ville :</dt>
               <input
                 className="pl-3 border-2 rounded-md border-green-300 bg-green-50"
@@ -125,7 +125,7 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
             </div>
           </dl>
         </div>
-          <Networks schools={schools} reset={reset} />   
+        <Networks schools={schools} reset={reset} />
       </form>
     </>
   );

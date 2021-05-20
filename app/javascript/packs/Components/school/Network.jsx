@@ -61,7 +61,11 @@ const Network = ({ network, schoolId, setNetworks }) => {
           value={url}
           className="p-2 flex-1"
         />
-        <XCircleIcon onClick={handleDelete} style={{cursor: "pointer"}} className="h-5 w-5" />
+        <XCircleIcon
+          onClick={handleDelete}
+          style={{ cursor: "pointer" }}
+          className="h-5 w-5"
+        />
       </div>
     </li>
   );

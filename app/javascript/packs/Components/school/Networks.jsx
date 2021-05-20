@@ -33,13 +33,13 @@ const Networks = ({ schools, reset }) => {
 
   return (
     <>
-      <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <div className=" bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Réseaux :</dt>
         {/* {schools.networks.map} */}
-        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 w-1/2">
           <ul
             id="input-tag"
-            className="border border-gray-200 rounded-md divide-y divide-gray-200 w-60"
+            className="border border-gray-200 rounded-md divide-y divide-gray-200"
           >
             {networks &&
               networks.map((net) => {
@@ -62,20 +62,19 @@ const Networks = ({ schools, reset }) => {
           </button>
         </dd>
       </div>
-      <div className="bg-white pb-3 space-y-2 relative z-0 inline-flex shadow-sm rounded-md col-12 w-full">
-        <button
-          id="btn-edit-school"
-          type="submit"
-          className="inline-flex px-4 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-        >
-          Valider
-        </button>
+      <div className="bg-white pb-3 mt-2 z-0 inline-flex justify-around shadow-sm rounded-md w-full">
         <input
           type="button"
           value="Annuler"
           onClick={() => reset()}
-          className="inline-flex px-4 py-3 items-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          className="inline-flex items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 hover:no-underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
         />
+        <button
+          type="submit"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 hover:no-underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Enregistrer
+        </button>
       </div>
     </>
   );
