@@ -50,8 +50,6 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
       });
   };
 
- 
-
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -126,14 +124,8 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
               />
             </div>
           </dl>
-          <Networks schools={ schools }/>
         </div>
-        <input
-          type="button"
-          value="Annuler"
-          onClick={() => reset()}
-          className="inline-flex ml-40 items-center px-4 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-        />
+          <Networks schools={schools} reset={reset} />   
       </form>
     </>
   );

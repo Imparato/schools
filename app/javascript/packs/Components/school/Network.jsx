@@ -1,17 +1,42 @@
-import { XCircleIcon } from '@heroicons/react/solid';
-import React, { useState } from 'react';
+import { XCircleIcon } from "@heroicons/react/solid";
+import React, { useState, useEffect } from "react";
 
-const Network = ({ network }) => {
-  
-  useState(() => {
-     const csrf = document
-       .querySelector("meta[name='csrf-token']")
+const Network = ({ network, schoolId, setNetworks }) => {
+  const [url, setUrl] = useState(network.url);  
+  const handleDelete = () => {
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+
+    fetch(`/schools/${schoolId}/networks/${network.id}`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        url: "",
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "X-CSRF-Token": csrf,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setNetworks(data[0].network);
+        // setNetworks(data[0].network);
+      });
+  };
+  const handleEdit = () => {
+    // verifie si l'input a changer
+    if(network.url !== url) {
+      console.log("edit that"); 
+       const csrf = document
+         .querySelector("meta[name='csrf-token']")
        .getAttribute("content");
 
-     fetch(`/schools/${schools.school.id}/networks/${network.id}`, {
-       method: "DELETE",
+     fetch(`/schools/${schoolId}/networks/${network.id}`, {
+         method: "PATCH",
        body: JSON.stringify({
-         url: "",
+         url: url
        }),
        headers: {
          "Content-type": "application/json; charset=UTF-8",
@@ -20,19 +45,25 @@ const Network = ({ network }) => {
      })
        .then((res) => res.json())
        .then((data) => {
-         setNetworks(data[0].network);
+         console.log(data);
+         // setNetworks(data[0].network);
        });
-  }, [])
-
+    
+    }
+  };
+  
   return (
-      <li
-        className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
-      >
-        <div className=" flex-1 flex items-center">
-        <input value={network.url} className="ml-2 flex-1" />
-        <XCircleIcon onClick={ handleDelete }/>
-        </div>
-      </li>
+    <li className=" flex items-center justify-between text-sm">
+      <div className=" flex-1 flex items-center">
+        <input
+          onBlur={() => handleEdit()}
+          onChange={(e) => setUrl(e.target.value)}
+          value={url}
+          className="p-2 flex-1"
+        />
+        <XCircleIcon onClick={handleDelete} style={{cursor: "pointer"}} className="h-5 w-5" />
+      </div>
+    </li>
   );
 };
 
