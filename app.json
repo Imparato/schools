@@ -1,5 +1,8 @@
 {
   "name": "theatre-cours",
+  "scripts": {
+    "postdeploy": "scripts/heroku_postdeploy.sh"
+  },
   "env": {
     "SECRET_KEY_BASE": {
       "generator": "secret"
