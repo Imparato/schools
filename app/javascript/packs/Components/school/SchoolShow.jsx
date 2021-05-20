@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useState } from "react";
 import SchoolEdit from "./SchoolEdit";
 
 const SchoolShow = ({ schools, setSchools }) => {
@@ -56,18 +56,18 @@ const SchoolShow = ({ schools, setSchools }) => {
                   </dd>
                 </div>
                 <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">Réseaux</dt>
+                  <dt className="text-sm font-medium text-gray-500">Réseaux :</dt>
                   {/* {schools.networks.map} */}
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200 w-60">
+                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200 w-85">
                       {schools.network.map((net) => {
                         return (
                           <li
                             key={net.id}
                             className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
                           >
-                            <div className="w-0 flex-1 flex items-center">
-                              <span className="ml-2 flex-1 w-0 truncate">
+                            <div className=" flex-1 flex items-center">
+                              <span className="ml-2 flex-1  ">
                                 {net.url}
                               </span>
                             </div>

@@ -1,5 +1,5 @@
-import { MailIcon } from "@heroicons/react/outline";
 import React, { useRef, useState } from "react";
+import Networks from "./Networks";
 
 const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
   const [name, setName] = useState(schools.school.name);
@@ -9,6 +9,8 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
   const [website, setWebsite] = useState(schools.school.website);
   const [city, setCity] = useState(schools.school.city);
 
+  const tagsRef = useRef();
+  // remet tout les champs a la valeur initial
   const reset = () => {
     setName(schools.school.name);
     setPublished(schools.school.published);
@@ -16,8 +18,10 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
     setEmail(schools.school.email);
     setWebsite(schools.school.website);
     setCity(schools.school.city);
-  }
+    setEditMode(false);
+  };
 
+  // Update => schools_controller
   const handleSubmit = (e) => {
     e.preventDefault();
     const csrf = document
@@ -41,11 +45,12 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("fetch");
         setSchools(data[0]);
         setEditMode(false);
       });
-  }
+  };
+
+ 
 
   return (
     <>
@@ -120,34 +125,15 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Réseaux</dt>
-              {/* {schools.networks.map} */}
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <ul className="border border-gray-200 rounded-md divide-y divide-gray-200 w-60">
-                  {schools.network.map((net) => {
-                    return (
-                      <li
-                        key={net.id}
-                        className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
-                      >
-                        <div className="w-0 flex-1 flex items-center">
-                          <span className="ml-2 flex-1 w-0 truncate">
-                            {net.url}
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </dd>
-            </div>
           </dl>
+          <Networks schools={ schools }/>
         </div>
-        <button type="submit" className="inline-flex ml-40 items-center px-4 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-          Valider
-        </button>
-        <input type="button" value='Annuler' onClick={() => reset()} className="inline-flex ml-40 items-center px-4 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"/>
+        <input
+          type="button"
+          value="Annuler"
+          onClick={() => reset()}
+          className="inline-flex ml-40 items-center px-4 py-3 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        />
       </form>
     </>
   );
