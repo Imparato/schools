@@ -17,7 +17,7 @@ const navigation = [
   { name: "Info", href: "/school", icon: HomeIcon, current: true },
   { name: "Cours", href: "/", icon: AcademicCapIcon, current: false },
   { name: "Adresses", href: "/adresses", icon: MapIcon, current: false },
-  { name: "Professeurs", href: "#", icon: UserGroupIcon, current: false },
+  { name: "Professeurs", href: "/professeurs", icon: UserGroupIcon, current: false },
   { name: "Profil", href: "#", icon: AdjustmentsIcon, current: false },
 ];
 
