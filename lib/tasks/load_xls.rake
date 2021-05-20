@@ -1,4 +1,6 @@
 require 'json'
+require 'rest-client'
+require 'base64'
 
 namespace :load do
   desc "load xls to DB"
@@ -27,8 +29,12 @@ namespace :load do
     AutoUser.delete_all
 
     puts "Importing ..."
-    filepath = 'python/cours.json'
-    serialized_cours = File.read(filepath)
+    # access file secured
+    # filepath = 'python/cours.json'
+    # serialized_cours = File.read(filepath)
+    url = "https://api.github.com/repos/fractalatcarf/blog_articles/contents/json/cours.json"
+    json = RestClient.get url, {:Authorization => "token #{ENV['COURS_JSON_AUTH_TOKEN']}"}
+    serialized_cours = Base64.decode64(JSON.parse(json.body)["content"]).force_encoding('UTF-8')
     cours = JSON.parse(serialized_cours)
     cours.each do |key, value|
       # MainCity
