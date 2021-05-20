@@ -4,12 +4,28 @@ Network.destroy_all
 Property.destroy_all
 Teaching.destroy_all
 Teacher.destroy_all
+Property.destroy_all
 Course.destroy_all
 Address.destroy_all
 School.destroy_all
 User.destroy_all
+Tag.destroy_all
+
+
 
 # ------------------------------------------------- PREMIER TOUR -----------------------------------------------------
+
+puts "init tags"
+tags = {
+  jours: ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"],
+  niveaux: ["tous", "débutants", "confirmés"],
+  publics: ["tous", "à partir de 18 ans", "enfants", "adolescents", "adultes"],
+  categories: ["improvisation", "théâtre de texte", "mime"],
+  langues: ["en anglais", "en allemand", "en espagnol"]
+}
+tags.each do |category, names|
+  names.each { |name| Tag.create(name: name, category: category.to_s) }
+end
 
 puts "Starting round 1..."
 
@@ -27,7 +43,8 @@ school1 = School.create!(
   blog_default: "",
   user: User.last,
   city: "Lyon",
-  imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon"
+  imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon",
+  blog_order: 1
 )
 
 network1 = Network.create!(
@@ -43,7 +60,7 @@ address1 = Address.create!(
   city: "Lyon",
   zipcode: "69001",
   details: "En haut de l'escalier à droite",
-  phone: "0456734544", 
+  phone: "0456734544",
 )
 
 address2 = Address.create!(
@@ -140,7 +157,8 @@ school2 = School.create!(
   blog_default: "",
   user: User.last,
   city: "Lyon",
-  imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon"
+  imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-lyon",
+  blog_order: 2
 )
 
 network2 = Network.create!(
@@ -156,7 +174,7 @@ address3 = Address.create!(
   city: "Lyon",
   zipcode: "69005",
   details: "",
-  phone: "0412345678", 
+  phone: "0412345678",
 )
 
 course3 = Course.create!(
@@ -174,12 +192,12 @@ teacher3 = Teacher.create!(
   phone: "+33456734444",
   school: School.last
 )
-    
+
 teaching3 = Teaching.create!(
   course: Course.last,
   teacher: Teacher.last
 )
-        
+
 course4 = Course.create!(
   published: false,
   address: Address.last,
@@ -241,6 +259,7 @@ school3 = School.create!(
   user: User.last,
   city: "Marseille",
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-paris",
+  blog_order: 3
 )
 
 network3 = Network.create!(
@@ -255,7 +274,7 @@ address4 = Address.create!(
   address_complement: "",
   city: "Marseille",
   zipcode: "13008",
-  phone: "0484255024", 
+  phone: "0484255024",
 )
 
 course5 = Course.create!(
@@ -341,6 +360,7 @@ school4 = School.create!(
   user: User.last,
   city: "Marseille",
   imparato_blog_link: "https://www.imparato.io/blog/les-meilleurs-cours-de-theatre-a-paris",
+  blog_order: 4
 )
 
 network4 = Network.create!(
@@ -359,7 +379,7 @@ address5 = Address.create!(
   address: "71 rue Sylvabelle",
   city: "Marseille",
   zipcode: "13006",
-  phone: "0674369753", 
+  phone: "0674369753",
 )
 
 address6 = Address.create!(
@@ -369,7 +389,7 @@ address6 = Address.create!(
   address_complement: "",
   city: "Marseille",
   zipcode: "13006",
-  phone: "0674369753", 
+  phone: "0674369753",
 )
 
 course7 = Course.create!(
