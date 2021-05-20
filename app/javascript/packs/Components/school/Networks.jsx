@@ -49,10 +49,8 @@ const Networks = ({schools}) => {
           id="input-tag"
           className="border border-gray-200 rounded-md divide-y divide-gray-200 w-60"
         >
-          {network.map((net) => {
-            return (
-              <Network key={net.id}/>
-            );
+          {networks.map((net) => {
+            return <Network key={net.id} schoolId={schools.school.id} network={net} />;
           })}
         </ul>
         <button

@@ -17,8 +17,15 @@ class NetworksController < ApplicationController
     render json: render_json(school)
   end
 
-  private
+  def destroy
+    school = School.find(params[:school_id])
+    network = Network.find(params[:id])
+    network.destroy
+    
+    render json: render_json(school)
+  end
 
+  private
   def network_params
     params.require(:network).permit(:url)
   end
