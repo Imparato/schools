@@ -41,6 +41,8 @@ gem 'simple_form'
 
 # to grab data from outside repo
 gem 'rest-client'
+gem "spring"
+gem "spring-watcher-listen"
 
 group :development, :test do
   gem "annotate"
