@@ -38,10 +38,17 @@ gem 'autoprefixer-rails'
 gem 'execjs', '2.7.0'
 gem 'font-awesome-sass'
 gem 'simple_form'
+
+# to grab data from outside repo
+gem 'rest-client'
+
 group :development, :test do
+  gem "annotate"
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem "spring"
+  gem "spring-watcher-listen"
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -55,7 +62,6 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 end
 
 group :test do
