@@ -3,6 +3,6 @@ class Address < ApplicationRecord
   has_many :courses, dependent: :destroy
 
   def to_s
-    return self.address
+    return address
   end
 end
