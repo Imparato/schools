@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <div className="h-screen flex bg-white">
+        <div className="h-screen lg:flex overflow-auto bg-white">
           <Navbar />
           <Switch>
             <Route exact path="/ecole" component={Schools} />
