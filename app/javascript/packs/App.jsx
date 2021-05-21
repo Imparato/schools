@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar';
 
 import Schools from './Components/school/Schools';
 import Addresses from "./Components/Addresses";
+import Teachers from "./Components/Teachers";
 
 const App = () => {
   return (
@@ -12,12 +13,13 @@ const App = () => {
         <div className="h-screen flex bg-white">
           <Navbar />
           <Switch>
-            <Route exact path="/school" component={Schools} />
+            <Route exact path="/ecole" component={Schools} />
             <Route
               exact
               path="/adresses"
               component={Addresses}
             />
+            <Route exact path="/professeurs" component={Teachers} />
           </Switch>
         </div>
       </Router>
