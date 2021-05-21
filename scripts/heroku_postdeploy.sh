@@ -1,1 +1,1 @@
-heroku run rails db:seed
+bundle exec rails db:seed
