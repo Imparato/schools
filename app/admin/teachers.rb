@@ -25,7 +25,4 @@ ActiveAdmin.register Teacher do
     column :updated_at
     actions
   end
-
-
-  
 end

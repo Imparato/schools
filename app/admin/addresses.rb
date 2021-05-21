@@ -1,5 +1,4 @@
 ActiveAdmin.register Address do
-
   menu priority: 3
   # permit_params do
   #   permitted = [:published, :school_id, :address, :address_complement, :city, :zipcode, :details, :phone]
@@ -29,5 +28,4 @@ ActiveAdmin.register Address do
     column :address_complement
     column :school
   end
-  
 end

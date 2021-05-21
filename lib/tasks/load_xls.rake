@@ -33,7 +33,7 @@ namespace :load do
     # filepath = 'python/cours.json'
     # serialized_cours = File.read(filepath)
     url = "https://api.github.com/repos/fractalatcarf/blog_articles/contents/json/cours.json"
-    json = RestClient.get url, {:Authorization => "token #{ENV['COURS_JSON_AUTH_TOKEN']}"}
+    json = RestClient.get url, { Authorization: "token #{ENV['COURS_JSON_AUTH_TOKEN']}" }
     serialized_cours = Base64.decode64(JSON.parse(json.body)["content"]).force_encoding('UTF-8')
     cours = JSON.parse(serialized_cours)
     cours.each do |key, value|
@@ -53,7 +53,7 @@ namespace :load do
       value["cours"].each do |school|
         # case of course name starts with #
         if school["name"].start_with?('#')
-          main_city.blog_voir_aussi += (school["name"] + "\n" + school["blog_text"] + "\n")
+          main_city.blog_voir_aussi += "#{school['name']}\n#{school['blog_text']}\n"
           main_city.save!
           next
         end

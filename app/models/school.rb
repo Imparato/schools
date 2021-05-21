@@ -54,7 +54,7 @@ class School < ApplicationRecord
     # renumbering cascade if collision
     if will_save_change_to_blog_order?
       to_move = School.where(city: city, blog_order: blog_order).first
-      to_move.update!(blog_order: to_move.blog_order + 1) if to_move
+      to_move&.update!(blog_order: to_move.blog_order + 1)
     end
   end
 end
