@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentSchool } from "../actions/currentSchool.action";
 import { isEmpty } from '../utils';
@@ -8,8 +8,10 @@ const home = () => {
   const dispatch = useDispatch()
   console.log(schools);
   
+
   const handleClick = (school) => {
     dispatch(getCurrentSchool(school));
+    window.localStorage.setItem("school", JSON.stringify(school));
     // window.location = "/adresses";
 
   }
