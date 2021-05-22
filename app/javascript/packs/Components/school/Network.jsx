@@ -1,54 +1,22 @@
 import { XCircleIcon } from "@heroicons/react/solid";
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { deleteNetwork, updateNetwork } from "../../actions/network.action";
 
-const Network = ({ network, schoolId, setNetworks }) => {
-  const [url, setUrl] = useState(network.url);  
+const Network = ({ network, schoolId }) => {
+  const [url, setUrl] = useState(network.url);
+  
+  const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
-    const csrf = document
-      .querySelector("meta[name='csrf-token']")
-      .getAttribute("content");
-
-    fetch(`/schools/${schoolId}/networks/${network.id}`, {
-      method: "DELETE",
-      body: JSON.stringify({
-        url: "",
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        "X-CSRF-Token": csrf,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setNetworks(data[0].network);
-        // setNetworks(data[0].network);
-      });
+    dispatch(deleteNetwork(csrf, schoolId, network.id));
   };
+
   const handleEdit = () => {
     // verifie si l'input a changer
     if(network.url !== url) {
-      console.log("edit that"); 
-       const csrf = document
-         .querySelector("meta[name='csrf-token']")
-       .getAttribute("content");
-
-     fetch(`/schools/${schoolId}/networks/${network.id}`, {
-         method: "PATCH",
-       body: JSON.stringify({
-         url: url
-       }),
-       headers: {
-         "Content-type": "application/json; charset=UTF-8",
-         "X-CSRF-Token": csrf,
-       },
-     })
-       .then((res) => res.json())
-       .then((data) => {
-         console.log(data);
-         // setNetworks(data[0].network);
-       });
-    
+      dispatch(updateNetwork(csrf, schoolId, network.id, url));
     }
   };
   

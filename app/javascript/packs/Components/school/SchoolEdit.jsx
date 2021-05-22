@@ -109,8 +109,7 @@ const SchoolEdit = ({ school, setEditMode }) => {
             </div>
           </dl>
         </div>
-        <button type="submit">change</button>
-        {/* <Networks schools={schools} reset={reset} /> */}
+        <Networks school={school} reset={reset} />
       </form>
     </>
   );

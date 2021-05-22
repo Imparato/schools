@@ -1,11 +1,17 @@
 class NetworksController < ApplicationController
+  def index
+    school = School.find(params[:school_id])
+    network = Network.where(school: school)
+
+    render json: network
+  end
   def create
     school = School.find(params[:school_id])
     network = Network.new(network_params)
     network.school = school
     network.save
 
-    render json: render_json(school)
+    render json: network
   end
 
   def update
@@ -13,7 +19,7 @@ class NetworksController < ApplicationController
     network = Network.find(params[:id])
     network.update(network_params)
 
-    render json: render_json(school)
+    render json: network
   end
 
   def destroy
@@ -21,7 +27,7 @@ class NetworksController < ApplicationController
     network = Network.find(params[:id])
     network.destroy
 
-    render json: render_json(school)
+    render json: network
   end
 
   private
@@ -30,12 +36,12 @@ class NetworksController < ApplicationController
     params.require(:network).permit(:url)
   end
 
-  def render_json(school)
-    result = []
-    result << {
-      school: school,
-      network: school.networks
-    }
-    return result
-  end
+  # def render_json(school)
+  #   result = []
+  #   result << {
+  #     school: school,
+  #     network: school.networks
+  #   }
+  #   return result
+  # end
 end

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { isEmpty } from "../../utils";
 import SchoolEdit from "./SchoolEdit";
 
 const SchoolShow = ({ school }) => {
   const [editMode, setEditMode] = useState(false);
-
+  const networks = useSelector((state) => state.networksReducer);
   return (
     <>
       <div className="bg-white shadow sm:rounded-lg w-100">
@@ -62,10 +64,9 @@ const SchoolShow = ({ school }) => {
                   <dt className="text-sm font-medium text-gray-500">
                     Réseaux :
                   </dt>
-                  {/* {schools.networks.map} */}
-                  {/* <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 w-2/3">
+                  <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 w-2/3">
                     <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                      {schools.network.map((net) => {
+                      {!isEmpty(networks) && networks.map((net) => {
                         return (
                           <li
                             key={net.id}
@@ -78,7 +79,7 @@ const SchoolShow = ({ school }) => {
                         );
                       })}
                     </ul>
-                  </dd> */}
+                  </dd>
                 </div>
               </dl>
             </div>
