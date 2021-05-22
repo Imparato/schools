@@ -10,16 +10,26 @@ import {
   XIcon,
   AcademicCapIcon,
   UserGroupIcon,
+  EyeIcon,
 } from "@heroicons/react/outline";
 import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const navigation = [
-  { name: "Info", href: "/ecole", icon: HomeIcon, current: true },
+  {name: 'Choisir une école', href: "/", icon: EyeIcon, current: true},
+  { name: `Info`, href: "/ecole", icon: HomeIcon, current: false },
   { name: "Cours", href: "/cours", icon: AcademicCapIcon, current: false },
   { name: "Adresses", href: "/adresses", icon: MapIcon, current: false },
-  { name: "Professeurs", href: "/professeurs", icon: UserGroupIcon, current: false },
+  {
+    name: "Professeurs",
+    href: "/professeurs",
+    icon: UserGroupIcon,
+    current: false,
+  },
   { name: "Profil", href: "/profil", icon: AdjustmentsIcon, current: false },
 ];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,7 +37,10 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const currentSchool = useSelector((state) => state.currentSchoolReducer);
+  if (currentSchool && currentSchool.name){
+    navigation[0].name = currentSchool.name;
+  }
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>

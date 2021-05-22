@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Addresses = () => {
   const [addresses, setAddresses] = useState();
+  const currentSchool = useSelector((state) => state.currentSchoolReducer);
+  
   useEffect(() => {
+    if (currentSchool[0]) console.log(currentSchool);
     fetch("/schools/:school_id/addresses")
       .then((response) => {
         // console.log(response);

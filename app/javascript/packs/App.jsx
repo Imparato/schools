@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar';
 import Schools from './Components/school/Schools';
 import Addresses from "./Components/Addresses";
 import Teachers from "./Components/Teachers";
+import home from './Components/home';
 
 const App = () => {
   return (
@@ -13,12 +14,9 @@ const App = () => {
         <div className="h-screen lg:flex overflow-auto bg-white">
           <Navbar />
           <Switch>
+            <Route exact path="/" component={home} />
             <Route exact path="/ecole" component={Schools} />
-            <Route
-              exact
-              path="/adresses"
-              component={Addresses}
-            />
+            <Route exact path="/adresses" component={Addresses} />
             <Route exact path="/professeurs" component={Teachers} />
           </Switch>
         </div>

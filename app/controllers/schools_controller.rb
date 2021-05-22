@@ -9,7 +9,7 @@ class SchoolsController < ApplicationController
         network: school.networks
       }
     end
-    render json: result
+    render json: schools
   end
 
   def update
@@ -20,7 +20,7 @@ class SchoolsController < ApplicationController
         school: school,
         network: school.networks
       }
-      render json: result
+      render json: school
     else
       render json: :error
     end

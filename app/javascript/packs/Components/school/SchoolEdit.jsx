@@ -1,53 +1,37 @@
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { editSchool } from "../../actions/currentSchool.action";
 import Networks from "./Networks";
 
-const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
-  const [name, setName] = useState(schools.school.name);
-  const [published, setPublished] = useState(schools.school.published);
-  const [description, setDescription] = useState(schools.school.description);
-  const [email, setEmail] = useState(schools.school.email);
-  const [website, setWebsite] = useState(schools.school.website);
-  const [city, setCity] = useState(schools.school.city);
+const SchoolEdit = ({ school, setEditMode }) => {
+  const [name, setName] = useState(school.name);
+  const [published, setPublished] = useState(school.published);
+  const [description, setDescription] = useState(school.description);
+  const [email, setEmail] = useState(school.email);
+  const [website, setWebsite] = useState(school.website);
+  const [city, setCity] = useState(school.city);
 
-  const tagsRef = useRef();
+  const dispatch = useDispatch()
   // remet tout les champs a la valeur initial
   const reset = () => {
-    setName(schools.school.name);
-    setPublished(schools.school.published);
-    setDescription(schools.school.description);
-    setEmail(schools.school.email);
-    setWebsite(schools.school.website);
-    setCity(schools.school.city);
+    setName(school.name);
+    setPublished(school.published);
+    setDescription(school.description);
+    setEmail(school.email);
+    setWebsite(school.website);
+    setCity(school.city);
     setEditMode(false);
   };
 
   // Update => schools_controller
   const handleSubmit = (e) => {
     e.preventDefault();
-    const csrf = document
+        const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
 
-    fetch(`/schools/${schools.school.id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        name: name,
-        published: published,
-        description: description,
-        email: email,
-        website: website,
-        city: city,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        "X-CSRF-Token": csrf,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setSchools(data[0]);
-        setEditMode(false);
-      });
+    dispatch(editSchool(school.id,name,published,description,email,website,city, csrf));  
+    setEditMode(false);
   };
 
   return (
@@ -125,7 +109,8 @@ const SchoolEdit = ({ schools, setEditMode, setSchools }) => {
             </div>
           </dl>
         </div>
-        <Networks schools={schools} reset={reset} />
+        <button type="submit">change</button>
+        {/* <Networks schools={schools} reset={reset} /> */}
       </form>
     </>
   );
