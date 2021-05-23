@@ -1,13 +1,13 @@
 import React from 'react';
 import { isEmpty } from "../../utils";
 
-const TeachersShow = ({ teachers }) => {
-  
+const TeachersShow = ({ teachers, setCreateMode }) => {
   return (
     <>
       <div className="relative w-full overflow-auto">
         <div className="absolute right-0 mr-8 mt-6">
           <button
+            onClick={()=> setCreateMode(true)}
             type="button"
             className="inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 hover:no-underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
