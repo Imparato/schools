@@ -10,7 +10,16 @@ class AddressesController < ApplicationController
   def update
     school = School.find(params[:school_id])
     address = Address.find(params[:id])
-    address.update!(address_params)
+    address.update(address_params)
+    render json: address
+  end
+
+  def create
+    school = School.find(params[:school_id])
+    address = Address.new(address_params)
+    address.school = school
+    address.save
+    
     render json: address
   end
 

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { isEmpty } from "../../utils";
 import AddressEdit from "./AddressEdit";
 import AddressesShow from "./AddressesShow";
+import AddressCreate from "./AddressCreate";
 
 const Addresses = () => {
   // const [addresses, setAddresses] = useState();
@@ -14,9 +15,9 @@ const Addresses = () => {
   return (
     <div className="relative w-full overflow-auto">
       {!isEmpty(addresses) && createMode ? (
-        <h1>edit Mode</h1>
+        <AddressCreate schoolId={school.id} setCreateMode={ setCreateMode }/>
       ) : (
-        <AddressesShow schoolId={school.id} addresses={addresses} />
+        <AddressesShow schoolId={school.id} addresses={addresses} setCreateMode={ setCreateMode } />
       )}
     </div>
 
