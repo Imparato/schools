@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 
 
 const navigation = [
-  {name: 'Choisir une école', href: "/", icon: EyeIcon, current: true},
+  {name: 'Choisir une école', href: "/", icon: EyeIcon, current: false},
   { name: `Info`, href: "/ecole", icon: HomeIcon, current: false },
   { name: "Cours", href: "/cours", icon: AcademicCapIcon, current: false },
   { name: "Adresses", href: "/adresses", icon: MapIcon, current: false },
@@ -108,12 +108,9 @@ const Navbar = () => {
                         key={item.name}
                         // to="course"
                         to={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                        )}
+                        activeClassName="bg-gray-100 text-gray-900"
+                        className="group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                        
                       >
                         <item.icon
                           className={classNames(
@@ -161,12 +158,7 @@ const Navbar = () => {
                       className="group flex hover:no-underline hover:text-white items-center px-2 py-2 text-sm font-medium rounded-md"
                     >
                       <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-500"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-3 h-6 w-6"
-                        )}
+                        className="text-black-400 group-hover:text-black-500 mr-3 h-6 w-6"
                         aria-hidden="true"
                       />
                       {item.name}

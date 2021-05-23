@@ -15,11 +15,6 @@ class SchoolsController < ApplicationController
   def update
     school = School.find(params[:id])
     if school.update(schools_params)
-      result = []
-      result << {
-        school: school,
-        network: school.networks
-      }
       render json: school
     else
       render json: :error

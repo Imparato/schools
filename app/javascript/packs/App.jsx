@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 
 import Schools from "./Components/school/Schools";
-import Addresses from "./Components/Addresses";
+import Addresses from "./Components/address/Addresses";
 import Teachers from "./Components/Teachers";
 import home from "./Components/home";
 import { useDispatch } from "react-redux";
 import { getCurrentSchool } from "./actions/currentSchool.action";
+import { getAddresses } from "./actions/addresses.action";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const App = () => {
   useState(() => {
     const schoolItem = window.localStorage.getItem("school");
     if (schoolItem) {
-      dispatch(getCurrentSchool(JSON.parse(schoolItem)));
+      const school = JSON.parse(schoolItem);
+      dispatch(getCurrentSchool(school));
+      dispatch(getAddresses(school.id))
     }
   }, []);
 

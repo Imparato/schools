@@ -11,7 +11,7 @@ import rootReducer from "./reducers/root.reducer";
 import { getSchools } from "./actions/school.action";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import '@tailwindcss/forms';
 
 document.addEventListener("turbolinks:load", () => {
   const reactApp = document.querySelector(".react-app");
