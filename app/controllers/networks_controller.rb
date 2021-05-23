@@ -36,12 +36,4 @@ class NetworksController < ApplicationController
     params.require(:network).permit(:url)
   end
 
-  # def render_json(school)
-  #   result = []
-  #   result << {
-  #     school: school,
-  #     network: school.networks
-  #   }
-  #   return result
-  # end
 end
