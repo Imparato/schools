@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { isEmpty } from "../../utils";
 
-const Teachers = () => {
-  const [teachers, setTeachers] = useState();
-  useEffect(() => {
-    fetch("/schools/:school_id/teachers")
-      .then((response) => {
-        // console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        setTeachers(data);
-      });
-  }, []);
-
+const TeachersShow = ({ teachers }) => {
+  
   return (
-    <div className="w-full">
+    <>
       <div className="relative w-full overflow-auto">
         <div className="absolute right-0 mr-8 mt-6">
           <button
@@ -62,7 +51,7 @@ const Teachers = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {teachers &&
+                    {!isEmpty(teachers) &&
                       teachers.map((teacher, teacherIdx) => (
                         <tr
                           key={teacher.id}
@@ -99,8 +88,8 @@ const Teachers = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default Teachers;
+export default TeachersShow;

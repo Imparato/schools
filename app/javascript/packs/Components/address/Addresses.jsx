@@ -20,13 +20,6 @@ const Addresses = () => {
         <AddressesShow schoolId={school.id} addresses={addresses} setCreateMode={ setCreateMode } />
       )}
     </div>
-
-    // <div>
-    //   {addresses &&
-    //     addresses.map((address) => {
-    //       return <p>{address.address}</p>;
-    //     })}
-    // </div>
   );
 };
 

@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { deleteAddresse } from "../../actions/addresses.action";
 import { isEmpty } from "../../utils";
 import AddressEdit from "./AddressEdit";
-import ModalConfirmation from "./ModalConfirmation";
 
 const AddressesShow = ({ addresses, schoolId, setCreateMode }) => {
   const [editMode, setEditMode] = useState(false);

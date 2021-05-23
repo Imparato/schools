@@ -65,7 +65,6 @@ const AddressCreate = ({setCreateMode, schoolId}) => {
                 type="address"
                 value={currentAddress}
                 onChange={(e) => setCurrentAddress(e.target.value)}
-                required
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
@@ -84,7 +83,6 @@ const AddressCreate = ({setCreateMode, schoolId}) => {
                 type="address_complement"
                 value={addressComplement}
                 onChange={(e) => setAddressComplement(e.target.value)}
-                required
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
@@ -103,7 +101,6 @@ const AddressCreate = ({setCreateMode, schoolId}) => {
                 type="details"
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
-                required
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
@@ -122,7 +119,6 @@ const AddressCreate = ({setCreateMode, schoolId}) => {
                 type="city"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                required
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
@@ -141,7 +137,6 @@ const AddressCreate = ({setCreateMode, schoolId}) => {
                 type="zipcode"
                 value={zipcode}
                 onChange={(e) => setZipcode(e.target.value)}
-                required
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
@@ -160,7 +155,6 @@ const AddressCreate = ({setCreateMode, schoolId}) => {
                 type="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                required
                 className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>

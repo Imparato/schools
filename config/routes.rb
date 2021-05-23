@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/ecole', to: 'pages#home'
   get '/adresses', to: 'pages#home'
   get '/professeurs', to: 'pages#home'
+  get '/profil', to: 'pages#home'
 
 
   resources :schools, only: [ :index, :update] do

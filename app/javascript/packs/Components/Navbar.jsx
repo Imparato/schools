@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import imparatoLogo from '../../../assets/images/imparato.png';
+import imparatoLogo from "../../../assets/images/imparato.png";
 import {
   HomeIcon,
   MapIcon,
@@ -10,15 +10,14 @@ import {
   XIcon,
   AcademicCapIcon,
   UserGroupIcon,
-  EyeIcon,
 } from "@heroicons/react/outline";
-import { Link, NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
+import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { ChartPieIcon } from "@heroicons/react/solid";
 
 const navigation = [
-  {name: 'Choisir une école', href: "/", icon: EyeIcon, current: false},
-  { name: `Info`, href: "/ecole", icon: HomeIcon, current: false },
+  { name: "Choisir une école", href: "/", icon: HomeIcon, current: false },
+  { name: `Dashboard`, href: "/ecole", icon: ChartPieIcon, current: false },
   { name: "Cours", href: "/cours", icon: AcademicCapIcon, current: false },
   { name: "Adresses", href: "/adresses", icon: MapIcon, current: false },
   {
@@ -30,7 +29,6 @@ const navigation = [
   { name: "Profil", href: "/profil", icon: AdjustmentsIcon, current: false },
 ];
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -38,9 +36,13 @@ function classNames(...classes) {
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const currentSchool = useSelector((state) => state.currentSchoolReducer);
-  if (currentSchool && currentSchool.name){
-    navigation[0].name = currentSchool.name;
+  if (currentSchool && currentSchool.name) {
+    navigation[0].name = `${currentSchool.name.slice(0, 15)}...`;
   }
+  const changeSchool = () => {
+    window.localStorage.removeItem("school");
+    window.location = "/";
+  };
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -110,7 +112,6 @@ const Navbar = () => {
                         to={item.href}
                         activeClassName="bg-gray-100 text-gray-900"
                         className="group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                        
                       >
                         <item.icon
                           className={classNames(
@@ -150,20 +151,49 @@ const Navbar = () => {
               </div>
               <nav className="mt-5 flex-1" aria-label="Sidebar">
                 <div className="px-2 space-y-1">
-                  {navigation.map((item) => (
-                    <NavLink
-                      key={item.name}
-                      to={item.href}
-                      activeClassName="bg-green-300 text-white"
-                      className="group flex hover:no-underline hover:text-white items-center px-2 py-2 text-sm font-medium rounded-md"
-                    >
-                      <item.icon
-                        className="text-black-400 group-hover:text-black-500 mr-3 h-6 w-6"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </NavLink>
-                  ))}
+                  {navigation.map((item) =>
+                    // Premier item du menu
+                    item === navigation[0] ? (
+                      <NavLink
+                        key={item.name}
+                        to={item.href}
+                        // activeClassName="bg-green-300 text-white"
+                        className=" mb-5 w-100 group flex align-center hover:no-underline hover:text-white items-center px-0.5 py-2 text-sm font-medium rounded-md"
+                      >
+                        <item.icon
+                          className=" mr-3 h-6 w-6"
+                          aria-hidden="true"
+                        />
+                        <p className="text-white-400 group-hover:text-white-500">
+                          {item.name}
+                        </p>
+                        {currentSchool.name && (
+                          <span
+                            onClick={changeSchool}
+                            className="inline-flex items-center hover:bg-green-800 hover:text-black-500 p-1 ml-2  rounded-full text-sm font-medium bg-green-300 text-white-300"
+                          >
+                            changer
+                          </span>
+                        )}
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        key={item.name}
+                        to={item.href}
+                        activeClassName="bg-green-300 text-white"
+                        className={classNames(
+                          navigation[0] === item ? " mb-5" : "mb-0",
+                          "group flex hover:no-underline hover:text-white items-center px-2 py-2 text-sm font-medium rounded-md"
+                        )}
+                      >
+                        <item.icon
+                          className="text-white-400 group-hover:text-white-500 mr-3 h-6 w-6"
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </NavLink>
+                    )
+                  )}
                 </div>
               </nav>
             </div>
@@ -191,6 +221,6 @@ const Navbar = () => {
       </div>
     </>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

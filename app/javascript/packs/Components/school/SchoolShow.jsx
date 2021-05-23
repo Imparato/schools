@@ -8,12 +8,9 @@ const SchoolShow = ({ school }) => {
   const networks = useSelector((state) => state.networksReducer);
   return (
     <>
-      <div className="bg-white shadow sm:rounded-lg w-100">
+      <div className="bg-white shadow sm:rounded-lg w-100 overflow-auto">
         {editMode ? (
-          <SchoolEdit
-            school={school}
-            setEditMode={setEditMode}
-          />
+          <SchoolEdit school={school} setEditMode={setEditMode} />
         ) : (
           <>
             <div className="border-t border-gray-200">
@@ -66,18 +63,19 @@ const SchoolShow = ({ school }) => {
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 w-2/3">
                     <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                      {!isEmpty(networks) && networks.map((net) => {
-                        return (
-                          <li
-                            key={net.id}
-                            className="pl-3 pr-4 w-40 py-2 flex items-center justify-between text-sm"
-                          >
-                            <div className=" flex-1 flex items-center">
-                              <span className="ml-2 ">{net.url}</span>
-                            </div>
-                          </li>
-                        );
-                      })}
+                      {!isEmpty(networks) &&
+                        networks.map((net) => {
+                          return (
+                            <li
+                              key={net.id}
+                              className="pl-3 pr-4 w-40 py-2 flex items-center justify-between text-sm"
+                            >
+                              <div className=" flex-1 flex items-center">
+                                <span className="ml-2 ">{net.url}</span>
+                              </div>
+                            </li>
+                          );
+                        })}
                     </ul>
                   </dd>
                 </div>
