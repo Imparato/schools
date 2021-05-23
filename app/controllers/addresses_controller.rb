@@ -23,6 +23,13 @@ class AddressesController < ApplicationController
     render json: address
   end
 
+  def destroy
+    address = Address.find(params[:id])
+    address.destroy
+
+    render json: address
+  end
+
   private
   def address_params
     params.require(:address).permit(:published, :address_complement, :city, :zipcode, :phone, :details)

@@ -1,4 +1,4 @@
-import { CREATE_ADDRESSE, GET_ADDRESSES, UPDATE_ADDRESSE } from '../actions/addresses.action.js';
+import { CREATE_ADDRESSE, DELETE_ADDRESSE, GET_ADDRESSES, UPDATE_ADDRESSE } from '../actions/addresses.action.js';
 
 const initialState = {};
 
@@ -18,6 +18,8 @@ export default function addressesReducer(state = initialState, action) {
         return address;
       });
     
+    case DELETE_ADDRESSE:
+      return state.filter((address) => address.id !== action.payload.id)
     default:
       return state;
   }

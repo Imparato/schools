@@ -63,4 +63,21 @@ export const createAddresse = (csrf, schoolId, addressUpdated) => {
       })
       .catch((err) => console.log(err));
   };
-} 
+}
+
+export const deleteAddresse = (csrf, schoolId, addressId) => {
+  return (dispatch) => {
+    return fetch(`/schools/${schoolId}/addresses/${addressId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "X-CSRF-Token": csrf,
+      },
+    })
+      .then(res => res.json())
+      .then((data) => {
+        dispatch({ type: DELETE_ADDRESSE, payload: data });
+      })
+      .catch((err) => console.log(err));
+  }
+}

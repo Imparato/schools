@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   get '/professeurs', to: 'pages#home'
 
 
-  resources :schools, only: [:update, :index] do
-    resources :addresses, only: [:index, :create, :update]
-    resources :networks, only: [:create, :index, :update, :destroy]
+  resources :schools, only: [ :index, :update] do
+    resources :addresses, only: [:index, :create, :update, :destroy]
+    resources :networks, only: [:index, :create, :update, :destroy]
     resources :teachers, only: [:index]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
