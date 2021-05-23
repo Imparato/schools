@@ -73,7 +73,7 @@ const Navbar = () => {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none">
+            <div className="relative flex-1 flex flex-col max-w-xs w-full bg-green-600 focus:outline-none">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"
@@ -104,27 +104,48 @@ const Navbar = () => {
                 </div>
                 <nav aria-label="Sidebar" className="mt-5">
                   <div className="px-2 space-y-1">
-                    {navigation.map((item) => (
-                      <NavLink
-                        exact
-                        key={item.name}
-                        // to="course"
-                        to={item.href}
-                        activeClassName="bg-gray-100 text-gray-900"
-                        className="group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                      >
-                        <item.icon
-                          className={classNames(
-                            item.current
-                              ? "text-gray-500"
-                              : "text-gray-400 group-hover:text-gray-500",
-                            "mr-4 h-6 w-6"
+                    {navigation.map((item) =>
+                      item === navigation[0] ? (
+                        <NavLink
+                          key={item.name}
+                          to={item.href}
+                          // activeClassName="bg-green-300 text-white"
+                          className=" mb-5 w-100 group flex align-center hover:no-underline hover:text-white items-center px-0.5 py-2 text-sm font-medium rounded-md"
+                        >
+                          <item.icon
+                            className=" mr-3 h-6 w-6"
+                            aria-hidden="true"
+                          />
+                          <p className="text-white-400 group-hover:text-white-500">
+                            {item.name}
+                          </p>
+                          {currentSchool.name && (
+                            <span
+                              onClick={changeSchool}
+                              className="inline-flex items-center hover:bg-green-800 hover:text-black-500 p-1 ml-2  rounded-full text-sm font-medium bg-green-300 text-white-300"
+                            >
+                              changer
+                            </span>
                           )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </NavLink>
-                    ))}
+                        </NavLink>
+                      ) : (
+                        <NavLink
+                          key={item.name}
+                          to={item.href}
+                          activeClassName="bg-green-300 text-white"
+                          className={classNames(
+                            navigation[0] === item ? " mb-5" : "mb-0",
+                            "group flex hover:no-underline hover:text-white items-center px-2 py-2 text-sm font-medium rounded-md"
+                          )}
+                        >
+                          <item.icon
+                            className="text-white-400 group-hover:text-white-500 mr-3 h-6 w-6"
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </NavLink>
+                      )
+                    )}
                   </div>
                 </nav>
               </div>
