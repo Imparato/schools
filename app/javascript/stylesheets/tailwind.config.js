@@ -1,7 +1,11 @@
 module.exports = {
+  purge: [],
+  darkMode: false,
   theme: {
-    colors: {
-      "imparato-green": "#219653",
-    },
+    extend: {},
   },
+  variants: {
+    extend: {},
+  },
+  plugins: [require("@tailwindcss/forms")],
 };

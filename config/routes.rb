@@ -11,11 +11,12 @@ Rails.application.routes.draw do
   get '/ecole', to: 'pages#home'
   get '/adresses', to: 'pages#home'
   get '/professeurs', to: 'pages#home'
+  get '/profil', to: 'pages#home'
 
 
-  resources :schools, only: [:update, :index] do
-    resources :addresses, only: [:index]
-    resources :networks, only: [:create, :update, :destroy]
+  resources :schools, only: [ :index, :update] do
+    resources :addresses, only: [:index, :create, :update, :destroy]
+    resources :networks, only: [:index, :create, :update, :destroy]
     resources :teachers, only: [:index]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

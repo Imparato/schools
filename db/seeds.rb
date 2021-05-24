@@ -44,7 +44,7 @@ cours.each do |key, value|
     end
 
     # display progression
-    puts "#{key} - #{school['name']} - #{progression_index}/#{value['cours'].size}"
+    puts "#{key} - #{school['name']} - #{progression_index}/#{value['cours'].size}\n #{school['email']&.strip}\n\n"
     progression_index += 1
 
     password = "123456" # SecureRandom.base64(5)
