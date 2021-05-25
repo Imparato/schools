@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :schools, only: [ :index, :update, :destroy] do
     resources :addresses, only: [:index, :create, :update, :destroy]
     resources :networks, only: [:index, :create, :update, :destroy]
-    resources :teachers, only: [:index]
+    resources :teachers, only: [:index, :create, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
