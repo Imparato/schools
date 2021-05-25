@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { createTeacher } from "../../actions/teachers.action";
 
 const TeacherCreate = ({ setCreateMode, schoolId }) => {
-  // const [currentTeacher, setCurrentTeacher] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [bio, setBio] = useState("");
@@ -17,7 +16,6 @@ const TeacherCreate = ({ setCreateMode, schoolId }) => {
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
     const newTeacher = {
-      // id: teacher.id,
       first_name,
       last_name,
       bio,

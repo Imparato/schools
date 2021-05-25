@@ -5,20 +5,7 @@ import TeacherCreate from "./TeacherCreate";
 import TeacherEdit from "./TeacherEdit";
 import TeachersShow from "./TeachersShow";
 
-// const Teachers = () => {
-//   const teachers = useSelector((state) => state.teachersReducer);
-//   const [createMode, setCreateMode] = useState(false);
-
-//   return (
-//     <div className="w-full">
-//       {teachers && createMode ? (<TeacherCreate/>):
-//         (<TeachersShow setCreateMode={setCreateMode} teachers = { teachers }/> )}
-//     </div>
-//   );
-// };
-
 const Teachers = () => {
-  // const [teachers, setTeachers] = useState();
   const [createMode, setCreateMode] = useState(false);
   const school = useSelector((state) => state.currentSchoolReducer);
   const teachers = useSelector((state) => state.teachersReducer);
