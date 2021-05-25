@@ -1,11 +1,13 @@
 require 'json'
 
 class TeachersController < ApplicationController
+  
   def index
     # @school = current_user.schools.find(params[:school_id])
     teachers = School.find(params[:school_id]).teachers
     render json: teachers
   end
+
   def update
     school = School.find(params[:school_id])
     teacher = Teacher.find(params[:id])
@@ -14,7 +16,7 @@ class TeachersController < ApplicationController
   end
 
   def create
-    teacher = Teacher.find(params[:school_id])
+    school = School.find(params[:school_id])
     teacher = Teacher.new(teacher_params)
     teacher.school = school
     teacher.save
