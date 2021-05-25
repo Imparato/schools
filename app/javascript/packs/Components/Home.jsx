@@ -23,7 +23,7 @@ const Home = () => {
               return (
                 <div
                   key={school.id}
-                  className="flex flex-col w-1/3 sm:col-10 justify-center  rounded-lg shadow-lg overflow-hidden"
+                  className="flex flex-col lg:w-1/3 sm:col-10 justify-center  rounded-lg shadow-lg overflow-hidden"
                 >
                   <div className="px-6 py-8 bg-white sm:p-10 sm:pb-6">
                     <div>

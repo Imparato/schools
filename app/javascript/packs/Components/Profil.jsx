@@ -1,23 +1,24 @@
 import { LogoutIcon } from "@heroicons/react/outline";
 import React from "react";
+import cookie from 'js-cookie';
 
 const Profil = () => {
-  const disconnect = () => {
+  
+  const disconnect = async () => {
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
-    
-    fetch("/users/sign_out", {
+
+    await fetch("/users/sign_out", {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         "X-CSRF-Token": csrf,
       },
-    })
-      .catch((err) => console.log(err));
-    window.localStorage.removeItem("school")
-    window.location = '/';
-
+    }).catch((err) => console.log(err));
+    
+    window.localStorage.removeItem("school");
+    window.location.reload();
   };
   return (
     <div className="w-100 h-100 flex align-center justify-center">
