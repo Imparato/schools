@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import "@tailwindcss/forms";
 import { useDispatch } from "react-redux";
-import { createTeacher } from "../../actions/teachers.action";
+import { updateTeacher } from "../../actions/teachers.action";
 
-const TeacherCreate = ({ setCreateMode, schoolId }) => {
-  const [first_name, setFirstName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [bio, setBio] = useState("");
-  const [phone, setPhone] = useState("");
+const TeacherEdit = ({ teacher, schoolId, setEditMode }) => {
+  const [first_name, setFirstName] = useState(teacher.first_name);
+  const [last_name, setLastName] = useState(teacher.last_name);
+  const [bio, setBio] = useState(teacher.bio);
+  const [phone, setPhone] = useState(teacher.phone);
 
   const dispatch = useDispatch();
 
@@ -15,20 +16,22 @@ const TeacherCreate = ({ setCreateMode, schoolId }) => {
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
-    const newTeacher = {
+    const updatedTeacher = {
+      id: teacher.id,
       first_name,
       last_name,
       bio,
       phone,
     };
-    dispatch(createTeacher(csrf, schoolId, newTeacher));
-    setCreateMode(false);
+    dispatch(updateTeacher(csrf, schoolId, updatedTeacher));
+    setEditMode(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full  space-y-1">
         <form onSubmit={(e) => handleSubmit(e)} className="mt-1 space-y-3">
+          
           <div>
             <label
               htmlFor="first_name"
@@ -115,4 +118,4 @@ const TeacherCreate = ({ setCreateMode, schoolId }) => {
   );
 };
 
-export default TeacherCreate;
+export default TeacherEdit;

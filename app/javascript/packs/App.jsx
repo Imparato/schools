@@ -9,6 +9,7 @@ import Home from "./Components/Home";
 import { useDispatch } from "react-redux";
 import { getCurrentSchool } from "./actions/currentSchool.action";
 import { getAddresses } from "./actions/addresses.action";
+import { getTeachers } from "./actions/teachers.action";
 import Profil from "./Components/Profil";
 
 const App = () => {
@@ -19,7 +20,8 @@ const App = () => {
     if (schoolItem) {
       const school = JSON.parse(schoolItem);
       dispatch(getCurrentSchool(school));
-      dispatch(getAddresses(school.id))
+      dispatch(getAddresses(school.id));
+      dispatch(getTeachers(school.id));
     }
   }, []);
 

@@ -1,6 +1,6 @@
 import { LogoutIcon } from "@heroicons/react/outline";
 import React from "react";
-import cookie from 'js-cookie';
+// import Cookie from 'js-cookie';
 
 const Profil = () => {
   
