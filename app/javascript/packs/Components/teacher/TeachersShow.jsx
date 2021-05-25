@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { isEmpty } from "../../utils";
 
-const Teachers = () => {
-  const [teachers, setTeachers] = useState();
-  useEffect(() => {
-    fetch("/schools/:school_id/teachers")
-      .then((response) => {
-        // console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        setTeachers(data);
-      });
-  }, []);
-
+const TeachersShow = ({ teachers, setCreateMode }) => {
   return (
-    <div className="w-full">
+    <>
       <div className="relative w-full overflow-auto">
         <div className="absolute right-0 mr-8 mt-6">
           <button
+            onClick={()=> setCreateMode(true)}
             type="button"
             className="inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 hover:no-underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
@@ -62,7 +51,7 @@ const Teachers = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {teachers &&
+                    {!isEmpty(teachers) &&
                       teachers.map((teacher, teacherIdx) => (
                         <tr
                           key={teacher.id}
@@ -99,8 +88,8 @@ const Teachers = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default Teachers;
+export default TeachersShow;

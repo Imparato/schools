@@ -1,18 +1,16 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { isEmpty } from "../../utils";
 import SchoolEdit from "./SchoolEdit";
 
-const SchoolShow = ({ schools, setSchools }) => {
+const SchoolShow = ({ school }) => {
   const [editMode, setEditMode] = useState(false);
-
+  const networks = useSelector((state) => state.networksReducer);
   return (
     <>
-      <div className="bg-white shadow sm:rounded-lg w-100">
+      <div className="bg-white shadow sm:rounded-lg w-100 overflow-auto">
         {editMode ? (
-          <SchoolEdit
-            schools={schools}
-            setEditMode={setEditMode}
-            setSchools={setSchools}
-          />
+          <SchoolEdit school={school} setEditMode={setEditMode} />
         ) : (
           <>
             <div className="border-t border-gray-200">
@@ -20,7 +18,7 @@ const SchoolShow = ({ schools, setSchools }) => {
                 <div className="bg-gray-50 px-4 py-3 mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Nom :</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {schools.school.name}
+                    {school.name}
                   </dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -28,7 +26,7 @@ const SchoolShow = ({ schools, setSchools }) => {
                     Publié :
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {schools.school.published ? "Oui" : "Non"}
+                    {school.published ? "Oui" : "Non"}
                   </dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -36,13 +34,13 @@ const SchoolShow = ({ schools, setSchools }) => {
                     Description :
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {schools.school.description}
+                    {school.description}
                   </dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Email :</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {schools.school.email}
+                    {school.email}
                   </dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -50,34 +48,34 @@ const SchoolShow = ({ schools, setSchools }) => {
                     Site web :
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {schools.school.website}
+                    {school.website}
                   </dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Ville :</dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {schools.school.city}
+                    {school.city}
                   </dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
                     Réseaux :
                   </dt>
-                  {/* {schools.networks.map} */}
                   <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 w-2/3">
                     <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                      {schools.network.map((net) => {
-                        return (
-                          <li
-                            key={net.id}
-                            className="pl-3 pr-4 w-40 py-2 flex items-center justify-between text-sm"
-                          >
-                            <div className=" flex-1 flex items-center">
-                              <span className="ml-2 ">{net.url}</span>
-                            </div>
-                          </li>
-                        );
-                      })}
+                      {!isEmpty(networks) &&
+                        networks.map((net) => {
+                          return (
+                            <li
+                              key={net.id}
+                              className="pl-3 pr-4 w-40 py-2 flex items-center justify-between text-sm"
+                            >
+                              <div className=" flex-1 flex items-center">
+                                <span className="ml-2 ">{net.url}</span>
+                              </div>
+                            </li>
+                          );
+                        })}
                     </ul>
                   </dd>
                 </div>

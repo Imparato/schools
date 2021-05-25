@@ -1,6 +1,6 @@
 web: PORT=3000 bundle exec puma -C config/puma.rb # -b "tcp://local.www.imparato.io:4080" -b 'ssl://local.www.imparato.io:4000?key=tmp/local.www.imparato.io-key.pem&cert=tmp/local.www.imparato.io.pem' -b "ssl://$LAN_IP:4000?key=tmp/local.www.imparato.io-key.pem&cert=tmp/local.www.imparato.io.pem"
 webpacker: ./bin/webpack-dev-server
-
+  
 
 # NOTE :
 # This assumes you have a $LAN_IP env var containing your lan IP (192.168...)

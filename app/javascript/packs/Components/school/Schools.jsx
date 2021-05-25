@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getNetworks } from "../../actions/network.action";
+import { isEmpty } from "../../utils";
 import SchoolShow from "./SchoolShow";
 
 const Schools = () => {
-  const [schools, setSchools] = useState();
+  const school = useSelector((state) => state.currentSchoolReducer);
+  const dispatch = useDispatch();
+  useState(() => {
+    if (!isEmpty(school)) dispatch(getNetworks(school.id));
+  },[])
   const [ready, setReady] = useState(false);
-  useEffect(() => {
-    fetch("/schools")
-    .then((res) => res.json())
-    .then((data) => {
-      setSchools(data[0]);
-      setReady(true);
-      console.log(schools);
-      });
-  }, []);
+
   return (
     <>
-      {schools ? (
-        <>
-          <SchoolShow schools={schools} setSchools={setSchools} />
-        </>
-      ) : (
-          <p>Créer une ecole ?</p>
+      {!isEmpty(school) && (
+
+        <SchoolShow school={school} />
       )}
     </>
   );

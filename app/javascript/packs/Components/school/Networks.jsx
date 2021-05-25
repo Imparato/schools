@@ -1,34 +1,20 @@
 import React, { useState } from "react";
 import { PlusIcon as PlusIconSolid } from "@heroicons/react/solid";
 import Network from "./Network";
+import { useDispatch, useSelector } from "react-redux";
+import { createNetwork } from "../../actions/network.action";
+import { isEmpty } from "../../utils";
 
-const Networks = ({ schools, reset }) => {
-  const [networks, setNetworks] = useState(schools.network);
-
-  // useState(() => {
-  //    setNetworks(schools.network);
-  // },[])
-
-  // CREATE
+const Networks = ({ school, reset }) => {
+  // const [networks, setNetworks] = useState(schools.network);
+  const networks = useSelector((state) => state.networksReducer);
+  const dispatch = useDispatch()
+  // CREATE NETWORK
   const addInputTag = () => {
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
-
-    fetch(`/schools/${schools.school.id}/networks`, {
-      method: "POST",
-      body: JSON.stringify({
-        url: "",
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        "X-CSRF-Token": csrf,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setNetworks(data[0].network);
-      });
+    dispatch(createNetwork(csrf, school.id,""))
   };
 
   return (
@@ -41,14 +27,13 @@ const Networks = ({ schools, reset }) => {
             id="input-tag"
             className="border border-gray-200 rounded-md divide-y divide-gray-200"
           >
-            {networks &&
-              networks.map((net) => {
+            {!isEmpty(networks) &&
+              networks.map((network) => {
                 return (
                   <Network
-                    key={net.id}
-                    schoolId={schools.school.id}
-                    network={net}
-                    setNetworks={setNetworks}
+                    key={network.id}
+                    schoolId={school.id}
+                    network={network}
                   />
                 );
               })}
