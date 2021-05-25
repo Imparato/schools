@@ -7,14 +7,8 @@ Rails.application.routes.draw do
   get '/api/school', to:'api#show'
   get '/api/cities', to:'api#cities'
 
-# react router
-  get '/ecole', to: 'pages#home'
-  get '/adresses', to: 'pages#home'
-  get '/professeurs', to: 'pages#home'
-  get '/profil', to: 'pages#home'
 
-
-  resources :schools, only: [ :index, :update] do
+  resources :schools, only: [ :index, :update, :destroy] do
     resources :addresses, only: [:index, :create, :update, :destroy]
     resources :networks, only: [:index, :create, :update, :destroy]
     resources :teachers, only: [:index]

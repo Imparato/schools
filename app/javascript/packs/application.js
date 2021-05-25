@@ -25,7 +25,6 @@ require("stylesheets/application.scss");
 
 // External imports
 import "bootstrap";
-// import "./index";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
