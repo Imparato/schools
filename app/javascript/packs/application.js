@@ -24,8 +24,9 @@ ActiveStorage.start()
 require("stylesheets/application.scss");
 
 // External imports
-import "bootstrap";
-// import "./index";
+// import "bootstrap";
+import "alpinejs";
+
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
