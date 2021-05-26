@@ -1,6 +1,6 @@
       <!-- This example requires Tailwind CSS v2.0+ -->
       <!-- breadcrums -->
-<nav class="bg-white border-b border-gray-200 flex h-8" aria-label="Breadcrumb">
+<nav  class="border-gray-400 flex h-8 lg:block sm:hidden" aria-label="Breadcrumb">
   <ol class="max-w-screen-xl w-full mx-auto px-4 flex space-x-2 sm:px-6 lg:px-8">
     <li class="flex">
       <div class="flex items-center">
@@ -26,7 +26,7 @@
   </ol>
 </nav>
 <!-- /breadcrums -->
-      <main class="flex-1 relative overflow-y-auto focus:outline-none">
+      <main class=" bg-red flex-1 relative overflow-y-auto focus:outline-none">
         <div class="py-6">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 
@@ -38,15 +38,15 @@
 
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3">
             <!-- This example requires Tailwind CSS v2.0+ -->
-<ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
   <% @schools.each do |school|   %>
-      <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 truncate">
+      <li class="col-span-1 bg-white relative rounded-lg shadow divide-y divide-gray-200 truncate">
         <div class="w-full flex items-center justify-between p-6 space-x-4">
         <%= link_to school_path(school) do %>
-          <div class="flex-1 truncate">
-            <div class="flex items-center space-x-3">
-              <h3 class="text-gray-900 text-sm font-medium truncate"><%= school.name[0..35].. %></h3>
-              <span class="flex-shrink-0 inline-block px-2 py-0.5 text-xs font-medium <%= school.published ? "bg-green-100  text-green-800" : "bg-red-300  text-red-800" %> rounded-full"> <%= school.published ? "Publié" : "Non publié" %></span>
+          <div class="flex-1">
+            <span class="flex-shrink-0 inline-block absolute top-2 right-5 px-2 py-0.5 text-xs font-medium <%= school.published ? "bg-green-100  text-green-800" : "bg-red-300  text-red-800" %> rounded-full"> <%= school.published ? "Publié" : "Non publié" %></span>
+            <div class=" items-center space-x-3">
+              <h3 class="text-gray-900 mt-4  text-sm font-medium truncate"><%= school.name %></h3>
             </div>
             <p class="mt-1 text-gray-500 text-sm truncate"><%= school.website %></p>
           </div>

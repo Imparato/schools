@@ -13,8 +13,12 @@
   </head>
 
   <body>
-  
     <%= render 'shared/flashes' %>
-    <%= yield %>
+    <% if user_signed_in?  %>
+      <%= render 'shared/vertical_navbar' %>
+    <% else %>%
+      <%= yield   %>
+    <% end %>
+    <%# <%= yield %> 
   </body>
 </html>
