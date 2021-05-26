@@ -9,9 +9,10 @@ class SchoolPolicy < ApplicationPolicy
     record.user == user
   end
 
+
   def create?
     record.user == user
-  end
+  end 
 
   def update?
     record.user == user

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
-  root to: 'pages#home'
+  root to: 'schools#index'
   get '/api/schools', to:'api#index'
   get '/api/school', to:'api#show'
   get '/api/cities', to:'api#cities'

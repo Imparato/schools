@@ -12,14 +12,14 @@ class SchoolsController < ApplicationController
   end
 
   def new
-    @school = School.new
+    @school = current_user.schools.new
+    authorize @school
     @school.networks.build
   end
   
   def create
-    @school = School.new(schools_params)
-    @school.user = current_user
     authorize @school
+    @school = current_user.school.new(schools_params)
     if @school.save
       redirect_to schools_path, notice: "Creation reussie"
     else
