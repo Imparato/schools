@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/api/cities', to:'api#cities'
 
 
-  resources :schools, only: [ :index, :update, :destroy] do
+  resources :schools do
     resources :addresses, only: [:index, :create, :update, :destroy]
     resources :networks, only: [:index, :create, :update, :destroy]
     resources :teachers, only: [:index, :create, :update, :destroy]

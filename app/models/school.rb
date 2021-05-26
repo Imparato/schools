@@ -3,7 +3,9 @@ class School < ApplicationRecord
   has_many :networks, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :teachers, dependent: :destroy
-
+  
+  accepts_nested_attributes_for :networks
+  
   validates_uniqueness_of :name, scope: [:city]
   validates_uniqueness_of :blog_order, scope: [:city]
   before_validation :check_order

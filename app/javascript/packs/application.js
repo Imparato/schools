@@ -25,12 +25,17 @@ require("stylesheets/application.scss");
 
 // External imports
 // import "bootstrap";
+require("@nathanvda/cocoon");
+
 import "alpinejs";
-
+// import EditorJS from "@editorjs/editorjs";
 // Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
-
+import FroalaEditor from "froala-editor";
+// Load a plugin.
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
+  new FroalaEditor("#editor", {
+    language: "fr"
+  });
+  
+ 
 });
