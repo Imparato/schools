@@ -28,8 +28,8 @@ gem 'activeadmin'
 # HTLM editor
 gem "wysiwyg-rails"
 
-# nested form 
-gem 'cocoon'
+gem 'pundit'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

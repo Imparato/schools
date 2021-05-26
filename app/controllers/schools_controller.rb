@@ -1,11 +1,12 @@
-require 'json'
 class SchoolsController < ApplicationController
+  
+  before_action :set_school, only: [:show, :update, :destroy]
+
   def index
-    @schools = School.where(user: current_user)
+    @schools =  policy_scope(School).where(user: current_user)
   end
 
   def show 
-    @school = School.find(params[:id])
     networks_count = 4 - @school.networks.count
     networks_count.times {@school.networks.build}
   end
@@ -18,12 +19,15 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(schools_params)
     @school.user = current_user
-
-    redirect_to schools_path, notice: "Creation reussie"
+    authorize @school
+    if @school.save
+      redirect_to schools_path, notice: "Creation reussie"
+    else
+      render :new, alert: @school.errors
+    end
   end
   
   def update
-    @school = School.find(params[:id])
     if @school.update(schools_params)
       redirect_to schools_path, notice: "Modification reussie"
     else
@@ -33,10 +37,15 @@ class SchoolsController < ApplicationController
   end
 
   def destroy
-    
+
   end
 
   private
+
+  def set_school
+    @school = School.find(params[:id])
+    authorize @school
+  end
 
   def schools_params
     params.require(:school).permit(:name, :published, :description, :email, :website, :city, networks_attributes: [:id, :url])
