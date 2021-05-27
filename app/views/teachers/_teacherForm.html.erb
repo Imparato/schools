@@ -17,26 +17,25 @@
             Prénom Nom
           </label>
           <div class="mt-1">
-            <%= teacher_form.text_field :first_name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "L'atelier des Didascalies, Les Cours de Jean-Baptiste etc etc ... " %>
+            <%= teacher_form.text_field :first_name, value: "#{@teacher.first_name} #{@teacher.last_name}" , class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom Nom" %>
           </div>
         </div>
 
-        <%# IL MANQUE L'EMAIL DANS LA DB %>
-        <%# <div class="sm:col-span-3">
+        <div class="sm:col-span-3">
           <label for="last_name" class="block text-sm font-medium text-gray-700">
             Email de contact (il ne sera visible que de vous)
           </label>
           <div class="mt-1">
-            <%= teacher_form.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Commune" %>
-          <%# </div>
-        </div> %>
+            <%= teacher_form.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "email@gmail.com" %>
+          </div>
+        </div>
 
         <div class="sm:col-span-3">
           <label for="email" class="block text-sm font-medium text-gray-700">
             Téléphone (il ne sera visible que de vous)
           </label>
           <div class="mt-1">
-            <%= teacher_form.text_field :phone, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "https://mon-atelier-theatre.com" %>
+            <%= teacher_form.text_field :phone, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "06 12 12 12 12" %>
 
           </div>
         </div>

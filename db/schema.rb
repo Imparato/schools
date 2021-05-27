@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_090335) do
+ActiveRecord::Schema.define(version: 2021_05_27_103832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_090335) do
   create_table "addresses", force: :cascade do |t|
     t.boolean "published"
     t.bigint "school_id", null: false
-    t.string "address"
+    t.string "current_address"
     t.string "address_complement"
     t.string "city"
     t.string "zipcode"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_090335) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "school_id"
+    t.string "email"
     t.index ["school_id"], name: "index_teachers_on_school_id"
   end
 
