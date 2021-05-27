@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_103832) do
   create_table "addresses", force: :cascade do |t|
     t.boolean "published"
     t.bigint "school_id", null: false
-    t.string "current_address"
+    t.string "address"
     t.string "address_complement"
     t.string "city"
     t.string "zipcode"
