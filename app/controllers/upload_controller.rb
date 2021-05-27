@@ -4,8 +4,6 @@ class UploadController < ActionController::Base
   IMAGE_EXT = [".gif", ".jpeg", ".jpg", ".png", ".svg"]
 
   def upload_image
-    p "***********************************************************"
-    p params[:file]
     if params[:file]
       FileUtils::mkdir_p(Rails.root.join("public/uploads/files"))
 
