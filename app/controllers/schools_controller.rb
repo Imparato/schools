@@ -18,8 +18,8 @@ class SchoolsController < ApplicationController
   end
   
   def create
+    @school = current_user.schools.new(schools_params)
     authorize @school
-    @school = current_user.school.new(schools_params)
     if @school.save
       redirect_to schools_path, notice: "Creation reussie"
     else
@@ -37,7 +37,9 @@ class SchoolsController < ApplicationController
   end
 
   def destroy
-
+    authorize @school
+    @school.destroy
+    redirect_to schools_path
   end
 
   private
