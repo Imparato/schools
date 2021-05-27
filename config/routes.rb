@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   get '/api/school', to:'api#show'
   get '/api/cities', to:'api#cities'
 
-
   resources :schools do
     resources :addresses, only: [:index, :create, :update, :destroy]
     resources :networks, only: [:index, :create, :update, :destroy]
     resources :teachers, only: [:index, :create, :update, :destroy]
   end
+
+  post "/upload_image" => "upload#upload_image", :as => :upload_image
+  get "/download_file/:name" => "upload#access_file", :as => :upload_access_file, :name => /.*/
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
