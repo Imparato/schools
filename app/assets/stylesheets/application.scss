@@ -1,3 +1,16 @@
+// html editor
+ @import "froala_editor.min";
+ @import "froala_style.min";
+ @import 'froala-editor/css/plugins/fullscreen.css';
+ @import 'froala-editor/css/plugins/colors.css';
+ @import 'froala-editor/css/plugins/image.css';
+ @import 'froala-editor/css/plugins/image_manager.css';
+ @import 'froala-editor/css/plugins/emoticons.css';
+ @import 'froala-editor/css/plugins/code_view.css';
+ @import 'froala-editor/css/plugins/line_breaker.css';
+
+//  #= :required()
+//  require plugins/colors.min.js
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";

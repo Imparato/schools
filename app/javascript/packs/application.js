@@ -25,12 +25,29 @@ require("stylesheets/application.scss");
 
 // External imports
 // import "bootstrap";
+require("@nathanvda/cocoon");
+
 import "alpinejs";
-
+// import EditorJS from "@editorjs/editorjs";
 // Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
-
+import FroalaEditor from "froala-editor";
+import "froala-editor/js/plugins/fullscreen.min.js";
+import "froala-editor/js/plugins/colors.min.js";
+import "froala-editor/js/plugins/image.min.js";
+import "froala-editor/js/plugins/image_manager.min.js";
+import "froala-editor/js/plugins/emoticons.min.js";
+import "froala-editor/js/plugins/code_view.min.js";
+import "froala-editor/js/plugins/line_breaker.min.js";
+import "froala-editor/js/languages/fr";
+// Load a plugin.
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
+  new FroalaEditor("#editor", {
+    language: "fr",
+    imageUploadURL: "/upload_image",
+    imageUploadParams: {
+      id: "my_editor",
+    },
+  });
+  
+ 
 });

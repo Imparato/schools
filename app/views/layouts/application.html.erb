@@ -9,15 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
   </head>
 
   <body>
-    <%= render 'shared/vertical_navbar' %>
     <%= render 'shared/flashes' %>
-    <%= yield %>
+
+    
+    <div x-data="{isOpen: false}" class="h-screen flex overflow-hidden bg-gray-100">
+        <%= render 'shared/vertical_navbar' %>
+      <div class="hidden bg-indigo-700 md:flex md:flex-shrink-0">
+        <%= render 'shared/top_navbar' %>
+          <%= yield   %>
+      </div>
+    </div>
+
+    <%# <%= yield %> 
   </body>
 </html>
