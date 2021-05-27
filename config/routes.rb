@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   get '/api/cities', to:'api#cities'
 
   resources :schools do
+    resources :teachers
     resources :addresses, only: [:index, :create, :update, :destroy]
     resources :networks, only: [:index, :create, :update, :destroy]
-    resources :teachers, only: [:index, :create, :update, :destroy]
   end
 
   post "/upload_image" => "upload#upload_image", :as => :upload_image
