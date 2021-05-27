@@ -31,7 +31,6 @@ class SchoolsController < ApplicationController
     if @school.update(schools_params)
       redirect_to schools_path, notice: "Modification reussie"
     else
-      raise
       render :show, alert: @school.errors
     end
   end
