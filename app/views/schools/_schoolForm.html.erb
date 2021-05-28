@@ -89,9 +89,24 @@
             Réseaux sociaux
           </label>
           <div class="col-span-3 mt-1 rounded-md shadow-sm bg-white -space-y-px">
-          <%= school_form.fields_for :networks do |network_form| %>
-            <%= render  "network_fields", f: network_form %> 
+        <% @school.networks.each do |network| %>
+          <%= school_form.fields_for :networks, network do |network_form| %>
+            <div class="flex -space-x-px">
+              <div class="w-1/2 flex-1 min-w-0">
+                <% if network == @school.networks[0] %>
+                  <%= network_form.text_field :url, placeholder: "https://twitter.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% elsif network == @school.networks[1] %>
+                  <%= network_form.text_field :url, placeholder: "https://facebook.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% elsif network == @school.networks[2] %>
+                  <%= network_form.text_field :url, placeholder: "https://youtube.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% else network == @school.networks[3] %>
+                  <%= network_form.text_field :url, placeholder: "https://instagram.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% end %>  
+              </div>
+            </div> 
           <% end %>
+        <% end %>
+
           </div>
         </div>
 
@@ -104,8 +119,6 @@
           </p>
           <div class="mt-1">
             <%= school_form.rich_text_area :description %>
-
-            <%# <textarea id="editor"></textarea> %>
           </div>
         </div>
       </div>
