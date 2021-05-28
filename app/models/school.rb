@@ -8,6 +8,10 @@ class School < ApplicationRecord
 
   accepts_nested_attributes_for :networks
   
+  validates_presence_of :name, message: "Veuillez entrer un nom à votre école"
+  validates_presence_of :city, message: "Veuillez préciser la ville votre école"
+  validates :email, format: {with: /\A[^@\s]+@[^@\s]+\z/, message: "L'email n'est pas valide"}
+
   validates_uniqueness_of :name, scope: [:city]
   validates_uniqueness_of :blog_order, scope: [:city]
   before_validation :check_order

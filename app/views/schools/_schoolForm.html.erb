@@ -1,5 +1,4 @@
 <%= form_for @school do |school_form| %>
-
   <div class="space-y-8 divide-y divide-gray-200">
 
     <div class="pt-8">
@@ -42,6 +41,7 @@
             </span>
           </span>
         </button>
+
       </div>
         <div class="sm:col-span-3">
           <label for="first_name" class="block text-sm font-medium text-gray-700">
@@ -49,6 +49,7 @@
           </label>
           <div class="mt-1">
             <%= school_form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "L'atelier des Didascalies, Les Cours de Jean-Baptiste etc etc ... " %>
+            <%= render  "shared/form_errors", locals: {item: @school ,property: :name} %>
           </div>
         </div>
 
@@ -58,6 +59,8 @@
           </label>
           <div class="mt-1">
             <%= school_form.text_field :city, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Commune" %>
+            <%= render  "shared/form_errors", locals: {item: @school ,property: :city} %>
+
           </div>
         </div>
 
@@ -77,6 +80,7 @@
           </label>
           <div class="mt-1">
             <%= school_form.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "https://mon-atelier-theatre.com" %>
+            <%= render  "shared/form_errors", locals: {item: @school ,property: :email} %>
           </div>
         </div>
 
@@ -110,7 +114,9 @@
 
   <div class="pt-5">
     <div class="flex items-center">
+    <% unless params[:action] == "new" || params[:action] == "create" %>
       <%= link_to "Supprimer l'école", "/schools/#{@school.id}", id: "delete_school" ,method: :delete, class: " bg-red-500 py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    <% end %>
       <div class="flex justify-end ml-auto">
         <%= link_to "Annuler", schools_path, class: " bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
         <%= school_form.submit "Enregistrer", class: " justify-flex-end ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>

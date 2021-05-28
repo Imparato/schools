@@ -23,7 +23,7 @@ class SchoolsController < ApplicationController
     if @school.save
       redirect_to schools_path, notice: "Creation reussie"
     else
-      render :new, alert: @school.errors
+      render :new
     end
   end
   
@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
     if @school.update(schools_params)
       redirect_to schools_path, notice: "Modification reussie"
     else
-      render :show, alert: @school.errors
+      render :show
     end
   end
 
