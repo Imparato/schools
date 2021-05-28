@@ -12,12 +12,14 @@
         </p>
       </div>
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        
         <div class="sm:col-span-3">
           <label for="name" class="block text-sm font-medium text-gray-700">
             Prénom Nom
           </label>
           <div class="mt-1">
             <%= teacher_form.text_field :first_name, value: "#{@teacher.first_name} #{@teacher.last_name}" , class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom Nom" %>
+            <%= render  "shared/form_errors", locals: {item: @teacher ,property: :first_name} %>
           </div>
         </div>
 
@@ -27,6 +29,7 @@
           </label>
           <div class="mt-1">
             <%= teacher_form.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "email@gmail.com" %>
+            <%= render  "shared/form_errors", locals: {item: @teacher ,property: :email} %>
           </div>
         </div>
 
@@ -47,8 +50,8 @@
           <p class="mt-1 text-sm text-gray-500">
             Donnez ici une description du parcours de <%= @teacher.first_name ? "#{@teacher.first_name} #{@teacher.last_name}" : "votre prof" %> mais aussi ce qui les caractéristiques des cours que ce professeur prodigue
           </p>
-          <div class="mt-1">
-            <%= teacher_form.text_area :bio, id:'editor' %>
+          <div class="mt-1 trix">
+            <%= teacher_form.rich_text_area :bio %>
             <%# <textarea id="editor"></textarea> %>
           </div>
         </div>
@@ -57,10 +60,16 @@
   </div>
 
   <div class="pt-5">
-    <div class="flex justify-end">
-      <%= link_to "Annuler", school_teachers_path(@school), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-      <%= teacher_form.submit "Enregistrer", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
-           %>
+
+    <div class="flex items-center">
+      <% unless params[:action] == "new" || params[:action] == "create" %>
+        <%= link_to "Supprimer le prof", "/schools/#{@school.id}/teachers/#{@teacher.id}", id: "delete_school" ,method: :delete, class: " bg-red-500 py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <% end %>
+      <div class="flex justify-end ml-auto">
+        <%= link_to "Annuler", school_teachers_path(@school), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        <%= teacher_form.submit "Enregistrer", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"%> 
+
+      </div>
     </div>
   </div>
 <% end %>
