@@ -30,6 +30,9 @@ require("@nathanvda/cocoon");
 import "alpinejs";
 // import EditorJS from "@editorjs/editorjs";
 // Internal imports, e.g:
+import { initSchoolNav } from "../plugins/init_school_nav";
+import { initVerticalNav } from "../plugins/init_vertical_nav";
+
 import FroalaEditor from "froala-editor";
 import "froala-editor/js/plugins/fullscreen.min.js";
 import "froala-editor/js/plugins/colors.min.js";
@@ -41,6 +44,9 @@ import "froala-editor/js/plugins/line_breaker.min.js";
 import "froala-editor/js/languages/fr";
 // Load a plugin.
 document.addEventListener('turbolinks:load', () => {
+  initSchoolNav();
+  initVerticalNav();
+  
   new FroalaEditor("#editor", {
     language: "fr",
     imageUploadURL: "/upload_image",
