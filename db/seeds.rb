@@ -75,7 +75,7 @@ cours.each do |key, value|
       Address.create!(
         published: false,
         school: School.last,
-        current_address: address["address"]&.strip,
+        address: address["address"]&.strip,
         city: address["city"]&.strip,
         zipcode: address["zipcode"]&.strip,
         phone: ""
