@@ -33,6 +33,7 @@ class TeachersController < ApplicationController
   end
 
   def update
+    
     @school = School.find(params[:school_id])
     fullname = teacher_params[:first_name].split(" ")
     if @teacher.update(teacher_params)
@@ -45,10 +46,11 @@ class TeachersController < ApplicationController
 
 
   def destroy
+    @school = School.find(params[:school_id])
     teacher = Teacher.find(params[:id])
     teacher.destroy
 
-    render :index
+    redirect_to school_teachers_path(@school)
   end
 
   private

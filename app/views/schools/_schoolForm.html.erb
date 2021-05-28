@@ -1,5 +1,4 @@
 <%= form_for @school do |school_form| %>
-
   <div class="space-y-8 divide-y divide-gray-200">
 
     <div class="pt-8">
@@ -12,12 +11,45 @@
         </p>
       </div>
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+      <div class="sm:col-span-4 h-5 lg:absolute lg:flex-row sm:flex-row-reverse sm:pb-3 sm:fixed lg:top-12 lg:right-12 flex space-x-2">
+
+        <label for="first_name"  class="mb-3 block text-md font-medium text-gray-700">
+            <span id="publishLabel" class="ease-out duration-500 flex-shrink-0 inline-block px-2 py-0.5 text-sm font-medium <%= @school.published ? "bg-green-200  text-green-800" : "bg-red-300  text-red-800" %> rounded-full"> <%= @school.published ? "Publié" : "Non publié" %></span>
+        </label>
+        
+        <button x-on:click="toggle === '1' ? $refs.publish.value = false : $refs.publish.value = true"
+                :class="[toggle === '1' ? 'bg-indigo-400' : 'bg-gray-200']" 
+                @click="toggle === '0' ? toggle = '1' : toggle = '0'" 
+                type="button" id="btnTogglePublish"
+                x-data="{ toggle: '<%=@school.published ? '1' : '0' %>' }"  class=" relative ml-2 inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none" role="switch" aria-checked="false">
+          
+          <%= school_form.hidden_field :published, "x-ref"=> "publish"%>
+          <span class="sr-only">Use setting</span>
+          <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+          <span  :class="[toggle === '1' ? 'translate-x-5' : 'translate-x-0']" class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+            <!-- Enabled: "opacity-0 ease-out duration-100", Not Enabled: "opacity-100 ease-in duration-200" -->
+            <span :class="[toggle === '1' ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200']" class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity" aria-hidden="true">
+              <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <!-- Enabled: "opacity-100 ease-in duration-200", Not Enabled: "opacity-0 ease-out duration-100" -->
+            <span  :class="[toggle === '1' ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100']" class=" absolute inset-0 h-full w-full flex items-center justify-center transition-opacity" aria-hidden="true">
+              <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
+                <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+              </svg>
+            </span>
+          </span>
+        </button>
+
+      </div>
         <div class="sm:col-span-3">
           <label for="first_name" class="block text-sm font-medium text-gray-700">
             Nom
           </label>
           <div class="mt-1">
             <%= school_form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "L'atelier des Didascalies, Les Cours de Jean-Baptiste etc etc ... " %>
+            <%= render  "shared/form_errors", locals: {item: @school ,property: :name} %>
           </div>
         </div>
 
@@ -27,6 +59,8 @@
           </label>
           <div class="mt-1">
             <%= school_form.text_field :city, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Commune" %>
+            <%= render  "shared/form_errors", locals: {item: @school ,property: :city} %>
+
           </div>
         </div>
 
@@ -46,6 +80,7 @@
           </label>
           <div class="mt-1">
             <%= school_form.text_field :email, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "https://mon-atelier-theatre.com" %>
+            <%= render  "shared/form_errors", locals: {item: @school ,property: :email} %>
           </div>
         </div>
 
@@ -54,13 +89,28 @@
             Réseaux sociaux
           </label>
           <div class="col-span-3 mt-1 rounded-md shadow-sm bg-white -space-y-px">
-          <%= school_form.fields_for :networks do |network_form| %>
-            <%= render  "network_fields", f: network_form %> 
+        <% @school.networks.each do |network| %>
+          <%= school_form.fields_for :networks, network do |network_form| %>
+            <div class="flex -space-x-px">
+              <div class="w-1/2 flex-1 min-w-0">
+                <% if network == @school.networks[0] %>
+                  <%= network_form.text_field :url, placeholder: "https://twitter.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% elsif network == @school.networks[1] %>
+                  <%= network_form.text_field :url, placeholder: "https://facebook.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% elsif network == @school.networks[2] %>
+                  <%= network_form.text_field :url, placeholder: "https://youtube.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% else network == @school.networks[3] %>
+                  <%= network_form.text_field :url, placeholder: "https://instagram.com/", class: "bg-white focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md bg-transparent focus:z-10 sm:text-sm border-gray-300" %>
+                <% end %>  
+              </div>
+            </div> 
           <% end %>
+        <% end %>
+
           </div>
         </div>
 
-        <div class="sm:col-span-6">
+        <div class="sm:col-span-6 ">
           <label for="email" class="block text-sm font-medium text-gray-700">
             Description de votre école.
           </label>
@@ -68,8 +118,7 @@
             Donnez ici une description générale de votre école. La description détaillée des cours se trouve dans l'onglet des cours.
           </p>
           <div class="mt-1">
-            <%= school_form.text_area :description, id:'editor' %>
-            <%# <textarea id="editor"></textarea> %>
+            <%= school_form.rich_text_area :description %>
           </div>
         </div>
       </div>
@@ -77,10 +126,15 @@
   </div>
 
   <div class="pt-5">
-    <div class="flex justify-end">
-      <%= link_to "Annuler", schools_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-      <%= school_form.submit "Enregistrer", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
-           %>
+    <div class="flex items-center">
+    <% unless params[:action] == "new" || params[:action] == "create" %>
+      <%= link_to "Supprimer l'école", "/schools/#{@school.id}", id: "delete_school" ,method: :delete, class: " bg-red-500 py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    <% end %>
+      <div class="flex justify-end ml-auto">
+        <%= link_to "Annuler", schools_path, class: " bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        <%= school_form.submit "Enregistrer", class: " justify-flex-end ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
     </div>
+
   </div>
 <% end %>

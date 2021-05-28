@@ -18,12 +18,12 @@ class SchoolsController < ApplicationController
   end
   
   def create
+    @school = current_user.schools.new(schools_params)
     authorize @school
-    @school = current_user.school.new(schools_params)
     if @school.save
       redirect_to schools_path, notice: "Creation reussie"
     else
-      render :new, alert: @school.errors
+      render :new
     end
   end
   
@@ -31,13 +31,14 @@ class SchoolsController < ApplicationController
     if @school.update(schools_params)
       redirect_to schools_path, notice: "Modification reussie"
     else
-      raise
-      render :show, alert: @school.errors
+      render :show
     end
   end
 
   def destroy
-
+    authorize @school
+    @school.destroy
+    redirect_to schools_path
   end
 
   private
