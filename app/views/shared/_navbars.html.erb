@@ -209,15 +209,17 @@
                                         <%# <a href="#" class="text-indigo-600 whitespace-normal font-medium text-s" aria-current="page">Théâtre du Petit Merlan</a> %>
                                         
                                         <div x-data="{tOpen: false}" class="ml-2 relative w-1/5">
-                                            <div>
-                                                <button @click="tOpen = !tOpen" @click.away="tOpen = false" type="button"
-                                                    class="max-w-xs bg-white flex items-center text-sm text-indigo-300 focus:outline-none focus:text-indigo-500 hover:text-indigo-500"
-                                                    id="select-menu-button" aria-expanded="false" aria-haspopup="true">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-                                                    </svg>
-                                                </button>
-                                            </div>
+                                            <% if @schools.length > 1 %>
+                                                <div>
+                                                    <button @click="tOpen = !tOpen" @click.away="tOpen = false" type="button"
+                                                        class="max-w-xs bg-white flex items-center text-sm text-indigo-300 focus:outline-none focus:text-indigo-500 hover:text-indigo-500"
+                                                        id="select-menu-button" aria-expanded="false" aria-haspopup="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            <% end %>
 
                                             <div id="mobile_nav_dd" 
                                                 x-show="tOpen"

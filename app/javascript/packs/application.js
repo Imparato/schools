@@ -31,7 +31,6 @@ import "alpinejs";
 // import EditorJS from "@editorjs/editorjs";
 // Internal imports, e.g:
 import { initSchoolNav } from "../plugins/init_school_nav";
-import { initVerticalNav } from "../plugins/init_vertical_nav";
 import { initTopMobileNav } from "../plugins/init_top_mobile_nav";
 
 
@@ -47,7 +46,6 @@ import "froala-editor/js/languages/fr";
 // Load a plugin.
 document.addEventListener('turbolinks:load', () => {
   initSchoolNav();
-  initVerticalNav();
   initTopMobileNav();
 
   new FroalaEditor("#editor", {

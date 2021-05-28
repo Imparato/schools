@@ -1,5 +1,0 @@
-const initVerticalNav = () => {
-  
-};
-
-export { initVerticalNav };

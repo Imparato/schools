@@ -5,8 +5,6 @@ const initTopMobileNav = () => {
   const mobile_nav_dd = document.getElementById("mobile_nav_dd");
   const currentSchool = window.location.pathname.split("/")[2];
 
-  console.log(schools)
-
   if (schools) {
     schools.forEach((school) => {
       if (school.dataset.index === currentSchool) {
