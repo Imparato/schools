@@ -16,9 +16,9 @@
     <%= render 'shared/flashes' %>
     
     <div x-data="{isOpen: false}" class="h-screen flex overflow-hidden bg-gray-100">
-        <%= render 'shared/vertical_navbar' %>
+        <%= render 'shared/mobile_vertical_navbar' %>
       <div class="hidden bg-indigo-700 md:flex md:flex-shrink-0">
-        <%= render 'shared/top_navbar' %>
+        <%= render 'shared/desktop_and_top_navbar' %>
           <%= yield   %>
       </div>
     </div>
