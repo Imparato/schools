@@ -4,6 +4,8 @@ class School < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :teachers, dependent: :destroy
   
+   has_rich_text :description
+
   accepts_nested_attributes_for :networks
   
   validates_uniqueness_of :name, scope: [:city]

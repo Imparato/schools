@@ -13,13 +13,16 @@ Turbolinks.start()
 ActiveStorage.start()
 
 
+require("trix")
+require("@rails/actiontext")
+
 // ----------------------------------------------------
 // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
 // WRITE YOUR OWN JS STARTING FROM HERE 👇
 // ----------------------------------------------------
 
-// require("@rails/ujs").start();
-// require("turbolinks").start();
+
+//= require trix
 
 require("stylesheets/application.scss");
 
@@ -32,7 +35,7 @@ import "alpinejs";
 
 // Load a plugin.
 document.addEventListener('turbolinks:load', () => {
-  
+
   const btnTogglePublish = document.querySelector("#btnTogglePublish");
   const publishLabel = document.querySelector("#publishLabel");
   if (btnTogglePublish) {

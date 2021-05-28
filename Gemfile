@@ -30,6 +30,7 @@ gem "wysiwyg-rails"
 
 gem 'pundit'
 
+gem 'trix-rails', require: 'trix'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
