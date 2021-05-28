@@ -195,7 +195,7 @@
                                         <% @schools.each do |school| %>
                                                 <!-- active classes: "border-indigo-500 text-indigo-600 -->
                                                 <!-- inactive classes: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                                                <div class="school_nav" data-index="<%= school.id %>">
+                                                <div class="school_nav" data-index="<%= school.id %>" data-name="<%= school.name %>">
                                                     <%= link_to school.name, school_path(school), class: "whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" %>
                                                 </div>
                                         <% end %>
@@ -205,8 +205,8 @@
 
                                 <!-- ----------------    SMALL DEVICE NAVIGATION   ----------------- -->
                                 <div class="md:hidden ml-4 w-5/6">
-                                    <div class="flex content-center">
-                                        <a href="#" class="text-indigo-600 whitespace-normal font-medium text-s" aria-current="page">Théâtre du Petit Merlan</a>
+                                    <div class="flex content-center" id="mobile_nav">
+                                        <%# <a href="#" class="text-indigo-600 whitespace-normal font-medium text-s" aria-current="page">Théâtre du Petit Merlan</a> %>
                                         
                                         <div x-data="{tOpen: false}" class="ml-2 relative w-1/5">
                                             <div>
@@ -219,7 +219,8 @@
                                                 </button>
                                             </div>
 
-                                            <div x-show="tOpen"
+                                            <div id="mobile_nav_dd" 
+                                                x-show="tOpen"
                                                 x-transition:enter="transition ease-out duration-100"
                                                 x-transition:enter-start="transform opacity-0 scale-95"
                                                 x-transition:enter-end="transform opacity-100 scale-100"
@@ -230,8 +231,8 @@
                                                 style="display:none" role="menu" aria-orientation="vertical"
                                                 aria-labelledby="select-menu-button" tabindex="-1">
                                                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                                                <a href="#" class="block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap">Théâtre du Petit Merlu</a>
-                                                <a href="#" class="block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap">Théâtre du Petit Merliope</a>
+                                                <%# <a href="#" class="block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap">Théâtre du Petit Merlu</a>
+                                                <a href="#" class="block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap">Théâtre du Petit Merliope</a> %>
                                             </div>
                                         </div>
                                     </div>
