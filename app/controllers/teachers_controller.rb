@@ -63,4 +63,5 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     authorize @teacher
   end
+
 end

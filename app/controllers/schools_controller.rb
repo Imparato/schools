@@ -1,9 +1,9 @@
 class SchoolsController < ApplicationController
   
-  before_action :set_school, only: [:show, :update, :destroy]
+  before_action :set_school, except: [:index, :new]
 
   def index
-    @schools =  policy_scope(School).where(user: current_user)
+    @disable_nav = true
   end
 
   def show 

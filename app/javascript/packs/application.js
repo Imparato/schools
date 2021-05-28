@@ -21,7 +21,6 @@ require("@rails/actiontext")
 // WRITE YOUR OWN JS STARTING FROM HERE 👇
 // ----------------------------------------------------
 
-
 //= require trix
 
 require("stylesheets/application.scss");
@@ -33,8 +32,15 @@ import "alpinejs";
 // import EditorJS from "@editorjs/editorjs";
 // Internal imports, e.g:
 
+import { initSchoolNav } from "../plugins/init_school_nav";
+import { initTopMobileNav } from "../plugins/init_top_mobile_nav";
+
+
+
 // Load a plugin.
 document.addEventListener('turbolinks:load', () => {
+  initSchoolNav();
+  initTopMobileNav();
 
   const btnTogglePublish = document.querySelector("#btnTogglePublish");
   const publishLabel = document.querySelector("#publishLabel");

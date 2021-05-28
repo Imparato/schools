@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :set_schools
   include Pundit
 
   # Pundit: white-list approach.
@@ -17,4 +18,9 @@ class ApplicationController < ActionController::Base
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
+
+  def set_schools
+    @schools =  policy_scope(School).where(user: current_user)
+  end
+  
 end
