@@ -1,6 +1,10 @@
 require 'json'
 
 class AddressesController < ApplicationController
+
+  before_action :set_schools
+  before_action :set_school, except: [:index, :new]
+
   def index
     addresses = School.find(params[:school_id]).addresses
     
@@ -34,4 +38,14 @@ class AddressesController < ApplicationController
   def address_params
     params.require(:address).permit(:published, :address_complement, :city, :zipcode, :phone, :details)
   end
+
+   def set_schools
+    @schools =  policy_scope(School).where(user: current_user)
+  end
+
+  def set_school
+    @school = School.find(params[:id])
+    authorize @school
+  end
+  
 end

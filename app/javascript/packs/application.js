@@ -13,23 +13,50 @@ Turbolinks.start()
 ActiveStorage.start()
 
 
+require("trix")
+require("@rails/actiontext")
+
 // ----------------------------------------------------
 // Note(lewagon): ABOVE IS RAILS DEFAULT CONFIGURATION
 // WRITE YOUR OWN JS STARTING FROM HERE 👇
 // ----------------------------------------------------
 
-// require("@rails/ujs").start();
-// require("turbolinks").start();
+//= require trix
 
 require("stylesheets/application.scss");
 
 // External imports
-import "bootstrap";
-// import "./index";
-// Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+// import "bootstrap";
 
+import "alpinejs";
+// import EditorJS from "@editorjs/editorjs";
+// Internal imports, e.g:
+
+import { initSchoolNav } from "../plugins/init_school_nav";
+import { initTopMobileNav } from "../plugins/init_top_mobile_nav";
+
+
+
+// Load a plugin.
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
+  initSchoolNav();
+  initTopMobileNav();
+
+  const btnTogglePublish = document.querySelector("#btnTogglePublish");
+  const publishLabel = document.querySelector("#publishLabel");
+  if (btnTogglePublish) {
+    btnTogglePublish.addEventListener("click", (e) => {
+      const text = publishLabel.innerText;
+      if (text === "Non publié") {
+        publishLabel.innerText = "publié";
+        publishLabel.classList.remove("bg-red-300", "text-red-800");
+        publishLabel.classList.add("bg-green-200", "text-green-800");
+      } else {
+        publishLabel.innerText = "Non publié";
+        publishLabel.classList.remove("bg-green-200", "text-green-800");
+        publishLabel.classList.add("bg-red-300", "text-red-800");
+      }
+    });
+  }
+ 
 });

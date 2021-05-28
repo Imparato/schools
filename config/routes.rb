@@ -2,22 +2,18 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
-  root to: 'pages#home'
+  root to: 'schools#index'
   get '/api/schools', to:'api#index'
   get '/api/school', to:'api#show'
   get '/api/cities', to:'api#cities'
 
-# react router
-  get '/ecole', to: 'pages#home'
-  get '/adresses', to: 'pages#home'
-  get '/professeurs', to: 'pages#home'
-  get '/profil', to: 'pages#home'
-
-
-  resources :schools, only: [ :index, :update] do
+  resources :schools do
+    resources :teachers
     resources :addresses, only: [:index, :create, :update, :destroy]
     resources :networks, only: [:index, :create, :update, :destroy]
-    resources :teachers, only: [:index]
   end
+
+  post "/upload_image" => "upload#upload_image", :as => :upload_image
+  get "/download_file/:name" => "upload#access_file", :as => :upload_access_file, :name => /.*/
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

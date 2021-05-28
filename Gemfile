@@ -25,6 +25,13 @@ gem 'activeadmin'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# HTLM editor
+gem "wysiwyg-rails"
+
+gem 'pundit'
+
+gem 'trix-rails', require: 'trix'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
