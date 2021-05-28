@@ -1,6 +1,5 @@
 class TeachersController < ApplicationController
   
-  before_action :set_schools
   before_action :set_teacher, only: [:show, :update, :destroy]
 
   def index
@@ -61,10 +60,6 @@ class TeachersController < ApplicationController
   def set_teacher
     @teacher = Teacher.find(params[:id])
     authorize @teacher
-  end
-
-  def set_schools
-    @schools =  policy_scope(School).where(user: current_user)
   end
 
 end
