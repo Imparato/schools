@@ -1,0 +1,88 @@
+<nav  class="border-gray-400 flex h-8 lg:block sm:hidden" aria-label="Breadcrumb">
+  <ol class="max-w-screen-xl w-full mx-auto px-4 flex space-x-2 sm:px-6 lg:px-8">
+    <li class="flex">
+      <div class="flex items-center">
+        <a href="#" class="text-gray-400 hover:text-gray-500">
+          <!-- Heroicon name: solid/home -->
+          <svg class="flex-shrink-0 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+          </svg>
+          <span class="sr-only">Home</span>
+        </a>
+      </div>
+    </li>
+
+    <li class="flex">
+      <div class="flex items-center">
+        <svg class="flex-shrink-0 w-6 h-full text-gray-200" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+        </svg>
+        <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Mes profs</a>
+      </div>
+    </li>
+
+  </ol>
+</nav>
+<!-- /breadcrums -->
+<main class=" bg-red flex-1 relative overflow-y-auto focus:outline-none">
+  <div class="py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+
+
+      <p class="mt-1 text-sm text-gray-500">
+        Toute les adresses de votre école <%= @school.name %>           
+      </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3">
+            <!-- This example requires Tailwind CSS v2.0+ -->
+      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <% @addresses.each do |address|   %>
+            <li class="col-span-1 bg-white relative rounded-lg shadow divide-y divide-gray-200 truncate">
+              <div class="w-full flex items-center justify-between p-6 space-x-4">
+              <%= link_to school_address_path(@school, address) do %>
+                <div class="flex-1">
+                  <div class=" items-center space-x-3">
+                    <h3 class="text-gray-900 mt-4  text-sm font-medium truncate"><%= address.address %></h3>
+                  </div>
+                <p class="mt-1 text-gray-500 text-sm truncate"><%= address.zipcode%> <strong><%= address.city  %></strong> </p>
+                </div>
+              <% end %>
+              </div>
+              <div>
+                <div class="-mt-px flex divide-x divide-gray-200">
+                  <div class="w-0 flex-1 flex">
+                    <%= link_to school_address_path(@school, address), class: "relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                      <span class="ml-3">Modifier</span>
+                    <% end  %> 
+                  </div>
+
+                </div>
+              </div>
+            </li>
+        <% end %>
+
+
+        <li class="col-span-1 rounded-lg shadow divide-y divide-gray-200">
+          <%= link_to new_school_address_path(@school) do  %>
+          <div class="w-full flex items-center justify-between p-6 space-x-4">
+            <div class="flex-1 truncate">
+              <div class="flex items-center space-x-3">
+                <h3 class="text-gray-900 text-sm font-medium truncate items-center">Ajouter un nouveau lieu de cours</h3>
+
+              </div>
+              <div>
+          </div>
+          <% end %>
+        </li>
+
+        <!-- More people... -->
+      </ul>
+
+
+    </div>
+  </div>
+</main>
