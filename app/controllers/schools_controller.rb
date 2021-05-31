@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
   
-  before_action :set_school, except: [:index, :new]
+  before_action :set_school, except: [:index, :new, :create]
 
   def index
     @disable_nav = true
@@ -18,12 +18,13 @@ class SchoolsController < ApplicationController
   end
   
   def create
-    @school = current_user.schools.new(schools_params)
+    @school = School.new(schools_params)
+    @school.user = current_user
     authorize @school
     if @school.save
-      redirect_to schools_path, notice: "Creation reussie"
+      redirect_to schools_path, notice: "Création reussie"
     else
-      render :new
+      render "new"
     end
   end
   

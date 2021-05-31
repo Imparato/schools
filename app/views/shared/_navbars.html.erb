@@ -52,6 +52,8 @@
         </div>
         <div class="mt-5 flex-1 h-0 overflow-y-auto">
             <nav class="px-2 space-y-1">
+            <% unless params["action"] == "new" || params["action"] == "create" %>
+
                 <!-- Current: "bg-indigo-800 text-white", Default: "text-indigo-100 hover:bg-indigo-600" -->
                 <%= link_to school_path(@school), class: "bg-indigo-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md" do %>
                     <!-- Heroicon name: outline/home -->
@@ -79,7 +81,7 @@
                     </svg>
                     Mes lieux de cours
                 <% end %>
-
+            <% end %>
                 <a href="#"
                     class="text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md">
                     <!-- Heroicon name: outline/academic-cap -->
@@ -115,6 +117,8 @@
             <div class="mt-5 flex-1 flex flex-col">
                 <nav class="flex-1 px-2 space-y-1">
                     <!-- Current: "bg-indigo-800 text-white", Default: "text-indigo-100 hover:bg-indigo-600" -->
+                <% unless params["action"] == "new" || params["action"] == "create" %>
+                
                     <%= link_to school_path(@school), class: "bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
                         <!-- Heroicon name: outline/home -->
                         <svg class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
@@ -144,6 +148,7 @@
                         Mes lieux de cours
                     <% end %>
 
+                <% end %>
                     <a href="#"
                         class="text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                         <!-- Heroicon name: outline/academic-cap -->
