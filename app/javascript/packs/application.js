@@ -34,13 +34,14 @@ import "alpinejs";
 
 import { initSchoolNav } from "../plugins/init_school_nav";
 import { initTopMobileNav } from "../plugins/init_top_mobile_nav";
-
+import { initVerticalNavColors } from "../plugins/init_vertical_nav_colors";
 
 
 // Load a plugin.
 document.addEventListener('turbolinks:load', () => {
   initSchoolNav();
   initTopMobileNav();
+  initVerticalNavColors();
 
   const btnTogglePublish = document.querySelector("#btnTogglePublish");
   const publishLabel = document.querySelector("#publishLabel");
