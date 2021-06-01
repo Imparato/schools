@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
   before_action :set_address, except: [:index, :new, :create]
 
   def index
-    @addresses = @school.addresses    
+    @addresses = @school.addresses.order(published: :desc)
   end
 
   def show

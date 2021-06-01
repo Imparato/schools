@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
 
   def index
     @school = School.find(params[:school_id]) 
-    @teachers = @school.teachers
+    @teachers = @school.teachers.order("last_name")
   end
   
   def show
