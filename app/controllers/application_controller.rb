@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :set_schools
+  before_action :set_default_school
   
   include Pundit 
   # Pundit: white-list approach. 
@@ -24,6 +25,10 @@ class ApplicationController < ActionController::Base
 
   def set_schools
     @schools =  policy_scope(School).where(user: current_user)
+  end
+
+  def set_default_school
+    @default_school = policy_scope(School).where(user: current_user).first
   end
   
 end
