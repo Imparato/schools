@@ -24,7 +24,7 @@ require("@rails/actiontext")
 //= require trix
 
 require("stylesheets/application.scss");
-
+import "../stylesheets/tailwind.config";
 // External imports
 // import "bootstrap";
 
@@ -35,13 +35,14 @@ import "alpinejs";
 import { initSchoolNav } from "../plugins/init_school_nav";
 import { initTopMobileNav } from "../plugins/init_top_mobile_nav";
 import { initVerticalNavColors } from "../plugins/init_vertical_nav_colors";
-
+import { closeModal } from "../plugins/closeModal";
 
 // Load a plugin.
 document.addEventListener('turbolinks:load', () => {
   initSchoolNav();
   initTopMobileNav();
   initVerticalNavColors();
+  closeModal();
 
   const btnTogglePublish = document.querySelector("#btnTogglePublish");
   const publishLabel = document.querySelector("#publishLabel");

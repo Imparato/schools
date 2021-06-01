@@ -1,51 +1,69 @@
-require 'json'
-
 class AddressesController < ApplicationController
 
   before_action :set_schools
-  before_action :set_school, except: [:index, :new]
+  before_action :set_school, except: [ :new]
+  before_action :set_address, except: [:index, :new, :create]
 
   def index
-    addresses = School.find(params[:school_id]).addresses
+    @addresses = @school.addresses    
+  end
+
+  def show
     
-    render json: addresses
+  end
+
+  def edit
+    
   end
 
   def update
-    school = School.find(params[:school_id])
-    address = Address.find(params[:id])
-    address.update(address_params)
-    render json: address
+    @address = Address.find(params[:id])
+    if @address.update(address_params)
+      redirect_to school_addresses_path(@school)
+    else
+      render :edit
+    end
+  end
+
+  def new
+    @school = School.find(params[:school_id])
+    @address = @school.addresses.new
+    authorize @address
   end
 
   def create
-    school = School.find(params[:school_id])
-    address = Address.new(address_params)
-    address.school = school
-    address.save
-    
-    render json: address
+    @address = Address.new(address_params)
+    @address.school = @school
+    authorize @address
+    if @address.save
+      redirect_to school_addresses_path(@school)
+    else
+      render :new
+    end
   end
 
   def destroy
-    address = Address.find(params[:id])
-    address.destroy
-
-    render json: address
+    @address.destroy
+    redirect_to school_addresses_path(@school)
   end
 
   private
+
   def address_params
-    params.require(:address).permit(:published, :address_complement, :city, :zipcode, :phone, :details)
+    params.require(:address).permit(:published, :address_complement,:address, :city, :zipcode, :phone, :details)
   end
 
-   def set_schools
+  def set_address
+    @address = Address.find(params[:id])
+    authorize @address
+  end
+
+  def set_schools
     @schools =  policy_scope(School).where(user: current_user)
   end
 
   def set_school
-    @school = School.find(params[:id])
-    authorize @school
+    @school = policy_scope(School).find(params[:school_id])
   end
   
 end
