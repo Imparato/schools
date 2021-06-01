@@ -283,13 +283,32 @@
                                 <!-- ----------------    MD AND ABOVE NAVIGATION   ----------------- -->
                                 <div class="hidden md:block md:ml-6">
                                     <div class="flex space-x-4">
+                                        <% if @school == nil %>
+                                        
+                                            <% @schools.each_with_index do |school, index| %>
+                                                    <!-- active classes: "border-indigo-500 text-indigo-600 -->
+                                                    <!-- inactive classes: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+                                                    <% if index == 0 %>
+                                                        <div>
+                                                            <%= link_to school.name, school_path(school), class: "border-indigo-500 text-indigo-600 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" %>
+                                                        </div>
+                                                    <% else %>
+                                                        <div>
+                                                            <%= link_to school.name, school_path(school), class: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" %>
+                                                        </div>
+                                                    <% end %>
+                                            <% end %> 
+                                        
+                                        <% else %>
 
-                                        <% @schools.each do |school| %>
-                                                <!-- active classes: "border-indigo-500 text-indigo-600 -->
-                                                <!-- inactive classes: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                                                <div class="school_nav" data-index="<%= school.id %>" data-name="<%= school.name %>">
-                                                    <%= link_to school.name, school_path(school), class: "whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" %>
-                                                </div>
+                                            <% @schools.each do |school| %>
+                                                    <!-- active classes: "border-indigo-500 text-indigo-600 -->
+                                                    <!-- inactive classes: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+                                                    <div class="school_nav" data-index="<%= school.id %>" data-name="<%= school.name %>">
+                                                        <%= link_to school.name, school_path(school), class: "whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm" %>
+                                                    </div>
+                                            <% end %>
+                                        
                                         <% end %>
                                     </div>
                                 </div>
@@ -298,8 +317,16 @@
                                 <!-- ----------------    SMALL DEVICE NAVIGATION   ----------------- -->
                                 <div class="md:hidden ml-4 w-5/6">
                                     <div class="flex content-center" id="mobile_nav">
-                                        <%# <a href="#" class="text-indigo-600 whitespace-normal font-medium text-s" aria-current="page">Théâtre du Petit Merlan</a> %>
-                                        
+
+                                        <% if @school == nil %>
+                                            <% @schools.each_with_index do |school, index| %>
+                                                <% if index == 0 %>
+                                                    <%= link_to school.name, school_path(school), class: "text-indigo-600 whitespace-normal font-medium text-s" %>
+                                                <% end %>
+                                            <% end %>
+                                        <% end %>                                        
+
+
                                         <div x-data="{tOpen: false}" class="ml-2 relative w-1/5">
                                             <% if @schools.length > 1 %>
                                                 <div>
@@ -327,6 +354,14 @@
                                                 <!-- Active: "bg-gray-100", Not Active: "" -->
                                                 <%# <a href="#" class="block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap">Théâtre du Petit Merlu</a>
                                                 <a href="#" class="block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap">Théâtre du Petit Merliope</a> %>
+                                                <% if @school == nil %>
+                                                    <% @schools.each_with_index do |school, index| %>
+                                                        <% if index > 0 %>
+                                                            <%= link_to school.name, school_path(school), class: "block text-indigo-300 hover:text-indigo-400 px-4 py-2 rounded-md font-medium whitespace-nowrap" %>
+                                                        <% end %>
+                                                    <% end %>
+                                                <% end %>    
+                                            
                                             </div>
                                         </div>
                                     </div>
