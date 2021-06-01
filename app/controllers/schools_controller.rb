@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
   before_action :set_school, except: [:index, :new, :create]
 
   def index
-    @disable_nav = true
+    
   end
 
   def show 
