@@ -55,7 +55,7 @@
             <% if (params["controller"] == "schools" && (params["action"] == "new" || params["action"] == "create")) || @default_school.nil? %>
                 
                 <!-- Current: "bg-indigo-800 text-white", Default: "text-indigo-100 hover:bg-indigo-600" -->
-                <%= link_to schools_path, class: "bg-indigo-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md" do %>
+                <%= link_to schools_path, class: "menu-item group flex items-center px-2 py-2 text-base font-medium rounded-md" do %>
                     <!-- Heroicon name: outline/home -->
                     <svg class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -83,7 +83,7 @@
                 <% end %>
 
                 <a href="#"
-                    class="menu-item group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                    class="text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md">
                     <!-- Heroicon name: outline/academic-cap -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -96,7 +96,7 @@
             <% else %>
             
                 <!-- Current: "bg-indigo-800 text-white", Default: "text-indigo-100 hover:bg-indigo-600" -->
-                <%= link_to schools_path, class: "bg-indigo-800 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md" do %>
+                <%= link_to schools_path, class: "menu-item group flex items-center px-2 py-2 text-base font-medium rounded-md" do %>
                     <!-- Heroicon name: outline/home -->
                     <svg class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -106,7 +106,7 @@
                     <%= @schools.length == 1 ? 'Mon école' : 'Mes écoles' %>
                 <% end %>
 
-                <%= link_to ( school_teachers_path(@school || @default_school)), class: "text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md" do  %>
+                <%= link_to ( school_teachers_path(@school || @default_school)), class: "menu-item group flex items-center px-2 py-2 text-base font-medium rounded-md" do  %>
                     <!-- Heroicon name: outline/user-group -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -114,7 +114,7 @@
                     Mes profs
                 <% end %>
 
-                <%= link_to school_addresses_path(@school || @default_school), class: "text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md" do  %>
+                <%= link_to school_addresses_path(@school || @default_school), class: "menu-item group flex items-center px-2 py-2 text-base font-medium rounded-md" do  %>
                     <!-- Heroicon name: outline/location-marker -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -124,7 +124,7 @@
                 <% end %>
 
                 <a href="#"
-                    class="text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                    class="menu-item group flex items-center px-2 py-2 text-base font-medium rounded-md">
                     <!-- Heroicon name: outline/academic-cap -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -163,7 +163,7 @@
 
                     <% if (params["controller"] == "schools" && (params["action"] == "new" || params["action"] == "create")) || @default_school.nil? %>
 
-                        <%= link_to schools_path, class: "bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
+                        <%= link_to schools_path, class: "menu-item group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
                             <!-- Heroicon name: outline/home -->
                             <svg class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -205,9 +205,10 @@
                             </svg>
                             Mes cours
                         </a>
+
                     <% else %>
 
-                        <%= link_to schools_path, class: "bg-indigo-800 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
+                        <%= link_to schools_path, class: "menu-item group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
                             <!-- Heroicon name: outline/home -->
                             <svg class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -217,7 +218,7 @@
                             <%= @schools.length == 1 ? 'Mon école' : 'Mes écoles' %>
                         <% end %>
                         
-                        <%= link_to school_teachers_path(@school || @default_school), class: "text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
+                        <%= link_to school_teachers_path(@school || @default_school), class: "menu-item group flex items-center px-2 py-2 text-sm font-medium rounded-md" do  %>
                             <!-- Heroicon name: outline/user-group -->
                             <svg class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -227,7 +228,7 @@
                             Mes profs
                         <% end %>
 
-                        <%= link_to school_addresses_path(@school || @default_school), class: "text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do %>
+                        <%= link_to school_addresses_path(@school || @default_school), class: "menu-item group flex items-center px-2 py-2 text-sm font-medium rounded-md" do %>
                             <!-- Heroicon name: outline/location-marker -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -237,7 +238,7 @@
                         <% end %>
 
                         <a href="#"
-                            class="text-indigo-100 hover:bg-indigo-600 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            class="menu-item group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             <!-- Heroicon name: outline/academic-cap -->
                             <svg class="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">

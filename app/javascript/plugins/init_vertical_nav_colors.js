@@ -1,6 +1,6 @@
 const initVerticalNavColors = () => {
 
-  const currentLocation = location.href;
+  const currentLocation = location.href.split('/').slice(0,6).join('/');
   const menuItem = document.querySelectorAll(".menu-item");
   const menuLength = menuItem.length;
 
