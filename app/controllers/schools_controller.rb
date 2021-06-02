@@ -9,6 +9,7 @@ class SchoolsController < ApplicationController
   def show 
     networks_count = 4 - @school.networks.count
     networks_count.times {@school.networks.build}
+    add_breadcrumb("Modifier")
   end
 
   def new
