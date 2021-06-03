@@ -24,7 +24,6 @@ require("@rails/actiontext")
 //= require trix
 
 require("stylesheets/application.scss");
-import "../stylesheets/tailwind.config";
 // External imports
 // import "bootstrap";
 

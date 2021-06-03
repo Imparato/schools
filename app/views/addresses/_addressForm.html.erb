@@ -4,14 +4,14 @@
     <div class="pt-8">
       <div>
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-          Informations sur mon école de théâtre amateur.
+          Informations sur votre addresse <%= @address.address unless !@address.address %>
         </h3>
         <p class="mt-1 text-sm text-gray-500">
 
         </p>
       </div>
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-      <div class="sm:col-span-4 h-5 lg:absolute lg:flex-row sm:flex-row-reverse sm:pb-3 sm:fixed lg:top-12 lg:right-12 flex space-x-2">
+      <div class="sm:col-span-4 h-5 md:absolute md:flex-row sm:flex-row-reverse sm:pb-3 sm:fixed md:top-12 md:right-12 flex space-x-2">
 
         <label for="first_name"  class="mb-3 block text-md font-medium text-gray-700">
             <span id="publishLabel" class="ease-out duration-500 flex-shrink-0 inline-block px-2 py-0.5 text-sm font-medium <%= @address.published ? "bg-green-200  text-green-800" : "bg-red-300  text-red-800" %> rounded-full"> <%= @address.published ? "Publié" : "Non publié" %></span>
@@ -49,6 +49,7 @@
           </label>
           <div class="mt-1">
             <%= address_form.text_field :address, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "12 avenue Charles De gaulle" %>
+            <%= render  "shared/form_errors", locals: {item: @address ,property: :address} %>
           </div>
         </div>
 
@@ -68,7 +69,7 @@
           </label>
           <div class="mt-1">
             <%= address_form.text_field :city, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Marseille" %>
-
+            <%= render  "shared/form_errors", locals: {item: @address ,property: :city} %>
           </div>
         </div>
 
