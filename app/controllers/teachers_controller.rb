@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
 
   def index
     @school = School.find(params[:school_id]) 
-    @teachers = @school.teachers
+    @teachers = @school.teachers.order("last_name")
     add_breadcrumb("Mes profs")
   end
   
@@ -55,7 +55,7 @@ class TeachersController < ApplicationController
   private
 
   def teacher_params
-    params.require(:teacher).permit( :email, :first_name, :last_name, :bio, :phone)
+    params.require(:teacher).permit( :email, :first_name, :last_name, :bio, :phone, :photo)
   end
 
   def set_teacher

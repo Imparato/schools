@@ -16,10 +16,13 @@
               <div class="w-full flex items-center justify-between p-6 space-x-4">
               <%= link_to school_teacher_path(@school, teacher) do %>
                 <div class="flex-1">
+                  <%=cl_image_tag teacher.photo.key, class: "flex-shrink-0 inline-block absolute top-2 right-5 inline-block h-10 w-10 rounded-full" %>
                   <div class=" items-center space-x-3">
                     <h3 class="text-gray-900 mt-4  text-sm font-medium truncate"><%= teacher.first_name %> <%= teacher.last_name %></h3>
                   </div>
+                  
                 </div>
+
               <% end %>
               </div>
               <div>
@@ -45,7 +48,6 @@
             <div class="flex-1 truncate">
               <div class="flex items-center space-x-3">
                 <h3 class="text-gray-900 text-sm font-medium truncate items-center">Ajouter un nouveau prof</h3>
-
               </div>
               <div>
           </div>

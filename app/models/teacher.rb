@@ -1,7 +1,7 @@
 class Teacher < ApplicationRecord
   has_many :teachings, dependent: :destroy
   belongs_to :school
-
+  has_one_attached :photo
   has_rich_text :bio
 
   validates_presence_of :first_name, message: "Veuillez préciser le nom de votre profésseur"
