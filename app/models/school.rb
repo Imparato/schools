@@ -12,10 +12,10 @@ class School < ApplicationRecord
   validates_presence_of :city, message: "Veuillez préciser la ville votre école"
   validates :email, format: {with: /\A[^@\s]+@[^@\s]+\z/, message: "L'email n'est pas valide"}
 
-  validates_uniqueness_of :name, scope: [:city]
-  validates_uniqueness_of :blog_order, scope: [:city]
+  validates_uniqueness_of :name, scope: [:city], message: "Cette école existe déjà"
+  # validates_uniqueness_of :blog_order, scope: [:city]
   before_validation :check_order
-
+  
   # last update of school and associated entities
   def last_update
     request = <<-STRING
