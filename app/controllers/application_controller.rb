@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_schools
   before_action :set_default_school
+  before_action :set_school
+  before_action :set_breadcrumbs
   
   include Pundit 
   # Pundit: white-list approach. 
@@ -29,6 +31,23 @@ class ApplicationController < ActionController::Base
 
   def set_default_school
     @default_school = policy_scope(School).where(user: current_user).first
+  end
+
+  def set_school
+    if !params["controller"].include?("devise")
+      @school = School.find(params[:school_id])
+    end
+  end
+
+  def set_breadcrumbs
+    @breadcrumbs = []
+  end
+
+  def add_breadcrumb(label, path = nil)
+    @breadcrumbs << {
+      label: label,
+      path: path
+    }
   end
   
 end

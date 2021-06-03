@@ -6,10 +6,13 @@ class AddressesController < ApplicationController
 
   def index
     @addresses = @school.addresses.order(published: :desc)
+    add_breadcrumb("Mes lieux de cours")
   end
 
   def show
-    
+    add_breadcrumb("Mes lieux de cours", school_addresses_path(@school))
+    add_breadcrumb(@address.address)
+    add_breadcrumb("Modifier")
   end
 
   def edit
@@ -29,6 +32,8 @@ class AddressesController < ApplicationController
     @school = School.find(params[:school_id])
     @address = @school.addresses.new
     authorize @address
+    add_breadcrumb("Mes lieux de cours", school_addresses_path(@school))
+    add_breadcrumb("Ajouter un lieu")
   end
 
   def create

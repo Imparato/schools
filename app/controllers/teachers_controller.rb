@@ -5,16 +5,21 @@ class TeachersController < ApplicationController
   def index
     @school = School.find(params[:school_id]) 
     @teachers = @school.teachers.order("last_name")
+    add_breadcrumb("Mes profs")
   end
   
   def show
     @school = School.find(params[:school_id])
+    add_breadcrumb("Mes profs", school_teachers_path(@school))
+    add_breadcrumb(@teacher.first_name+' '+@teacher.last_name, school_teacher_path(@teacher))
+    add_breadcrumb("Modifier")
   end
 
   def new
     @school = School.find(params[:school_id])
     @teacher = @school.teachers.new
     authorize @teacher
+    add_breadcrumb("Ajouter un prof")
   end
   
   def create
