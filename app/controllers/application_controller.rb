@@ -1,9 +1,15 @@
+require 'action_text'
 class ApplicationController < ActionController::Base
+  helper ActionText::Engine.helpers
+
   before_action :authenticate_user!
   before_action :set_schools
-  include Pundit
-
-  # Pundit: white-list approach.
+  before_action :set_default_school
+  before_action :set_school
+  before_action :set_breadcrumbs
+  
+  include Pundit 
+  # Pundit: white-list approach. 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
@@ -21,6 +27,27 @@ class ApplicationController < ActionController::Base
 
   def set_schools
     @schools =  policy_scope(School).where(user: current_user)
+  end
+
+  def set_default_school
+    @default_school = policy_scope(School).where(user: current_user).first
+  end
+
+  def set_school
+    if !params["controller"].include?("devise")
+      @school = School.find(params[:school_id])
+    end
+  end
+
+  def set_breadcrumbs
+    @breadcrumbs = []
+  end
+
+  def add_breadcrumb(label, path = nil)
+    @breadcrumbs << {
+      label: label,
+      path: path
+    }
   end
   
 end

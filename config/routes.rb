@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :schools do
     resources :teachers
-    resources :addresses, only: [:index, :create, :update, :destroy]
+    resources :addresses
     resources :networks, only: [:index, :create, :update, :destroy]
   end
 

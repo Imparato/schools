@@ -72,13 +72,14 @@ cours.each do |key, value|
     )
 
     school["addresses"].each do |address|
+      next if address["address"].empty?  
       Address.create!(
         published: false,
         school: School.last,
-        current_address: address["address"]&.strip,
+        address: address["address"]&.strip,
         city: address["city"]&.strip,
         zipcode: address["zipcode"]&.strip,
-        phone: ""
+        # phone: "0600000000"
       )
     end
     school["network"].each do |network|
