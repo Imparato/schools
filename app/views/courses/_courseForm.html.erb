@@ -1,0 +1,83 @@
+<%= form_for([@school, @course]) do |course_form| %>
+
+  <div class="space-y-8 divide-y divide-gray-200">
+
+    <div class="lg:pt-8">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Informations sur %>
+        </h3>
+        <p class="mt-1 text-sm text-gray-500">
+
+        </p>
+      </div>
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Prix
+          </label>
+          <div class="mt-1">
+            <%= course_form.text_field :price, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom" %>
+          </div>
+        </div>
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Periode
+          </label>
+          <div class="mt-1">
+            <%= course_form.text_field :price_period, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Nom" %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="last_name" class="block text-sm font-medium text-gray-700">
+            Addresse
+          </label>
+          <div class="mt-1">
+          
+            <%= course_form.collection_select :address_id, Address.where(school: @school), :id , :address, class: "bg-green-200"%>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            profs
+          </label>
+          <div class="mt-1">
+            <%= course_form.collection_select :teachers, Teacher.where(school: @school),:teachings, :full_name, class: "bg-green-200"%>
+          </div>
+        </div>
+
+        <div class="sm:col-span-6">
+          <label for="email" class="block text-sm font-medium text-gray-700">
+                  aze
+          </label>
+          <p class="mt-1 text-sm text-gray-500">
+            Donnez ici une description du parcours mais aussi ce qui les caractéristiques des cours que ce professeur prodigue
+          </p>
+          <div class="mt-1 trix">
+            <%= course_form.rich_text_area :description %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-5">
+
+    <div class="flex items-center">
+      <% unless params[:action] == "new" || params[:action] == "create" %>
+        <div x-data="{ open: false }">
+          <a @click="open = true" style="cursor: pointer;" class="bg-red-500 py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="delete_school">Supprimer le prof</a> 
+          <%= render  "deleteModal" %>
+        </div>
+      <% end %>
+      <div class="flex justify-end ml-auto">
+        <%= link_to "Annuler", school_courses_path(@school), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        <%= course_form.submit "Enregistrer", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"%> 
+
+      </div>
+    </div>
+  </div>
+<% end %>

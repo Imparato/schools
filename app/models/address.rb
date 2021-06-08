@@ -13,4 +13,8 @@ class Address < ApplicationRecord
   def to_s
     return address
   end
+
+  def current_address
+    return self
+  end
 end
