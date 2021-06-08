@@ -14,9 +14,9 @@
 
   <body>
     <%= render 'shared/flashes' %>
-    <%if params["controller"].include?("devise") %>
+    <% if params["controller"].include?("devise") && params["action"] != "edit" %>
       <%= yield  %>
-     <% else %>
+    <% else %>
      <%= render 'shared/navbars' %>
     <% end %>
 
