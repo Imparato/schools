@@ -26,7 +26,7 @@
           <%= address_form.hidden_field :published, "x-ref"=> "publish"%>
           <span class="sr-only">Use setting</span>
           <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
-          <span  :class="[toggle === '1' ? 'translate-x-5' : 'translate-x-0']" class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+          <span  :style="[toggle === '1' ? 'transform: translateX(20px);' : 'transform: translateX(0px);']"  class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
             <!-- Enabled: "opacity-0 ease-out duration-100", Not Enabled: "opacity-100 ease-in duration-200" -->
             <span :class="[toggle === '1' ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200']" class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity" aria-hidden="true">
               <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
