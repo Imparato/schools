@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: teachers
+#
+#  id         :bigint           not null, primary key
+#  first_name :string
+#  last_name  :string
+#  bio        :text
+#  phone      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  school_id  :bigint
+#  email      :string
+#
 require "test_helper"
 
 class TeacherTest < ActiveSupport::TestCase

@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: addresses
+#
+#  id                 :bigint           not null, primary key
+#  published          :boolean
+#  school_id          :bigint           not null
+#  address            :string
+#  address_complement :string
+#  city               :string
+#  zipcode            :string
+#  details            :text
+#  phone              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
 class Address < ApplicationRecord
   belongs_to :school
   has_many :courses, dependent: :destroy
