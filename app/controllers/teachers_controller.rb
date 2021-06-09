@@ -40,7 +40,7 @@ class TeachersController < ApplicationController
     if @teacher.update(teacher_params)
       redirect_to school_teachers_path(@school)
     else
-      render :index
+      render :show
     end
   end
 
