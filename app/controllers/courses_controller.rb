@@ -26,9 +26,12 @@ class CoursesController < ApplicationController
   def create
     @school = School.find(params[:school_id])
     @course = Course.new(
+      name: course_params[:name],
       price: course_params[:price],
       price_period: course_params[:price_period], 
       description: course_params[:description], 
+      start_time: course_params[:start_time], 
+      end_time: course_params[:end_time] 
       )
     @address = Address.find(course_params[:address_id])
     @course.address = @address
@@ -45,6 +48,6 @@ class CoursesController < ApplicationController
   
   end
   def course_params
-    params.require(:course).permit(:price, :price_period, :address_id, :teachers, :description)
+    params.require(:course).permit(:price, :price_period, :name, :start_time, :end_time, :address_id, :teachers, :description)
   end
 end

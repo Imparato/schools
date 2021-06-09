@@ -1,26 +1,33 @@
-<%= form_for([@school, @course]) do |course_form| %>
+<%= simple_form_for([@school, @course]) do |course_form| %>
 
   <div class="space-y-8 divide-y divide-gray-200">
 
-    <div class="lg:pt-8">
+    <div class="">
       <div>
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-          Informations sur %>
+          Informations sur votre cours
         </h3>
-        <p class="mt-1 text-sm text-gray-500">
-
-        </p>
       </div>
       <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
+        
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Nom du cours
+          </label>
+          <div class="mt-1">
+            <%= course_form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom" %>
+          </div>
+        </div>
+        
         <div class="sm:col-span-3">
           <label for="name" class="block text-sm font-medium text-gray-700">
             Prix
           </label>
           <div class="mt-1">
-            <%= course_form.text_field :price, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom" %>
+            <%= course_form.number_field :price, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom" %>
           </div>
         </div>
+        
         <div class="sm:col-span-3">
           <label for="name" class="block text-sm font-medium text-gray-700">
             Periode
@@ -30,13 +37,30 @@
           </div>
         </div>
 
+
         <div class="sm:col-span-3">
           <label for="last_name" class="block text-sm font-medium text-gray-700">
             Addresse
           </label>
           <div class="mt-1">
           
-            <%= course_form.collection_select :address_id, Address.where(school: @school), :id , :address, class: "bg-green-200"%>
+            <%= course_form.collection_select :address_id, Address.where(school: @school), :id , :address, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2"%>
+          </div>
+        </div>
+        
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Heure du cours
+          </label>
+          <div class="mt-1 flex justify-around">
+            <div class="w-1/3" >
+              <em class="text-center">Début:</em>
+              <%= course_form.time_field  :start_time, value: @course.start_time, class: " w-1/3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" %>
+            </div>
+            <div class="w-1/3">
+              <em class="text-center">Fin:</em>
+              <%= course_form.time_field  :end_time, value: @course.end_time, class: "w-1/3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" %>
+            </div>
           </div>
         </div>
 
