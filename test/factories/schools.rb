@@ -3,19 +3,27 @@
 # Table name: schools
 #
 #  id                 :bigint           not null, primary key
-#  name               :string
-#  published          :boolean
-#  description        :text
-#  email              :string
-#  website            :string
 #  blog_default       :text
-#  user_id            :bigint           not null
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  imparato_blog_link :string
-#  city               :string
 #  blog_default_days  :string
 #  blog_order         :integer          default(0)
+#  city               :string
+#  description        :text
+#  email              :string
+#  imparato_blog_link :string
+#  name               :string
+#  published          :boolean
+#  website            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  user_id            :bigint           not null
+#
+# Indexes
+#
+#  index_schools_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
   factory :school do
