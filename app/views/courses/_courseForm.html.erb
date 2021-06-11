@@ -70,14 +70,10 @@
           </div>
         </div>
 
-
         <div class="sm:col-span-3">
-          <label for="last_name" class="block text-sm font-medium text-gray-700">
-            Addresse
-          </label>
+          <%= course_form.label :address, "Addresse", class: "block text-sm font-medium text-gray-700"%>
           <div class="mt-1">
-          
-            <%= course_form.collection_select :address_id, Address.where(school: @school), :id , :address, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2"%>
+            <%= course_form.association :address, label: false, collection: Address.where(school: @school), prompt: "Choisissez une addresse" ,class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2"%>
           </div>
         </div>
         
@@ -102,13 +98,28 @@
             profs
           </label>
           <div class="mt-1">
-            <%= course_form.collection_select :teachers, Teacher.where(school: @school),:teachings, :full_name, class: "bg-green-200"%>
+            <%= course_form.collection_select :teachers, Teacher.where(school: @school),:id, :full_name, selected: @course.teachers.first ? @course.teachers.first.id : nil, class: "bg-green-200"%>
           </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Tags
+          </label>
+ <%# START SELECT %>
+          <div class="mt-1 w-full">
+            <%= course_form.collection_check_boxes :tags , Tag.all.order(name: :asc), :id, :name, checked: @course.tags.ids do |b| %>
+              <%= b.check_box %>
+              <%= b.label %>
+            <% end %>
+          </div>
+
+<%# END SELECT %>
         </div>
 
         <div class="sm:col-span-6">
           <label for="email" class="block text-sm font-medium text-gray-700">
-                  aze
+            Description
           </label>
           <p class="mt-1 text-sm text-gray-500">
             Donnez ici une description du parcours mais aussi ce qui les caractéristiques des cours que ce professeur prodigue

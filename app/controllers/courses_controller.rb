@@ -35,6 +35,15 @@ class CoursesController < ApplicationController
       start_time: course_params[:start_time], 
       end_time: course_params[:end_time] 
       )
+      Teaching.find_or_create_by(teacher: Teacher.find(course_params[:teachers]), course: @course)
+      
+      tags = course_params["tags"].filter  {|id| !id.empty?} 
+      tags.each do |id|
+        if !id.empty? || id != ""
+          Property.find_or_create_by(tag: Tag.find(id), course: @course)
+        end  
+      end
+       
       @address = Address.find(course_params[:address_id])
       @course.address = @address
       authorize @school
@@ -55,11 +64,20 @@ class CoursesController < ApplicationController
       start_time: course_params[:start_time], 
       end_time: course_params[:end_time] 
       )
-    @address = Address.find(course_params[:address_id])
+    @address = Address.find(course_params["address_id"]) 
     @course.address = @address
-    # @course.school = @school
     authorize @school
-    if @course.save
+    if @course.save!
+      # create teaching for teacher
+      Teaching.create(teacher: Teacher.find(course_params[:teachers]), course: @course)
+      # Create property for tags
+      tags = course_params["tags"].filter  {|id| !id.empty?} 
+      tags.each do |id|
+        if !id.empty? || id != ""
+          Property.create(tag: Tag.find(id), course: @course)
+        end  
+      end 
+
       redirect_to school_courses_path(@school), notice: "Création du cours reussi"
     else
       render :new
@@ -75,6 +93,7 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:published, :price, :price_period, :name, :start_time, :end_time, :address_id, :teachers, :description)
+    params.require(:course).permit( :published, :price, :price_period, :name, :start_time, :end_time, 
+                                    :address_id, :teachers, :description, tags:[])
   end
 end
