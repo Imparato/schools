@@ -25,10 +25,18 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-require "test_helper"
-
-class SchoolTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+FactoryBot.define do
+  factory :school do
+    name { "Ecole dramatique"}
+    published { true }
+    description { "Lorem ipsum"}
+    email { "school@ecole.io"}
+    website { nil }
+    blog_default { nil }
+    user
+    imparato_blog_link { nil }
+    city { "Marseille"}
+    blog_default_days { nil }
+    blog_order { 0 }
+  end
 end
