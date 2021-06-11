@@ -38,12 +38,13 @@ class CoursesController < ApplicationController
       Teaching.find_or_create_by(teacher: Teacher.find(course_params[:teachers]), course: @course)
       
       tags = course_params["tags"].filter  {|id| !id.empty?} 
+      
+      @course.properties.each { |prop| prop.destroy if !tags.include?(prop.id)}
+
       tags.each do |id|
-        if !id.empty? || id != ""
-          Property.find_or_create_by(tag: Tag.find(id), course: @course)
-        end  
-      end
-       
+        Property.find_or_create_by(tag: Tag.find(id), course: @course)
+      end      
+
       @address = Address.find(course_params[:address_id])
       @course.address = @address
       authorize @school
