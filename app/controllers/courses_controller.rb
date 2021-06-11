@@ -39,8 +39,9 @@ class CoursesController < ApplicationController
       
       tags = course_params["tags"].filter  {|id| !id.empty?} 
       
+      # delete properties Unchecked
       @course.properties.each { |prop| prop.destroy if !tags.include?(prop.id)}
-
+      # add properties Checked
       tags.each do |id|
         Property.find_or_create_by(tag: Tag.find(id), course: @course)
       end      

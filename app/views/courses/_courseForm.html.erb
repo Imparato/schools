@@ -48,7 +48,7 @@
             Nom du cours
           </label>
           <div class="mt-1">
-            <%= course_form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom" %>
+            <%= course_form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Nom du cours" %>
           </div>
         </div>
         
@@ -57,7 +57,7 @@
             Prix
           </label>
           <div class="mt-1">
-            <%= course_form.number_field :price, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Prenom" %>
+            <%= course_form.number_field :price, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "100" %>
           </div>
         </div>
         
@@ -66,14 +66,24 @@
             Periode
           </label>
           <div class="mt-1">
-            <%= course_form.text_field :price_period, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Nom" %>
+            <%= course_form.text_field :price_period, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Par trimestre, Par ans" %>
           </div>
         </div>
 
-        <div class="sm:col-span-3">
-          <%= course_form.label :address, "Addresse", class: "block text-sm font-medium text-gray-700"%>
-          <div class="mt-1">
-            <%= course_form.association :address, label: false, collection: Address.where(school: @school), prompt: "Choisissez une addresse" ,class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2"%>
+        <div class="lg:flex lg:justify-between lg:space-x-8">
+          <div class="sm:col-span-3">
+            <%= course_form.label :address, "Addresse", class: "block text-sm font-medium text-gray-700"%>
+            <div class="mt-1">
+              <%= course_form.association :address, label: false, collection: Address.where(school: @school), prompt: "Choisissez une addresse" ,class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2"%>
+            </div>
+          </div>
+          <div class="sm:col-span-3">
+            <label for="email" class="block text-sm font-medium text-gray-700">
+              Profs
+            </label>
+            <div class="mt-1">
+              <%= course_form.collection_select :teachers, Teacher.where(school: @school),:id, :full_name, selected: @course.teachers.first ? @course.teachers.first.id : nil, class: " p-4 text-indigo-400", options_class: "aze"%>
+            </div>
           </div>
         </div>
         
@@ -93,29 +103,63 @@
           </div>
         </div>
 
-        <div class="sm:col-span-3">
-          <label for="email" class="block text-sm font-medium text-gray-700">
-            profs
-          </label>
-          <div class="mt-1">
-            <%= course_form.collection_select :teachers, Teacher.where(school: @school),:id, :full_name, selected: @course.teachers.first ? @course.teachers.first.id : nil, class: "bg-green-200"%>
-          </div>
+       
+          <style>
+            dialog[open] {
+              animation: appear .15s cubic-bezier(0, 1.8, 1, 1.8);
+          }
+
+            dialog::backdrop {
+              background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(54, 54, 54, 0.5));
+              backdrop-filter: blur(3px);
+            }
+            @keyframes appear {
+              from {
+                opacity: 0;
+                transform: translateX(-3rem);
+              }
+
+              to {
+                opacity: 1;
+                transform: translateX(0);
+              }
+            } 
+          </style>
+
+        <div class="sm:col-span-3 flex items-center justify-center mt-3">
+          <%# <section class=" flex h-screen w-screen p-10 justify-center items-start"> %>
+          <a onclick="document.getElementById('myModal').showModal()" id="btn" class="py-3 px-10 bg-indigo-400 hover:bg-indigo-600 text-white rounded text shadow-xl cursor-pointer">Ajouter des tags</a>
+          <%# </section> %>
         </div>
 
-        <div class="sm:col-span-3">
-          <label for="email" class="block text-sm font-medium text-gray-700">
-            Tags
-          </label>
- <%# START SELECT %>
-          <div class="mt-1 w-full">
-            <%= course_form.collection_check_boxes :tags , Tag.all.order(name: :asc), :id, :name, checked: @course.tags.ids do |b| %>
-              <%= b.check_box %>
-              <%= b.label %>
-            <% end %>
-          </div>
-
-<%# END SELECT %>
-        </div>
+          <dialog id="myModal" class="h-auto md:w-1/2 sm:w-auto box-border	 md:p-5 m-auto bg-white rounded-md ">
+                  
+            <div class="flex flex-col sm:w-96 md:w-full h-auto	">
+                  <!-- Header -->
+                  <div class="flex relative w-full h-auto justify-center items-center">
+                    <div class="flex w-10/12 h-auto py-3 justify-center items-center text-2xl font-bold">
+                          Tags
+                    </div>
+                    <div onclick="document.getElementById('myModal').close();" class="flex w-1/12 h-auto justify-center cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </div>
+                    <!--Header End-->
+                  </div>
+                    <!-- Modal Content-->
+                    <div class=" w-full h-auto py-10 px-2  bg-gray-200 rounded text-center">
+                      <%= course_form.collection_check_boxes :tags , Tag.all.order(name: :asc), :id, :name, checked: @course.tags.ids do |b| %>
+                          <li class= "flex items-center mb-2 ml-4">
+                            <%= b.check_box class: "w-4 h-4 bg-red-500 checkbox-tag", style: "filter: grayscale(0.7);" %>
+                            <%= b.label class: "ml-3 font-medium" %>
+                          </li>
+                        <% end %>
+                      <div onclick="document.getElementById('myModal').close();" class="flex w-1/12 h-auto justify-center mx-auto mt-4 cursor-pointer">
+                          <a class="py-3 px-10 bg-indigo-400 hover:bg-indigo-600 text-white rounded text shadow-xl">Valider</a>
+                      </div>
+                    </div>
+                    <!-- End of Modal Content-->
+                  </div>
+          </dialog>
 
         <div class="sm:col-span-6">
           <label for="email" class="block text-sm font-medium text-gray-700">
