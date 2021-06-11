@@ -2,19 +2,14 @@
 
   <div class="space-y-8 divide-y divide-gray-200">
 
-    <div class="lg:pt-8">
-      <div>
-        <h3 class="text-lg leading-6 font-medium text-gray-900">
-          Informations sur <%= @teacher.first_name ? "#{@teacher.first_name} #{@teacher.last_name}" : "votre prof" %>
-        </h3>
-        <p class="mt-1 text-sm text-gray-500">
-
-        </p>
-      </div>
-      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-
-        <%# Profil picture %>
-        <div x-data="{photoName: null, photoPreview: null}" class=" lg:ml-2 md:absolute md:top-3 md:right-5 sm:col-span-3 md:mr-3">
+    <div>
+      <div class="flex justify-between items-start">
+        <div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Informations sur <%= @teacher.first_name ? "#{@teacher.first_name} #{@teacher.last_name}" : "votre prof" %>
+          </h3>
+        </div>
+        <div x-data="{photoName: null, photoPreview: null}" class="">
            <!-- Photo File Input -->
           <%= teacher_form.file_field :photo, "x-ref" => "photo", "x-on:change" => 
           "photoName = $refs.photo.files[0].name;
@@ -25,20 +20,23 @@
                         reader.readAsDataURL($refs.photo.files[0]);" ,class: "hidden"  %>
           <div class="text-center">
               <!-- Current Profile Photo -->
-              <div class="mt-2" x-show="! photoPreview">
-                  <img src="<%= @teacher.photo.url || "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2015%2F10%2F05%2F22%2F37%2Fblank-profile-picture-973460_640.png&f=1&nofb=1" %>" class="h-16 w-16 lg:w-16 lg:h-16 md:w-10 md:h-10 m-auto rounded-full shadow">
-              </div>
+            <div class="" x-show="! photoPreview">
+                <img src="<%= @teacher.photo.url || "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2015%2F10%2F05%2F22%2F37%2Fblank-profile-picture-973460_640.png&f=1&nofb=1" %>" class="h-16 w-16 lg:w-16 lg:h-16 md:w-10 md:h-10 m-auto rounded-full shadow">
+            </div>
               <!-- New Profile Photo Preview -->
-              <div class="mt-2" x-show="photoPreview" style="display: none;">
-                  <span class="block w-16 h-16 rounded-full m-auto shadow" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'" style="background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');">
-                  </span>
-              </div>
-              <button type="button" class="inline-flex items-center px-2 py-1 md:px-1 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
-                  Changer la photo
-              </button>
+            <div class="" x-show="photoPreview" style="display: none;">
+                <span class="block w-16 h-16 rounded-full m-auto shadow" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'" style="background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');">
+                </span>
+            </div>
+            <button type="button" class="inline-flex items-center px-2 py-1 md:px-1 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2" x-on:click.prevent="$refs.photo.click()">
+                Changer la photo
+            </button>
           </div>
         </div>
-
+        
+      </div>
+      
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
         <div class="sm:col-span-3">
           <label for="name" class="block text-sm font-medium text-gray-700">
