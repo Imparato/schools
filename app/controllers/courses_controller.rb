@@ -66,15 +66,15 @@ class CoursesController < ApplicationController
       start_time: course_params[:start_time], 
       end_time: course_params[:end_time] 
       )
-    @address = Address.find(course_params["address_id"]) 
-    @course.address = @address
-    authorize @school
-    if @course.save!
-      # create teaching for teacher
-      Teaching.create(teacher: Teacher.find(course_params[:teachers]), course: @course)
-      # Create property for tags
-      tags = course_params["tags"].filter  {|id| !id.empty?} 
-      tags.each do |id|
+      authorize @school
+      if @course.save
+        @address = Address.find(course_params["address_id"]) 
+        @course.address = @address
+        # create teaching for teacher
+        Teaching.create(teacher: Teacher.find(course_params[:teachers]), course: @course)
+        # Create property for tags
+        tags = course_params["tags"].filter  {|id| !id.empty?} 
+        tags.each do |id|
         if !id.empty? || id != ""
           Property.create(tag: Tag.find(id), course: @course)
         end  
