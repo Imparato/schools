@@ -67,8 +67,10 @@ class CoursesController < ApplicationController
       end_time: course_params[:end_time] 
       )
       authorize @school
+      @address = Address.find(course_params[:address_id]) if  !course_params[:address_id].empty?
+      @course.address = @address
+      # raise
       if @course.save
-        @address = Address.find(course_params["address_id"]) 
         @course.address = @address
         # create teaching for teacher
         Teaching.create(teacher: Teacher.find(course_params[:teachers]), course: @course)
@@ -79,7 +81,6 @@ class CoursesController < ApplicationController
           Property.create(tag: Tag.find(id), course: @course)
         end  
       end 
-
       redirect_to school_courses_path(@school), notice: "Création du cours reussi"
     else
       render :new
