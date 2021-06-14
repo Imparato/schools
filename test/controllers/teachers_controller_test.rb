@@ -66,9 +66,29 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
         phone: "06 00 00 00 00"
       }
     })
-
     assert_redirected_to school_teachers_path(teacher.school)
     testteacher = Teacher.last
     assert_equal "06 00 00 00 00", testteacher.phone
+  end
+
+  test "should delete teacher" do
+    # Create teacher
+    school = create(:school)
+    sign_in school.user
+    post school_teachers_path(school, params:{
+      teacher:{
+        school: school,
+        email: "testteacher@test.fr",
+        phone: "0612121212",
+        first_name: 'test',
+        last_name: "teacher"
+      }
+    })
+
+    # try to delete teacher
+    teacher = Teacher.last
+    delete school_teacher_path(teacher.school, teacher)
+    assert_redirected_to school_teachers_path(teacher.school)
+    assert_nil Teacher.last
   end
 end
