@@ -27,7 +27,9 @@
 #
 FactoryBot.define do
   factory :school do
-    name { "Ecole dramatique"}
+    sequence :name do |n|
+      "Ecole dramatique#{n}"
+    end
     published { true }
     description { "Lorem ipsum"}
     email { "school@ecole.io"}
