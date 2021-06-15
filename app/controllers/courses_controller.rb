@@ -8,6 +8,7 @@ class CoursesController < ApplicationController
         @courses << course
       end
     end
+    add_breadcrumb("Mes cours")
   end
 
   def new
@@ -21,6 +22,9 @@ class CoursesController < ApplicationController
     @school = School.find(params[:school_id])
     @course = Course.find(params[:id])
     authorize @school
+    add_breadcrumb("Mes cours", school_courses_path(@course))
+    add_breadcrumb(@course.name, school_course_path(@course))
+    add_breadcrumb("Modifier")
   end
 
   def update
