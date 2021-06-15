@@ -3,7 +3,7 @@ require "test_helper"
 class SchoolsControllerTest < ActionDispatch::IntegrationTest
   test "should load index" do
     sign_in create(:user)
-
+    
     get root_path
     assert_response :success
   end

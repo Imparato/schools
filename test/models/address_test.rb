@@ -28,4 +28,17 @@ class AddressTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  test "should validate zipcode" do
+    assert build(:address).valid?
+
+    address = build(:address, zipcode: "20000")
+    assert address.valid?
+
+    address = build(:address, zipcode: "12")
+    assert_not address.valid?
+
+    address = build(:address, zipcode: "12E12")
+    assert_not address.valid?
+  end
+
 end
