@@ -42,7 +42,9 @@ class School < ApplicationRecord
   validates_uniqueness_of :name, scope: [:city], message: "Cette école existe déjà"
   # validates_uniqueness_of :blog_order, scope: [:city]
   before_validation :check_order
-  
+  before_save :update_blog_order
+  # before_create :update_blog_order
+  # School.where(city: "Paris").last.blog_order + 1
   # last update of school and associated entities
   def last_update
     request = <<-STRING
@@ -90,6 +92,13 @@ class School < ApplicationRecord
     if will_save_change_to_blog_order?
       to_move = School.where(city: city, blog_order: blog_order).first
       to_move&.update!(blog_order: to_move.blog_order + 1)
+    end
+  end
+
+  def update_blog_order
+    if !School.where(city: city).last.nil?
+      order = School.where(city: city).last.blog_order 
+      self.blog_order = order + 1
     end
   end
 end

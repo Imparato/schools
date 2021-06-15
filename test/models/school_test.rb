@@ -31,4 +31,9 @@ class SchoolTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  test "blog order must be the last + 1" do
+    10.times { create(:school) }
+    school = create(:school)
+    assert_equal 10, school.blog_order
+  end
 end
