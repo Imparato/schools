@@ -4,9 +4,12 @@
 #
 #  id           :bigint           not null, primary key
 #  description  :text
+#  end_time     :string
+#  name         :string
 #  price        :float
 #  price_period :string
 #  published    :boolean
+#  start_time   :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  address_id   :bigint           not null
