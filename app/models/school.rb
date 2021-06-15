@@ -30,8 +30,8 @@ class School < ApplicationRecord
   has_many :networks, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :teachers, dependent: :destroy
-  
-   has_rich_text :description
+  has_many :courses, through: :addresses
+  has_rich_text :description
 
   accepts_nested_attributes_for :networks
   

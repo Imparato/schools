@@ -1,24 +1,30 @@
+
+
+
 <main class=" bg-red flex-1 relative overflow-y-auto focus:outline-none">
   <div class="py-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 
 
       <p class="mt-1 text-sm text-gray-500">
-        Tous les professeurs de votre école <%= @school.name %>           
+        Tous les cours de votre école <%= @school.name %>           
       </p>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3">
             <!-- This example requires Tailwind CSS v2.0+ -->
       <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <% @teachers.each do |teacher|   %>
+        <% @courses.each do | course| %>
+          
+          <% unless course.nil? %>
+                      
             <li class="col-span-1 bg-white relative rounded-lg shadow divide-y divide-gray-200 truncate">
               <div class="w-full flex items-center justify-between p-6 space-x-4">
-              <%= link_to school_teacher_path(@school, teacher) do %>
+              <%= link_to school_course_path(@school, course) do %>
                 <div class="flex-1">
-                  <%=cl_image_tag teacher.photo.key, crop: :thumb, gravity: :face, class: "flex-shrink-0 inline-block absolute top-2 right-5 inline-block h-10 w-10 rounded-full" %>
+                <span class="flex-shrink-0 inline-block absolute top-2 right-5 px-2 py-0.5 text-xs font-medium <%= course.published ? "bg-green-100  text-green-800" : "bg-red-300  text-red-800" %> rounded-full"> <%= course.published ? "Publié" : "Non publié" %></span>
                   <div class=" items-center space-x-3">
-                    <h3 class="text-gray-900 mt-4  text-sm font-medium truncate"><%= teacher.first_name %> <%= teacher.last_name %></h3>
+                    <h3 class="text-gray-900 mt-4  text-sm font-medium truncate"><%= course.name %> </h3>
                   </div>
                   
                 </div>
@@ -28,7 +34,7 @@
               <div>
                 <div class="-mt-px flex divide-x divide-gray-200">
                   <div class="w-0 flex-1 flex">
-                    <%= link_to school_teacher_path(@school, teacher), class: "relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500" do %>
+                    <%= link_to school_course_path(@school, course), class: "relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500" do %>
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                       </svg>
@@ -39,15 +45,16 @@
                 </div>
               </div>
             </li>
+          <% end %>
         <% end %>
 
 
         <li class="col-span-1 rounded-lg shadow divide-y divide-gray-200">
-          <%= link_to new_school_teacher_path(@school) do  %>
+          <%= link_to new_school_course_path(@school) do  %>
           <div class="w-full flex items-center justify-between p-6 space-x-4">
             <div class="flex-1 truncate">
               <div class="flex items-center space-x-3">
-                <h3 class="text-gray-900 text-sm font-medium truncate items-center">Ajouter un nouveau prof</h3>
+                <h3 class="text-gray-900 text-sm font-medium truncate items-center">Ajouter un nouveau cours</h3>
               </div>
               <div>
           </div>
