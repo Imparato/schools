@@ -40,4 +40,23 @@
   }
 }
 
+#course_teachers{
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: medium;
+  option{
+    font-size: large;
+    font-weight: 400;
+
+  }
+}
+#course_address_id{
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: medium;
+  option{
+    font-size: large;
+    font-weight: 400;
+  }
+}
 // @import '@tailwindcss/forms/dist/forms';
