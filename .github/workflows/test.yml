@@ -1,0 +1,102 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      # fail-fast: false
+      matrix:
+        postgres: [13.2]
+        ruby: [.ruby-version]
+        node: [14]
+        experimental: [false]
+
+    name: Ruby ${{ matrix.ruby }}, PostgreSQL ${{ matrix.postgres }}
+
+    services:
+      db:
+        image: postgres:${{ matrix.postgres }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgrespwd
+          POSTGRES_DB: test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: "postgres://postgres:postgrespwd@localhost:5432/test"
+      APP_ENV: test
+      RAILS_ENV: test
+      RACK_ENV: test
+      TEST_ENV: ci
+      TZ: "Europe/Paris"
+
+      CLOUDINARY_URL: cloudinary://1234:not-a-real-account@organization
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get -yqq install libpq-dev
+
+      - name: "Prepare Gemfile for matrix ruby version"
+        if: ${{ matrix.ruby }} != ".ruby-version"
+        run: sed -i '4d' Gemfile # delete 5th line
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # change when cache is corrupted
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache-node
+        with:
+          path: node_modules
+          key: yarn-node-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-node-${{ runner.os }}${{ matrix.node }}-
+
+      - name: Yarn install
+        if: steps.cache-node.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Compile wepbackers
+        run: RAILS_ENV=test bundle exec rails webpacker:compile
+
+      - run: ruby -v
+      - run: psql --version
+      - run: printenv | sort
+
+      - name: Test
+        run: bundle exec rake test
+
+      - name: Archive logs artifacts
+        uses: actions/upload-artifact@v2
+        if: failure() && ${{ matrix.experimental == false }}
+        with:
+          name: log
+          path: log/test.log
+
+      - name: Archive coverage artifacts
+        if: ${{ github.event_name == 'pull_request' }} && ${{ matrix.experimental == false }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage
+
+      - name: Simplecov Report
+        if: ${{ github.event_name == 'pull_request' }} && {{ matrix.experimental == false }}
+        uses: aki77/simplecov-report-action@v1
+        with:
+          failedThreshold: 25
+          token: ${{ secrets.GITHUB_TOKEN }}

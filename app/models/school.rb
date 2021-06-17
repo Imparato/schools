@@ -1,10 +1,37 @@
+# == Schema Information
+#
+# Table name: schools
+#
+#  id                 :bigint           not null, primary key
+#  blog_default       :text
+#  blog_default_days  :string
+#  blog_order         :integer          default(0)
+#  city               :string
+#  description        :text
+#  email              :string
+#  imparato_blog_link :string
+#  name               :string
+#  published          :boolean
+#  website            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  user_id            :bigint           not null
+#
+# Indexes
+#
+#  index_schools_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 class School < ApplicationRecord
   belongs_to :user
   has_many :networks, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :teachers, dependent: :destroy
-  
-   has_rich_text :description
+  has_many :courses, through: :addresses
+  has_rich_text :description
 
   accepts_nested_attributes_for :networks
   

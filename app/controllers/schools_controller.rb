@@ -23,7 +23,7 @@ class SchoolsController < ApplicationController
     @school.user = current_user
     authorize @school
     if @school.save
-      redirect_to schools_path, notice: "Création reussie"
+      redirect_to schools_path, notice: "Création de l'école reussie"
     else
       render "new"
     end
@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
   
   def update
     if @school.update(schools_params)
-      redirect_to schools_path, notice: "Modification reussie"
+      redirect_to schools_path, notice: "Modification de l'école reussie"
     else
       render :show
     end
@@ -40,7 +40,7 @@ class SchoolsController < ApplicationController
   def destroy
     authorize @school
     @school.destroy
-    redirect_to schools_path
+    redirect_to schools_path, notice: "Suppression de l'école reussie"
   end
 
   private
@@ -51,6 +51,6 @@ class SchoolsController < ApplicationController
   end
 
   def schools_params
-    params.require(:school).permit(:name, :published, :description, :email, :website, :city, networks_attributes: [:id, :url])
+    params.require(:school).permit(:name, :published, :description, :email, :address_id ,:website, :city, networks_attributes: [])
   end
 end

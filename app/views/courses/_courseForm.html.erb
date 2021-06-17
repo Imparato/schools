@@ -1,0 +1,222 @@
+<%= simple_form_for([@school, @course]) do |course_form| %>
+
+  <div class="space-y-8 divide-y divide-gray-200">
+
+    <div class="">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Informations sur votre cours
+        </h3>
+      </div>
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-4 h-5 md:absolute md:flex-row sm:flex-row-reverse sm:pb-3 sm:fixed md:top-12 md:right-12 flex space-x-2">
+
+        <label for="publish"  class="mb-3 block text-md font-medium text-gray-700">
+            <span id="publishLabel" class="ease-out duration-500 flex-shrink-0 inline-block px-2 py-0.5 text-sm font-medium <%= @course.published ? "bg-green-200  text-green-800" : "bg-red-300  text-red-800" %> rounded-full"> <%= @course.published ? "Publié" : "Non publié" %></span>
+        </label>
+        
+        <button x-data="{ toggle: '<%=@course.published ? '1' : '0' %>' }"
+        x-on:click="toggle === '1' ? $refs.publish.value = false : $refs.publish.value = true"
+                :class="[toggle === '1' ? 'bg-indigo-400' : 'bg-gray-200']" 
+                @click="toggle === '0' ? toggle = '1' : toggle = '0'" 
+                type="button" id="btnTogglePublish"
+                  class=" relative ml-2 inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none" role="switch" aria-checked="false">
+          
+          <%= course_form.hidden_field :published, "x-ref"=> "publish"%>
+          <span class="sr-only">Use setting</span>
+          <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+          <span :style="[toggle === '1' ? 'transform: translateX(20px);' : 'transform: translateX(0px);']"  class="pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+            <!-- Enabled: "opacity-0 ease-out duration-100", Not Enabled: "opacity-100 ease-in duration-200" -->
+            <span :class="[toggle === '1' ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200']" class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity" aria-hidden="true">
+              <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <!-- Enabled: "opacity-100 ease-in duration-200", Not Enabled: "opacity-0 ease-out duration-100" -->
+            <span  :class="[toggle === '1' ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100']" class=" absolute inset-0 h-full w-full flex items-center justify-center transition-opacity" aria-hidden="true">
+              <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
+                <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+              </svg>
+            </span>
+          </span>
+        </button>
+
+      </div>
+
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Nom du cours
+          </label>
+          <div class="mt-1">
+            <%= course_form.text_field :name, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Nom du cours" %>
+            <%= render  "shared/form_errors", locals: {item: @course ,property: :name} %>
+
+          </div>
+        </div>
+        
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Prix
+          </label>
+          <div class="mt-1">
+            <%= course_form.number_field :price, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "100" %>
+          </div>
+        </div>
+        
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Periode
+          </label>
+          <div class="mt-1">
+            <%= course_form.text_field :price_period, class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" ,placeholder: "Par trimestre, Par ans" %>
+          </div>
+        </div>
+
+        <div class="lg:flex lg:justify-between lg:space-x-8">
+          <div class="sm:col-span-3">
+            <%= course_form.label :address, "Addresse", class: "block text-sm font-medium text-gray-700"%>
+            <div class="mt-1 relative">
+              <%= course_form.association :address, error: false, label: false, collection: Address.where(school: @school), prompt: "Choisissez une addresse" ,class: "shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2"%>
+                <%# address errors messages  %>
+                  <% unless @course.errors.messages[:address].empty? %>
+                    <div class="rounded-md bg-red-50  p-2 mt-1">
+                      <div class="flex">
+                        <div class="flex-shrink-0">
+                          <!-- Heroicon name: solid/x-circle -->
+                          <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                          </svg>
+                        </div>
+                        <div >
+                          <div class="mt-1 text-sm text-red-700">
+                            <ul class="list-disc pl-5 space-y-1">
+                              <li>
+                                <%= @course.errors.messages[:address][1] %>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <%# end address errors messages %>
+            </div>
+          </div>
+          <div class="sm:col-span-3">
+            <label for="email" class="block text-sm font-medium text-gray-700">
+              Profs
+            </label>
+            <div class="mt-1">
+              <%= course_form.collection_select :teachers, Teacher.where(school: @school),:id, :full_name, selected: @course.teachers.first ? @course.teachers.first.id : nil, class: " p-4 text-indigo-400", options_class: "aze"%>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sm:col-span-3">
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Heure du cours
+          </label>
+          <div class="mt-1 flex justify-around">
+            <div class="w-1/3" >
+              <em class="text-center">Début:</em>
+              <%= course_form.time_field  :start_time, value: @course.start_time, class: " w-1/3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" %>
+              <%= render  "shared/form_errors", locals: {item: @course ,property: :start_time} %>
+            </div>
+            <div class="w-1/3">
+              <em class="text-center">Fin:</em>
+              <%= course_form.time_field  :end_time, value: @course.end_time, class: "w-1/3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-3 py-2" %>
+              <%= render  "shared/form_errors", locals: {item: @course ,property: :end_time} %>
+            </div>
+          </div>
+        </div>
+
+       
+          <style>
+            dialog[open] {
+              animation: appear .15s cubic-bezier(0, 1.8, 1, 1.8);
+          }
+
+            dialog::backdrop {
+              background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(54, 54, 54, 0.5));
+              backdrop-filter: blur(3px);
+            }
+            @keyframes appear {
+              from {
+                opacity: 0;
+                transform: translateX(-3rem);
+              }
+
+              to {
+                opacity: 1;
+                transform: translateX(0);
+              }
+            } 
+          </style>
+
+        <div class="sm:col-span-3 flex items-center justify-center mt-3">
+          <%# <section class=" flex h-screen w-screen p-10 justify-center items-start"> %>
+          <a onclick="document.getElementById('myModal').showModal()" id="btn" class="py-3 px-10 bg-indigo-400 hover:bg-indigo-600 text-white rounded text shadow-xl cursor-pointer">Ajouter des tags</a>
+          <%# </section> %>
+        </div>
+
+          <dialog id="myModal" class="h-auto md:w-1/2 sm:w-auto box-border	 md:p-5 m-auto bg-white rounded-md ">
+                  
+            <div class="flex flex-col sm:w-96 md:w-full h-auto	">
+                  <!-- Header -->
+                  <div class="flex relative w-full h-auto justify-center items-center">
+                    <div class="flex w-10/12 h-auto py-3 justify-center items-center text-2xl font-bold">
+                          Tags
+                    </div>
+                    <div onclick="document.getElementById('myModal').close();" class="flex w-1/12 h-auto justify-center cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </div>
+                    <!--Header End-->
+                  </div>
+                    <!-- Modal Content-->
+                    <div class=" w-full h-auto py-10 px-2  bg-gray-200 rounded text-center">
+                      <%= course_form.collection_check_boxes :tags , Tag.all.order(name: :asc), :id, :name, checked: @course.tags.ids do |b| %>
+                          <li class= "flex items-center mb-2 ml-4">
+                            <%= b.check_box class: "w-4 h-4 bg-red-500 checkbox-tag", style: "filter: grayscale(0.7);" %>
+                            <%= b.label class: "ml-3 font-medium" %>
+                          </li>
+                        <% end %>
+                      <div onclick="document.getElementById('myModal').close();" class="flex w-1/12 h-auto justify-center mx-auto mt-4 cursor-pointer">
+                          <a class="py-3 px-10 bg-indigo-400 hover:bg-indigo-600 text-white rounded text shadow-xl">Valider</a>
+                      </div>
+                    </div>
+                    <!-- End of Modal Content-->
+                  </div>
+          </dialog>
+
+        <div class="sm:col-span-6">
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Description
+          </label>
+          <p class="mt-1 text-sm text-gray-500">
+            Donnez ici une description du parcours mais aussi ce qui les caractéristiques des cours que ce professeur prodigue
+          </p>
+          <div class="mt-1 trix">
+            <%= course_form.rich_text_area :description %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-5">
+
+    <div class="flex items-center">
+      <% unless params[:action] == "new" || params[:action] == "create" %>
+        <div x-data="{ open: false }">
+          <a @click="open = true" style="cursor: pointer;" class="bg-red-500 py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="delete_school">Supprimer le cours</a> 
+          <%= render  "deleteModal" %>
+        </div>
+      <% end %>
+      <div class="flex justify-end ml-auto">
+        <%= link_to "Annuler", school_courses_path(@school), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        <%= course_form.submit "Enregistrer", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"%> 
+
+      </div>
+    </div>
+  </div>
+<% end %>
