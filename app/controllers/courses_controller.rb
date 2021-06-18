@@ -22,8 +22,8 @@ class CoursesController < ApplicationController
     @school = School.find(params[:school_id])
     @course = Course.find(params[:id])
     authorize @school
-    add_breadcrumb("Mes cours", school_courses_path(@course))
-    add_breadcrumb(@course.name, school_course_path(@course))
+    add_breadcrumb("Mes cours", school_courses_path(@school))
+    add_breadcrumb(@course.name, school_course_path(@school))
     add_breadcrumb("Modifier")
   end
 
