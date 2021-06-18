@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
   def show
     @school = School.find(params[:school_id])
     add_breadcrumb("Mes profs", school_teachers_path(@school))
-    add_breadcrumb(@teacher.first_name+' '+@teacher.last_name, school_teacher_path(@teacher))
+    add_breadcrumb(@teacher.first_name+' '+@teacher.last_name)
     add_breadcrumb("Modifier")
   end
 
