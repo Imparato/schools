@@ -22,8 +22,8 @@ class CoursesController < ApplicationController
     @school = School.find(params[:school_id])
     @course = Course.find(params[:id])
     authorize @school
-    add_breadcrumb("Mes cours", school_courses_path(@course))
-    add_breadcrumb(@course.name, school_course_path(@course))
+    add_breadcrumb("Mes cours", school_courses_path(@school))
+    add_breadcrumb(@course.name)
     add_breadcrumb("Modifier")
   end
 
@@ -53,7 +53,7 @@ class CoursesController < ApplicationController
       @address = Address.find(course_params[:address_id])
       @course.address = @address
       authorize @school
-      redirect_to school_courses_path(@school), notice: "Modification du cours reussi"
+      redirect_to school_courses_path(@school), notice: "Modification du cours réussie"
     else
       render :show
     end
