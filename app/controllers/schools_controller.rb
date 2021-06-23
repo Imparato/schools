@@ -30,7 +30,19 @@ class SchoolsController < ApplicationController
   end
   
   def update
+    params["school"]["networks_attributes"].permit! 
     if @school.update(schools_params)
+      params["school"]["networks_attributes"].each do |network|
+        if Network.find_by(url: network[1]["url"], school: @school).nil?
+          if !network[1]["id"] 
+            net = Network.create( url: network[1]["url"], school: @school )
+          else
+            net = Network.find(network[1]["id"])
+            net.update(url: network[1]["url"])
+          end
+        end
+      end
+      # raise
       redirect_to schools_path, notice: "Modification de l'école reussie"
     else
       render :show
@@ -51,6 +63,7 @@ class SchoolsController < ApplicationController
   end
 
   def schools_params
-    params.require(:school).permit(:name, :published, :description, :email, :address_id ,:website, :city, networks_attributes: [])
+    params.require(:school).permit(:name, :published, :description, :email, :address_id ,:website, :city, networks: [])
   end
+
 end

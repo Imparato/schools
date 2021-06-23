@@ -28,8 +28,8 @@ class Teacher < ApplicationRecord
 
   validates_presence_of :first_name, message: "Veuillez préciser le nom de votre professeur"
   validates :email, format: {with: /\A[^@\s]+@[^@\s]+\z/, message: "L'email n'est pas valide"}
-  validates :phone, format: { with: /\A(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/, message: "Le numero de téléphone ne semble pas correct" }
-
+  # validates_format_of :phone, with: /\A(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/, message: "Le numero de téléphone ne semble pas correct" 
+  
   def full_name
     "#{first_name} #{last_name}"
   end

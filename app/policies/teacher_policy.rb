@@ -5,9 +5,17 @@ class TeacherPolicy < ApplicationPolicy
     end
   end
 
+    def index
+      record.user = user
+    end
+
    def show?
     record.school.user == user
   end
+
+  def new?
+    record.school.user == user
+  end 
 
   def create?
     record.school.user == user

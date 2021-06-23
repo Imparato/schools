@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   def set_school
     if !params["controller"].include?("devise")
       @school = School.find(params[:school_id])
+      authorize @school
     end
   end
 

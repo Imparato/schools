@@ -7,11 +7,15 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    record.user = user
+  end
+
+  def set_school
+    record.user = user
   end
 
   def show?
-    false
+    record.user = user
   end
 
   def create?
